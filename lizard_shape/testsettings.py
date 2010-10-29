@@ -1,3 +1,5 @@
+import os
+
 DEBUG = True
 TEMPLATE_DEBUG = True
 DATABASE_ENGINE = 'sqlite3'
@@ -6,6 +8,7 @@ SITE_ID = 1
 INSTALLED_APPS = [
     'lizard_shape',
     'lizard_ui',
+    'lizard_map',
     'staticfiles',
     'compressor',
     'django_nose',
@@ -31,6 +34,36 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     # {{ STATIC_URL }}myapp/my.css in your templates.
     'staticfiles.context_processors.static_url',
     )
+
+
+# SETTINGS_DIR allows media paths and so to be relative to this settings file
+# instead of hardcoded to c:\only\on\my\computer.
+SETTINGS_DIR = os.path.dirname(os.path.realpath(__file__))
+
+# BUILDOUT_DIR is for access to the "surrounding" buildout, for instance for
+# BUILDOUT_DIR/var/static files to give django-staticfiles a proper place
+# to place all collected static files.
+BUILDOUT_DIR = os.path.abspath(os.path.join(SETTINGS_DIR, '..'))
+
+
+# Absolute path to the directory that holds user-uploaded media.
+MEDIA_ROOT = os.path.join(BUILDOUT_DIR, 'var', 'media')
+# Absolute path to the directory where django-staticfiles'
+# "bin/django build_static" places all collected static files from all
+# applications' /media directory.
+STATIC_ROOT = os.path.join(BUILDOUT_DIR, 'var', 'static')
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash if there is a path component (optional in other cases).
+MEDIA_URL = '/media/'
+# URL for the per-application /media static files collected by
+# django-staticfiles.  Use it in templates like
+# "{{ MEDIA_URL }}mypackage/my.css".
+STATIC_URL = '/static_media/'
+# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
+# trailing slash.  Uses STATIC_URL as django-staticfiles nicely collects
+# admin's static media into STATIC_ROOT/admin.
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 
 try:
