@@ -1,0 +1,31 @@
+{% extends "lizard_map/wms.html" %}
+{% load workspaces %}
+
+{% block subtitle %} Flow {% endblock %}
+
+{% block sidebar %}
+<div class="sidebarbox sidebarbox-stretched">
+  <h2>
+  Kaartlagen
+  </h2>
+  <ul id="area-pane"
+      class="automatic-tree filetree pane">
+    {% if shapes_tree %}
+      {% with "lizard_shape/tree_snippet_shapes.html" as tree_template %}
+        {% with shapes_tree as tree_items %}
+          {% include tree_template %}
+        {% endwith %}
+      {% endwith %}
+    {% else %}
+      <li>Geen kaartlagen beschikbaar.</li>
+    {% endif %}
+  </ul>
+</div>
+
+{% for workspace in workspaces.user %}
+  {% workspace workspace %}
+{% empty %}
+No workspace
+{% endfor %}
+
+{% endblock %}
