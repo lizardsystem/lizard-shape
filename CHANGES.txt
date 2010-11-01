@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-0.1 (unreleased)
+0.1 (2010-11-01)
 ----------------
 
 - First working version: lines are showed on map.
