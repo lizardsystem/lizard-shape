@@ -5,4 +5,6 @@ Changelog of lizard-shape
 0.1 (unreleased)
 ----------------
 
-- Initial library skeleton created by thaskel.  [your name]
+- First working version: lines are showed on map.
+
+- Initial library skeleton created by nensskel.  [Jack]
