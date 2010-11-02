@@ -9,6 +9,7 @@ from lizard_map.workspace import WorkspaceManager
 
 from lizard_shape.models import Category
 from lizard_shape.models import Shape
+from lizard_shape.models import ShapeLegend
 
 
 def homepage(request,
@@ -29,14 +30,19 @@ def homepage(request,
             # Append sub categories.
             children = get_tree(parent=category)
             # Append shapes.
-            for shape in category.shapes.all():
+            for shapelegend in ShapeLegend.objects.filter(shape__category=category):
                 children.append({
-                        'name': str(shape),
+                        'name': str(shapelegend),
                         'type': 'shape',
                         'adapter_layer_json': (
                             '{"layer_name": "Waterlichamen", '
+                            '"legend_id": "%d", '
+                            '"value_field": "%s", '
                             '"layer_filename": "%s", '
-                            '"search_property_name": "WGBNAAM"}') % (shape.shp_file.path) })
+                            '"search_property_name": "WGBNAAM"}') % (
+                            shapelegend.legend.id,
+                            shapelegend.value_field,
+                            shapelegend.shape.shp_file.path) })
             row = {'name': category.name,
                    'type': 'category',
                    'children': children}

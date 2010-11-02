@@ -3,8 +3,14 @@ from django.db import models
 
 from treebeard.al_tree import AL_Node
 
+from lizard_map.models import Legend
+
 # The default location from MEDIA_ROOT to upload files to.
 UPLOAD_TO = "lizard_shape/shapes"
+
+
+class ShapeNameError(Exception):
+    pass
 
 
 class Shape(models.Model):
@@ -21,6 +27,9 @@ class Shape(models.Model):
     shx_file = models.FileField(upload_to=UPLOAD_TO)
     prj_file = models.FileField(upload_to=UPLOAD_TO)
 
+    legend = models.ManyToManyField(Legend, through='ShapeLegend',
+                                    null=True, blank=True)
+
     def __unicode__(self):
         return '%s' % self.name
 
@@ -32,18 +41,23 @@ class Shape(models.Model):
         prj_first = self.prj_file.name.rpartition('.')
 
         if shp_first[-1] != 'shp':
-            raise Exception("Uploaded shp_file doest not have extension .shp.")
+            raise ShapeNameError(
+                "Uploaded shp_file doest not have extension .shp.")
         if dbf_first[-1] != 'dbf':
-            raise Exception("Uploaded dbf_file doest not have extension .dbf.")
+            raise ShapeNameError(
+                "Uploaded dbf_file doest not have extension .dbf.")
         if shx_first[-1] != 'shx':
-            raise Exception("Uploaded shx_file doest not have extension .shx.")
+            raise ShapeNameError(
+                "Uploaded shx_file doest not have extension .shx.")
         if prj_first[-1] != 'prj':
-            raise Exception("Uploaded prj_file doest not have extension .prj.")
+            raise ShapeNameError(
+                "Uploaded prj_file doest not have extension .prj.")
 
         if shp_first[0] == dbf_first[0] == shx_first[0] == prj_first[0]:
             super(Shape, self).save(*args, **kwargs)
         else:
-            raise Exception("Uploaded files do not have common filename base.")
+            raise ShapeNameError(
+                "Uploaded files do not have common filename base.")
 
 
 class Category(AL_Node):
@@ -64,3 +78,18 @@ class Category(AL_Node):
 
     def __unicode__(self):
         return '%s' % self.name
+
+
+class ShapeLegend(models.Model):
+    """
+    Legend for shapefile:
+    - Which field to use for value?
+    """
+
+    name = models.CharField(max_length=80)
+    shape = models.ForeignKey(Shape)
+    legend = models.ForeignKey(Legend)
+    value_field = models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return '%s - %s' % (self.shape, self.name)

@@ -1,0 +1,171 @@
+[
+  {
+    "pk": 1, 
+    "model": "lizard_shape.shape", 
+    "fields": {
+      "shp_file": "lizard_shape/shapes/AfvoerendOppervlak_Tak_line_3.shp", 
+      "description": "test", 
+      "prj_file": "lizard_shape/shapes/AfvoerendOppervlak_Tak_line_3.prj", 
+      "dbf_file": "lizard_shape/shapes/AfvoerendOppervlak_Tak_line_3.dbf", 
+      "shx_file": "lizard_shape/shapes/AfvoerendOppervlak_Tak_line_3.shx", 
+      "slug": "test", 
+      "name": "test"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "lizard_shape.category", 
+    "fields": {
+      "shapes": [
+        1
+      ], 
+      "name": "root", 
+      "parent": null, 
+      "slug": "root"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "lizard_shape.shapelegend", 
+    "fields": {
+      "value_field": "ovh_vla", 
+      "shape": 1, 
+      "name": "test legenda", 
+      "legend": 1
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "lizard_map.workspace", 
+    "fields": {
+      "name": "temp", 
+      "visible": false, 
+      "extent_west": null, 
+      "owner": null, 
+      "extent_east": null, 
+      "extent_north": null, 
+      "extent_south": null
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "lizard_map.workspace", 
+    "fields": {
+      "name": "Workspace", 
+      "visible": false, 
+      "extent_west": null, 
+      "owner": null, 
+      "extent_east": null, 
+      "extent_north": null, 
+      "extent_south": null
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "lizard_map.workspace", 
+    "fields": {
+      "name": "temp", 
+      "visible": false, 
+      "extent_west": null, 
+      "owner": null, 
+      "extent_east": null, 
+      "extent_north": null, 
+      "extent_south": null
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "lizard_map.workspace", 
+    "fields": {
+      "name": "Workspace", 
+      "visible": false, 
+      "extent_west": null, 
+      "owner": null, 
+      "extent_east": null, 
+      "extent_north": null, 
+      "extent_south": null
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "lizard_map.workspaceitem", 
+    "fields": {
+      "index": 20, 
+      "name": "test - test legenda", 
+      "visible": true, 
+      "adapter_layer_json": "{\"layer_name\": \"Waterlichamen\", \"legend_id\": \"1\", \"value_field\": \"ovh_vla\", \"layer_filename\": \"/home/jack/svn/djangoapps/lizard-shape/var/media/lizard_shape/shapes/AfvoerendOppervlak_Tak_line_3.shp\", \"search_property_name\": \"WGBNAAM\"}", 
+      "workspace": 3, 
+      "adapter_class": "adapter_shapefile"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "lizard_map.workspacecollage", 
+    "fields": {
+      "name": "Collage", 
+      "workspace": 2
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "lizard_map.workspacecollage", 
+    "fields": {
+      "name": "Collage", 
+      "workspace": 4
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "lizard_map.color", 
+    "fields": {
+      "a": 255, 
+      "r": 20, 
+      "b": 20, 
+      "g": 20
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "lizard_map.color", 
+    "fields": {
+      "a": 255, 
+      "r": 200, 
+      "b": 200, 
+      "g": 200
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "lizard_map.color", 
+    "fields": {
+      "a": 255, 
+      "r": 255, 
+      "b": 0, 
+      "g": 0
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "lizard_map.color", 
+    "fields": {
+      "a": 255, 
+      "r": 0, 
+      "b": 255, 
+      "g": 0
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "lizard_map.legend", 
+    "fields": {
+      "too_low_color": 1, 
+      "max_value": 300.0, 
+      "min_value": -100.0, 
+      "descriptor": "default", 
+      "steps": 10, 
+      "too_high_color": 2, 
+      "min_color": 3, 
+      "max_color": 4
+    }
+  }
+]

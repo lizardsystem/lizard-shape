@@ -1,4 +1,6 @@
+import logging
 import os
+
 
 DEBUG = True
 TEMPLATE_DEBUG = True
@@ -64,6 +66,12 @@ STATIC_URL = '/static_media/'
 # trailing slash.  Uses STATIC_URL as django-staticfiles nicely collects
 # admin's static media into STATIC_ROOT/admin.
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+
+# Set up logging BEFORE importing the base settings.
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(name)s %(levelname)s %(message)s')
 
 
 try:
