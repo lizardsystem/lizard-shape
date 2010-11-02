@@ -8,7 +8,6 @@ from lizard_map.daterange import current_start_end_dates
 from lizard_map.workspace import WorkspaceManager
 
 from lizard_shape.models import Category
-from lizard_shape.models import Shape
 from lizard_shape.models import ShapeLegend
 
 
@@ -30,7 +29,8 @@ def homepage(request,
             # Append sub categories.
             children = get_tree(parent=category)
             # Append shapes.
-            for shapelegend in ShapeLegend.objects.filter(shape__category=category):
+            shapelegends = ShapeLegend.objects.filter(shape__category=category)
+            for shapelegend in shapelegends:
                 children.append({
                         'name': str(shapelegend),
                         'type': 'shape',
@@ -42,7 +42,7 @@ def homepage(request,
                             '"search_property_name": "WGBNAAM"}') % (
                             shapelegend.legend.id,
                             shapelegend.value_field,
-                            shapelegend.shape.shp_file.path) })
+                            shapelegend.shape.shp_file.path)})
             row = {'name': category.name,
                    'type': 'category',
                    'children': children}
