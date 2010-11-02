@@ -3,6 +3,7 @@ omit =
     /home/*/.buildout/eggs/*
     /var/lib/hudson/.buildout/*
     /usr/*
+    /local_checkouts/*
     parts/*
     eggs/*
     */test*
