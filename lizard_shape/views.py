@@ -47,7 +47,8 @@ def homepage(request,
                             shapelegend.value_field,
                             shapelegend.shape.shp_file.path)})
             # Legends for points.
-            shapelegendpoints = ShapeLegendPoint.objects.filter(shape__category=category)
+            shapelegendpoints = ShapeLegendPoint.objects.filter(
+                shape__category=category)
             for shapelegendpoint in shapelegendpoints:
                 children.append({
                         'name': str(shapelegendpoint),
