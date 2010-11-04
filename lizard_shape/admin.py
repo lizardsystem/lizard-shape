@@ -11,8 +11,16 @@ class ShapeNameError(Exception):
     pass
 
 
-def check_extension_or_error(filename, extension, extension_name):
+def check_extension_or_error(filename, extension, extension_name=None):
+    """
+    Checks filename for given extension. If it fails, raise
+    forms.ValidationError.
+
+    Filename is absolute or relative.
+    """
     first = filename.rpartition('.')
+    if extension_name is None:
+        extension_name = '%s file' % extension
     if first[-1] != extension:
         raise forms.ValidationError(
             "%s doest not have extension .%s." % (extension_name, extension))

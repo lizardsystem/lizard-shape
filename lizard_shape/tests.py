@@ -2,9 +2,11 @@
 
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
+from django.forms import ValidationError
 from django.test import TestCase
 from django.test.client import Client
 
+from lizard_shape.admin import check_extension_or_error
 from lizard_shape.models import Category
 from lizard_shape.models import Shape
 from lizard_shape.models import ShapeNameError
@@ -94,3 +96,33 @@ class ModelShapeTest(TestCase):
         """
         self.shape.shp_file.name = 'oeloebloe.shp'
         self.assertRaises(ShapeNameError, self.shape.save)
+
+
+class AdminTest(TestCase):
+
+    def test_check_extension(self):
+        """
+        Checks filename with correct absolute filename.
+        """
+        filename = '/home/jack/shapefile.shp'
+        check_extension_or_error(filename, 'shp')
+        check_extension_or_error(filename, 'shp', extension_name='Shapefile')
+
+    def test_check_extension(self):
+        """
+        Checks filename with correct relative filename.
+        """
+        filename = 'shapefile.shp'
+        check_extension_or_error(filename, 'shp')
+        check_extension_or_error(filename, 'shp', extension_name='Shapefile')
+
+    def test_check_extension_error(self):
+        """
+        Checks if an error is raised in case of an error.
+        """
+        filename = '/home/jack/shapefile.shx'
+        self.assertRaises(
+            ValidationError, check_extension_or_error, filename, 'shp')
+        self.assertRaises(
+            ValidationError, check_extension_or_error, filename, 'shp',
+            extension_name='Shapefile')
