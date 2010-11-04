@@ -4,6 +4,7 @@ from django import forms
 from lizard_shape.models import Category
 from lizard_shape.models import Shape
 from lizard_shape.models import ShapeLegend
+from lizard_shape.models import ShapeLegendPoint
 
 
 class ShapeNameError(Exception):
@@ -58,10 +59,24 @@ class ShapeForm(forms.ModelForm):
         return data
 
 
+class ShapeLegendInline(admin.TabularInline):
+    model = ShapeLegend
+
+
+class ShapeLegendPointInline(admin.TabularInline):
+    model = ShapeLegendPoint
+
+
 class ShapeAdmin(admin.ModelAdmin):
     form = ShapeForm
+    inlines = [ShapeLegendInline, ShapeLegendPointInline, ]
+
+
+class ShapeInline(admin.TabularInline):
+    model = Shape
 
 
 admin.site.register(Category)
 admin.site.register(Shape, ShapeAdmin)
 admin.site.register(ShapeLegend)
+admin.site.register(ShapeLegendPoint)

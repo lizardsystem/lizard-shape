@@ -4,6 +4,7 @@ from django.db import models
 from treebeard.al_tree import AL_Node
 
 from lizard_map.models import Legend
+from lizard_map.models import LegendPoint
 
 # The default location from MEDIA_ROOT to upload files to.
 UPLOAD_TO = "lizard_shape/shapes"
@@ -89,6 +90,20 @@ class ShapeLegend(models.Model):
     name = models.CharField(max_length=80)
     shape = models.ForeignKey(Shape)
     legend = models.ForeignKey(Legend)
+    value_field = models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return '%s - %s' % (self.shape, self.name)
+
+
+class ShapeLegendPoint(models.Model):
+    """
+    Legend for point shapefile.
+    """
+
+    name = models.CharField(max_length=80)
+    shape = models.ForeignKey(Shape)
+    legend_point = models.ForeignKey(LegendPoint)
     value_field = models.CharField(max_length=20)
 
     def __unicode__(self):

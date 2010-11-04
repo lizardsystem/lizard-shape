@@ -9,6 +9,7 @@ from lizard_map.workspace import WorkspaceManager
 
 from lizard_shape.models import Category
 from lizard_shape.models import ShapeLegend
+from lizard_shape.models import ShapeLegendPoint
 
 
 def homepage(request,
@@ -28,21 +29,39 @@ def homepage(request,
         for category in categories:
             # Append sub categories.
             children = get_tree(parent=category)
-            # Append shapes.
+            # Append shapes by legend.
             shapelegends = ShapeLegend.objects.filter(shape__category=category)
+            # Legends for lines.
             for shapelegend in shapelegends:
                 children.append({
                         'name': str(shapelegend),
                         'type': 'shape',
                         'adapter_layer_json': (
-                            '{"layer_name": "Waterlichamen", '
+                            '{"layer_name": "%s", '
                             '"legend_id": "%d", '
                             '"value_field": "%s", '
                             '"layer_filename": "%s", '
                             '"search_property_name": "WGBNAAM"}') % (
+                            shapelegend.name,
                             shapelegend.legend.id,
                             shapelegend.value_field,
                             shapelegend.shape.shp_file.path)})
+            # Legends for points.
+            shapelegendpoints = ShapeLegendPoint.objects.filter(shape__category=category)
+            for shapelegendpoint in shapelegendpoints:
+                children.append({
+                        'name': str(shapelegendpoint),
+                        'type': 'shape',
+                        'adapter_layer_json': (
+                            '{"layer_name": "%s", '
+                            '"legend_point_id": "%d", '
+                            '"value_field": "%s", '
+                            '"layer_filename": "%s", '
+                            '"search_property_name": "WGBNAAM"}') % (
+                            shapelegendpoint.name,
+                            shapelegendpoint.legend_point.id,
+                            shapelegendpoint.value_field,
+                            shapelegendpoint.shape.shp_file.path)})
             row = {'name': category.name,
                    'type': 'category',
                    'children': children}
