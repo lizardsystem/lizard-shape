@@ -6,6 +6,7 @@
       "shp_file": "lizard_shape/shapes/AfvoerendOppervlak_Tak_line.shp", 
       "description": "", 
       "prj_file": "lizard_shape/shapes/AfvoerendOppervlak_Tak_line.prj", 
+      "id_field": null, 
       "dbf_file": "lizard_shape/shapes/AfvoerendOppervlak_Tak_line.dbf", 
       "shx_file": "lizard_shape/shapes/AfvoerendOppervlak_Tak_line.shx", 
       "slug": "test", 
@@ -19,6 +20,7 @@
       "shp_file": "lizard_shape/shapes/Knoop.shp", 
       "description": "", 
       "prj_file": "lizard_shape/shapes/Knoop.prj", 
+      "id_field": null, 
       "dbf_file": "lizard_shape/shapes/Knoop.dbf", 
       "shx_file": "lizard_shape/shapes/Knoop.shx", 
       "slug": "knoop", 
@@ -32,6 +34,7 @@
       "shp_file": "lizard_shape/shapes/GeslotenLeiding_line.shp", 
       "description": "", 
       "prj_file": "lizard_shape/shapes/GeslotenLeiding_line.prj", 
+      "id_field": null, 
       "dbf_file": "lizard_shape/shapes/GeslotenLeiding_line.dbf", 
       "shx_file": "lizard_shape/shapes/GeslotenLeiding_line.shx", 
       "slug": "lines", 
@@ -45,6 +48,7 @@
       "shp_file": "lizard_shape/shapes/Overstort_Knoop.shp", 
       "description": "", 
       "prj_file": "lizard_shape/shapes/Overstort_Knoop.prj", 
+      "id_field": null, 
       "dbf_file": "lizard_shape/shapes/Overstort_Knoop.dbf", 
       "shx_file": "lizard_shape/shapes/Overstort_Knoop.shx", 
       "slug": "overstort", 
@@ -58,6 +62,7 @@
       "shp_file": "lizard_shape/shapes/Wieringen.shp", 
       "description": "", 
       "prj_file": "lizard_shape/shapes/Wieringen.prj", 
+      "id_field": "PEILVAKID", 
       "dbf_file": "lizard_shape/shapes/Wieringen.dbf", 
       "shx_file": "lizard_shape/shapes/Wieringen.shx", 
       "slug": "vlakken", 
@@ -116,7 +121,7 @@
     "fields": {
       "value_field": "ONVSTED_HA", 
       "shape": 5, 
-      "name": "onvsted_ha", 
+      "name": "Onverhard stedelijk (ha)", 
       "legend": 1
     }
   }, 
@@ -201,13 +206,13 @@
     }
   }, 
   {
-    "pk": 9, 
+    "pk": 12, 
     "model": "lizard_map.workspaceitem", 
     "fields": {
       "index": 20, 
-      "name": "vlakken - onvsted_ha", 
+      "name": "vlakken - Onverhard stedelijk (ha)", 
       "visible": true, 
-      "adapter_layer_json": "{\"layer_name\": \"onvsted_ha\", \"legend_id\": \"1\", \"value_field\": \"ONVSTED_HA\", \"layer_filename\": \"/home/jack/svn/djangoapps/lizard-shape/var/media/lizard_shape/shapes/Wieringen.shp\", \"search_property_name\": \"WGBNAAM\"}", 
+      "adapter_layer_json": "{\"layer_name\": \"vlakken - Onverhard stedelijk (ha)\", \"legend_id\": \"1\", \"value_field\": \"ONVSTED_HA\", \"value_name\": \"Onverhard stedelijk (ha)\", \"layer_filename\": \"/home/jack/svn/djangoapps/lizard-shape/var/media/lizard_shape/shapes/Wieringen.shp\", \"search_property_name\": \"PEILVAKID\"}", 
       "workspace": 1, 
       "adapter_class": "adapter_shapefile"
     }
@@ -220,6 +225,30 @@
       "name": "test - ovh_vla", 
       "visible": true, 
       "adapter_layer_json": "{\"layer_name\": \"ovh_vla\", \"legend_id\": \"1\", \"value_field\": \"ovh_vla\", \"layer_filename\": \"/home/jack/svn/djangoapps/lizard-shape/var/media/lizard_shape/shapes/AfvoerendOppervlak_Tak_line.shp\", \"search_property_name\": \"WGBNAAM\"}", 
+      "workspace": 2, 
+      "adapter_class": "adapter_shapefile"
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "lizard_map.workspaceitem", 
+    "fields": {
+      "index": 40, 
+      "name": "vlakken - onvsted_ha", 
+      "visible": false, 
+      "adapter_layer_json": "{\"layer_name\": \"onvsted_ha\", \"legend_id\": \"1\", \"value_field\": \"ONVSTED_HA\", \"layer_filename\": \"/home/jack/svn/djangoapps/lizard-shape/var/media/lizard_shape/shapes/Wieringen.shp\", \"search_property_name\": \"WGBNAAM\"}", 
+      "workspace": 2, 
+      "adapter_class": "adapter_shapefile"
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "lizard_map.workspaceitem", 
+    "fields": {
+      "index": 50, 
+      "name": "overstort - gemiddelde buitenwaterstand", 
+      "visible": true, 
+      "adapter_layer_json": "{\"layer_name\": \"gemiddelde buitenwaterstand\", \"legend_point_id\": \"2\", \"value_field\": \"bws_gem\", \"layer_filename\": \"/home/jack/svn/djangoapps/lizard-shape/var/media/lizard_shape/shapes/Overstort_Knoop.shp\", \"search_property_name\": \"WGBNAAM\"}", 
       "workspace": 2, 
       "adapter_class": "adapter_shapefile"
     }

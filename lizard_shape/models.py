@@ -28,6 +28,13 @@ class Shape(models.Model):
     shx_file = models.FileField(upload_to=UPLOAD_TO)
     prj_file = models.FileField(upload_to=UPLOAD_TO)
 
+    id_field = models.CharField(
+        max_length=20, null=True, blank=True,
+        help_text='The id field must be filled for searching.')
+    name_field = models.CharField(
+        max_length=20, null=True, blank=True,
+        help_text='The name field must be filled for mouseovers, popups.')
+
     legend = models.ManyToManyField(Legend, through='ShapeLegend',
                                     null=True, blank=True)
 

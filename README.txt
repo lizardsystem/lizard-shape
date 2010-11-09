@@ -3,7 +3,31 @@ lizard-shape
 
 Introduction
 
-Usage, etc.
+
+Usage
+-----
+
+- Add lizard_shape to your buildout.cfg.
+
+- Add lizard_shape and lizard_map to the INSTALLED_APPS in your
+  settings.
+
+- Add app in your urls.py, i.e. (r'^shape/', include('lizard_shape.urls')).
+
+- Add a link to the app somewhere:
+
+    - {% url lizard_shape.homepage %} in a template
+
+    - reverse('lizard_shape.homepage')
+
+- Optionally set MAP_SETTINGS, DEFAULT_START_DAYS and DEFAULT_END_DAYS
+  in your settings. See the lizard_map testsettings for examples.
+
+Make the database tables:
+
+    $> bin/django syncdb
+
+- Add some data in the admin screen.
 
 
 Development installation
