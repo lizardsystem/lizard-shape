@@ -33,54 +33,18 @@ def homepage(request,
             shapelegends = ShapeLegend.objects.filter(shape__category=category)
             # Legends for lines.
             for shapelegend in shapelegends:
-                id_field = (shapelegend.shape.id_field
-                            if shapelegend.shape.id_field else "")
-                name_field = (shapelegend.shape.name_field
-                              if shapelegend.shape.name_field else "")
                 children.append({
                         'name': str(shapelegend),
                         'type': 'shape',
-                        'adapter_layer_json': (
-                            '{"layer_name": "%s", '
-                            '"legend_id": "%d", '
-                            '"value_field": "%s", '
-                            '"value_name": "%s", '
-                            '"layer_filename": "%s", '
-                            '"search_property_id": "%s", '
-                            '"search_property_name": "%s"}') % (
-                            str(shapelegend),
-                            shapelegend.legend.id,
-                            shapelegend.value_field,
-                            shapelegend.name,
-                            shapelegend.shape.shp_file.path,
-                            id_field,
-                            name_field)})
+                        'adapter_layer_json': shapelegend.adapter_layer_json})
             # Legends for points.
             shapelegendpoints = ShapeLegendPoint.objects.filter(
                 shape__category=category)
             for shapelegendpoint in shapelegendpoints:
-                id_field = (shapelegendpoint.shape.id_field
-                            if shapelegendpoint.shape.id_field else "")
-                name_field = (shapelegendpoint.shape.name_field
-                              if shapelegendpoint.shape.name_field else "")
                 children.append({
                         'name': str(shapelegendpoint),
                         'type': 'shape',
-                        'adapter_layer_json': (
-                            '{"layer_name": "%s", '
-                            '"legend_point_id": "%d", '
-                            '"value_field": "%s", '
-                            '"value_name": "%s", '
-                            '"layer_filename": "%s", '
-                            '"search_property_id": "%s", '
-                            '"search_property_name": "%s"}') % (
-                            str(shapelegendpoint),
-                            shapelegendpoint.legend_point.id,
-                            shapelegendpoint.value_field,
-                            shapelegendpoint.name,
-                            shapelegendpoint.shape.shp_file.path,
-                            id_field,
-                            name_field)})
+                        'adapter_layer_json': shapelegendpoint.adapter_layer_json})
             row = {'name': category.name,
                    'type': 'category',
                    'children': children}

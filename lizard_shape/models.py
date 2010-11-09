@@ -67,6 +67,20 @@ class Shape(models.Model):
             raise ShapeNameError(
                 "Uploaded files do not have common filename base.")
 
+    def get_adapter_layer_json_list(self):
+        """
+        Calculates all adapter_layer_jsons from available legends and
+        return in list.
+        """
+        result = []
+        # Add all shapelegends.
+        result.extend([s.adapter_layer_json
+                       for s in self.shapelegend_set.all()])
+        # Add all shapelegendspoints.
+        result.extend([s.adapter_layer_json
+                       for s in self.shapelegendpoint_set.all()])
+        return result
+
 
 class Category(AL_Node):
     """
@@ -102,6 +116,33 @@ class ShapeLegend(models.Model):
     def __unicode__(self):
         return '%s - %s' % (self.shape, self.name)
 
+    @property
+    def adapter_layer_json(self):
+        """
+        Defines adapter_layer_json for adapter_shapefile (from
+        lizard-map).
+        """
+        id_field = (self.shape.id_field
+                    if self.shape.id_field else "")
+        name_field = (self.shape.name_field
+                      if self.shape.name_field else "")
+        result = ((
+                '{"layer_name": "%s", '
+                '"legend_id": "%d", '
+                '"value_field": "%s", '
+                '"value_name": "%s", '
+                '"layer_filename": "%s", '
+                '"search_property_id": "%s", '
+                '"search_property_name": "%s"}') % (
+                str(self),
+                self.legend.id,
+                self.value_field,
+                self.name,
+                self.shape.shp_file.path,
+                id_field,
+                name_field))
+        return result
+
 
 class ShapeLegendPoint(models.Model):
     """
@@ -115,3 +156,30 @@ class ShapeLegendPoint(models.Model):
 
     def __unicode__(self):
         return '%s - %s' % (self.shape, self.name)
+
+    @property
+    def adapter_layer_json(self):
+        """
+        Defines adapter_layer_json for adapter_shapefile (from
+        lizard-map).
+        """
+        id_field = (self.shape.id_field
+                    if self.shape.id_field else "")
+        name_field = (self.shape.name_field
+                      if self.shape.name_field else "")
+        result = ((
+                '{"layer_name": "%s", '
+                '"legend_point_id": "%d", '
+                '"value_field": "%s", '
+                '"value_name": "%s", '
+                '"layer_filename": "%s", '
+                '"search_property_id": "%s", '
+                '"search_property_name": "%s"}') % (
+                str(self),
+                self.legend_point.id,
+                self.value_field,
+                self.name,
+                self.shape.shp_file.path,
+                id_field,
+                name_field))
+        return result
