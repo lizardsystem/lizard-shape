@@ -5,7 +5,11 @@ Changelog of lizard-shape
 0.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Moved adapter_layer_json functions to model functions.
+
+- Added tests and fixtures.
+
+- Pinned newest lizard-map and lizard-ui.
 
 
 0.1 (2010-11-01)
