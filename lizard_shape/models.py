@@ -1,7 +1,7 @@
 # (c) Nelen & Schuurmans.  GPL licensed, see LICENSE.txt.
 from django.db import models
+from django.utils import simplejson as json
 
-import json
 from treebeard.al_tree import AL_Node
 
 from lizard_map.models import Legend
