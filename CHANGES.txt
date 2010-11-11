@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-0.2 (unreleased)
+0.2 (2010-11-11)
 ----------------
 
 - Moved adapter_layer_json functions to model functions.
