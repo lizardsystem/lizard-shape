@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-0.3 (unreleased)
+0.3 (2010-11-11)
 ----------------
 
 - Changed json to django.utils.simplejson as json.
