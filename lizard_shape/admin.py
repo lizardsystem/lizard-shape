@@ -3,6 +3,7 @@ from django import forms
 
 from lizard_shape.models import Category
 from lizard_shape.models import Shape
+from lizard_shape.models import ShapeField
 from lizard_shape.models import ShapeLegend
 from lizard_shape.models import ShapeLegendPoint
 
@@ -86,5 +87,6 @@ class ShapeInline(admin.TabularInline):
 
 admin.site.register(Category)
 admin.site.register(Shape, ShapeAdmin)
+admin.site.register(ShapeField)
 admin.site.register(ShapeLegend)
 admin.site.register(ShapeLegendPoint)

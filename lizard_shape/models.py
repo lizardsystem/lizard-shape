@@ -1,6 +1,7 @@
 # (c) Nelen & Schuurmans.  GPL licensed, see LICENSE.txt.
 from django.db import models
 
+import json
 from treebeard.al_tree import AL_Node
 
 from lizard_map.models import Legend
@@ -82,6 +83,20 @@ class Shape(models.Model):
         return result
 
 
+class ShapeField(models.Model):
+    """
+    Which fields do we want to display in a popup? Used by adapter in
+    lizard-map.
+    """
+    name = models.CharField(max_length=80)
+    field = models.CharField(max_length=20)
+
+    shape = models.ForeignKey('Shape')
+
+    def __unicode__(self):
+        return u'%s - %s' % (self.shape, self.name)
+
+
 class Category(AL_Node):
     """
     Tree structure for ordering objects.
@@ -126,6 +141,8 @@ class ShapeLegend(models.Model):
                     if self.shape.id_field else "")
         name_field = (self.shape.name_field
                       if self.shape.name_field else "")
+        display_fields = [{'name': sf.name, 'field': sf.field}
+                          for sf in self.shape.shapefield_set.all()]
         result = ((
                 '{"layer_name": "%s", '
                 '"legend_id": "%d", '
@@ -133,14 +150,16 @@ class ShapeLegend(models.Model):
                 '"value_name": "%s", '
                 '"layer_filename": "%s", '
                 '"search_property_id": "%s", '
-                '"search_property_name": "%s"}') % (
+                '"search_property_name": "%s", '
+                '"display_fields": %s}') % (
                 str(self),
                 self.legend.id,
                 self.value_field,
                 self.name,
                 self.shape.shp_file.path,
                 id_field,
-                name_field))
+                name_field,
+                json.dumps(display_fields)))
         return result
 
 
@@ -167,6 +186,8 @@ class ShapeLegendPoint(models.Model):
                     if self.shape.id_field else "")
         name_field = (self.shape.name_field
                       if self.shape.name_field else "")
+        display_fields = [{'name': sf.name, 'field': sf.field}
+                          for sf in self.shape.shapefield_set.all()]
         result = ((
                 '{"layer_name": "%s", '
                 '"legend_point_id": "%d", '
@@ -174,12 +195,14 @@ class ShapeLegendPoint(models.Model):
                 '"value_name": "%s", '
                 '"layer_filename": "%s", '
                 '"search_property_id": "%s", '
-                '"search_property_name": "%s"}') % (
+                '"search_property_name": "%s", '
+                '"display_fields": %s}') % (
                 str(self),
                 self.legend_point.id,
                 self.value_field,
                 self.name,
                 self.shape.shp_file.path,
                 id_field,
-                name_field))
+                name_field,
+                json.dumps(display_fields)))
         return result
