@@ -16,6 +16,7 @@ install_requires = [
     'lizard-map',
     'django-nose',
     'django-treebeard',
+    'nens',
     ],
 
 tests_require = [

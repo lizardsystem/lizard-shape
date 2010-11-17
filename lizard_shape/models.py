@@ -3,12 +3,14 @@ from django.db import models
 from django.utils import simplejson as json
 
 from treebeard.al_tree import AL_Node
+from nens.sobek import HISFile
 
 from lizard_map.models import Legend
 from lizard_map.models import LegendPoint
 
 # The default location from MEDIA_ROOT to upload files to.
 UPLOAD_TO = "lizard_shape/shapes"
+UPLOAD_HIS = "lizard_shape/his"
 
 
 class ShapeNameError(Exception):
@@ -31,13 +33,16 @@ class Shape(models.Model):
 
     id_field = models.CharField(
         max_length=20, null=True, blank=True,
-        help_text='The id field must be filled for searching.')
+        help_text='The id field must be filled for searching and for his files.')
     name_field = models.CharField(
         max_length=20, null=True, blank=True,
         help_text='The name field must be filled for mouseovers, popups.')
 
     legend = models.ManyToManyField(Legend, through='ShapeLegend',
                                     null=True, blank=True)
+
+    his = models.ForeignKey('His', null=True, blank=True)
+    his_parameter = models.CharField(max_length=20, null=True, blank=True)
 
     def __unicode__(self):
         return '%s' % self.name
@@ -81,6 +86,17 @@ class Shape(models.Model):
         result.extend([s.adapter_layer_json
                        for s in self.shapelegendpoint_set.all()])
         return result
+
+    def timeseries(self, location_name, start=None, end=None):
+        """
+        Returns timeseries from hisfile in a dict associating
+        timestamp to value. Returns [] if no hisfile defined.
+        """
+        if self.his and self.his_parameter:
+            hf = self.his.hisfile()
+            return hf.get_timeseries(
+                location_name, self.his_parameter, start=start, end=end)
+        return []
 
 
 class ShapeField(models.Model):
@@ -205,4 +221,22 @@ class ShapeLegendPoint(models.Model):
                 id_field,
                 name_field,
                 json.dumps(display_fields)))
+        return result
+
+
+class His(models.Model):
+    """
+    Sobek HIS files and their relation to a shapefile.
+    """
+
+    name = models.CharField(max_length=80)
+    filename = models.FileField(upload_to=UPLOAD_HIS)
+
+    def __unicode__(self):
+        return '%s' % self.name
+
+    def hisfile(self):
+        result = HISFile(self.filename.path)
+        print result.parameters()
+        print result.locations()
         return result

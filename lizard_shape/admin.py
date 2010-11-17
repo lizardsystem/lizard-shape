@@ -2,6 +2,7 @@ from django.contrib import admin
 from django import forms
 
 from lizard_shape.models import Category
+from lizard_shape.models import His
 from lizard_shape.models import Shape
 from lizard_shape.models import ShapeField
 from lizard_shape.models import ShapeLegend
@@ -86,6 +87,7 @@ class ShapeInline(admin.TabularInline):
 
 
 admin.site.register(Category)
+admin.site.register(His)
 admin.site.register(Shape, ShapeAdmin)
 admin.site.register(ShapeField)
 admin.site.register(ShapeLegend)
