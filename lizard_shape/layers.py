@@ -18,7 +18,7 @@ from lizard_map.workspace import WorkspaceItemAdapter
 logger = logging.getLogger(__name__)
 
 
-class WorkspaceItemAdapterShapefile(WorkspaceItemAdapter):
+class AdapterShapefile(WorkspaceItemAdapter):
     """Render a WorkspaceItem using a shape file.
 
     Instance variables:
@@ -60,7 +60,7 @@ class WorkspaceItemAdapterShapefile(WorkspaceItemAdapter):
         default_resource_module and default_resource_name.
 
         """
-        super(WorkspaceItemAdapterShapefile, self).__init__(*args, **kwargs)
+        super(AdapterShapefile, self).__init__(*args, **kwargs)
 
         layer_arguments = kwargs['layer_arguments']
         self.layer_name = str(layer_arguments['layer_name'])
@@ -119,8 +119,6 @@ class WorkspaceItemAdapterShapefile(WorkspaceItemAdapter):
 
     def layer(self, layer_ids=None, request=None):
         """Return layer and styles for a shapefile.
-
-        Registered as ``shapefile_layer``
 
         http://127.0.0.1:8000/map/workspace/1/wms/?LAYERS=basic&SERVICE=
         WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&EXCEPTIONS=application%
@@ -316,10 +314,6 @@ class WorkspaceItemAdapterShapefile(WorkspaceItemAdapter):
               width=380.0, height=250.0, layout_extra=None):
         """
         Displays timeseries graph.
-
-        This function can only be used in combination with
-        lizard-shape. Maybe it's better to move the whole file to
-        lizard-shape.
         """
         import datetime
 

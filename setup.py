@@ -17,6 +17,7 @@ install_requires = [
     'django-nose',
     'django-treebeard',
     'nens',
+    'shapely',
     ],
 
 tests_require = [
@@ -45,7 +46,7 @@ setup(name='lizard-shape',
           'console_scripts': [
             ],
           'lizard_map.adapter_class': [
-            'adapter_shapefile = lizard_map.layers:WorkspaceItemAdapterShapefile',
+            'adapter_shapefile = lizard_shape.layers:AdapterShapefile',
             ],
           },
       )

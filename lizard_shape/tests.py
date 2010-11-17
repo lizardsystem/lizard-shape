@@ -5,8 +5,13 @@ from django.db import IntegrityError
 from django.forms import ValidationError
 from django.test import TestCase
 from django.test.client import Client
+import pkg_resources
 
+import lizard_map.models
+import lizard_shape.layers
+from lizard_map.models import WorkspaceItem
 from lizard_shape.admin import check_extension_or_error
+from lizard_shape.layers import AdapterShapefile
 from lizard_shape.models import Category
 from lizard_shape.models import Shape
 from lizard_shape.models import ShapeNameError
@@ -126,3 +131,43 @@ class AdminTest(TestCase):
         self.assertRaises(
             ValidationError, check_extension_or_error, filename, 'shp',
             extension_name='Shapefile')
+
+
+class AdapterShapefileTestSuite(TestCase):
+    """WMS layer functions are generally defined in layers.py. One can add his
+    own in other apps. shapefile_layer is an example function.
+    """
+
+    def test_initialization(self):
+        mock_workspace = None
+        layer_arguments = {
+            'layer_name': 'Waterlichamen',
+            'resource_module': 'lizard_map',
+            'resource_name': 'test_shapefiles/KRWwaterlichamen_merge.shp',
+            'search_property_name': 'WGBNAAM'}
+        ws_adapter = lizard_shape.layers.AdapterShapefile(
+            mock_workspace, layer_arguments=layer_arguments)
+        layers, styles = ws_adapter.layer()
+        # TODO: test output.
+
+    def test_b(self):
+        """Test the layer info is initialized with the given parameters.
+
+        Note: the resource_module must exist.
+        """
+
+        workspace_item = 0  # don't care for this test
+        arguments = {'layer_name': 'Layer name',
+                     'resource_module': 'lizard_map',
+                     'resource_name': 'Resource name',
+                     'search_property_name': 'Search property name'}
+
+        adapter = AdapterShapefile(workspace_item,
+                                   layer_arguments=arguments)
+
+        self.assertEqual(adapter.layer_name, 'Layer name')
+        self.assertEqual(adapter.resource_module, 'lizard_map')
+        self.assertEqual(adapter.resource_name, 'Resource name')
+        self.assertEqual(adapter.search_property_name, 'Search property name')
+
+
