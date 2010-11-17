@@ -5,7 +5,7 @@ Changelog of lizard-shape
 0.5 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Moved shapefile adapter from lizard-map to here.
 
 
 0.4 (2010-11-11)
