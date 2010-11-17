@@ -1,5 +1,6 @@
 from shapely.geometry import Point
 from shapely.wkt import loads
+import datetime
 import logging
 import mapnik
 import osgeo.ogr
@@ -10,10 +11,12 @@ from django.template.loader import render_to_string
 from django.utils import simplejson as json
 
 from lizard_map import coordinates
+from lizard_map.adapter import Graph
 from lizard_map.models import Legend
 from lizard_map.models import LegendPoint
 from lizard_map.utility import float_to_string
 from lizard_map.workspace import WorkspaceItemAdapter
+from lizard_shape.models import His
 
 logger = logging.getLogger(__name__)
 
@@ -114,7 +117,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
         return legend_object
 
     def legend(self, updates=None):
-        return super(WorkspaceItemAdapterShapefile, self).legend_default(
+        return super(AdapterShapefile, self).legend_default(
             self._legend_object)
 
     def layer(self, layer_ids=None, request=None):
@@ -240,7 +243,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
         if icon_style is None and self.legend_point_id is not None:
             legend_object = LegendPoint.objects.get(pk=self.legend_point_id)
             icon_style = legend_object.icon_style()
-        return super(WorkspaceItemAdapterShapefile, self).symbol_url(
+        return super(AdapterShapefile, self).symbol_url(
             identifier=identifier,
             start_date=start_date,
             end_date=end_date,
@@ -315,10 +318,6 @@ class AdapterShapefile(WorkspaceItemAdapter):
         """
         Displays timeseries graph.
         """
-        import datetime
-
-        from lizard_shape.models import His
-        from lizard_map.adapter import Graph
 
         line_styles = self.line_styles(identifiers)
 
