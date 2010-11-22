@@ -17,8 +17,14 @@ from lizard_map.models import LegendPoint
 from lizard_map.utility import float_to_string
 from lizard_map.workspace import WorkspaceItemAdapter
 from lizard_shape.models import His
+from lizard_shape.models import Shape
+from lizard_shape.models import ShapeLegend
+from lizard_shape.models import ShapeLegendPoint
 
 logger = logging.getLogger(__name__)
+
+LEGEND_TYPE_SHAPELEGEND = 'ShapeLegend'
+LEGEND_TYPE_SHAPELEGENDPOINT = 'ShapeLegendPoint'
 
 
 class AdapterShapefile(WorkspaceItemAdapter):
@@ -85,7 +91,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
         self.search_property_id = \
             layer_arguments.get('search_property_id', "")
         self.legend_id = layer_arguments.get('legend_id', None)
-        self.legend_point_id = layer_arguments.get('legend_point_id', None)
+        self.legend_type = layer_arguments.get('legend_type', None)
         self.value_field = layer_arguments.get('value_field', None)
         self.value_name = layer_arguments.get('value_name', None)
         self.display_fields = layer_arguments.get('display_fields', [])
@@ -110,10 +116,13 @@ class AdapterShapefile(WorkspaceItemAdapter):
 
     @property
     def _legend_object(self):
+        legend_models = {
+            LEGEND_TYPE_SHAPELEGEND: ShapeLegend,
+            LEGEND_TYPE_SHAPELEGENDPOINT: ShapeLegendPoint}
+        legend_model = legend_models[self.legend_type]
+
         if self.legend_id is not None:
-            legend_object = Legend.objects.get(id=self.legend_id)
-        elif self.legend_point_id is not None:
-            legend_object = LegendPoint.objects.get(id=self.legend_point_id)
+            legend_object = legend_model.objects.get(id=self.legend_id)
         return legend_object
 
     def legend(self, updates=None):
@@ -136,13 +145,17 @@ class AdapterShapefile(WorkspaceItemAdapter):
 
         layer.datasource = mapnik.Shapefile(
             file=self.layer_filename)
-        if self.legend_id is not None:
-            legend = Legend.objects.get(id=self.legend_id)
-            style = legend.mapnik_linestyle(value_field=str(self.value_field))
+        if (self.legend_id is not None and
+            self.legend_type == LEGEND_TYPE_SHAPELEGEND):
+
+            shape_legend = ShapeLegend.objects.get(id=self.legend_id)
+            style = shape_legend.legend.mapnik_style(value_field=str(self.value_field))
             # style = self._default_mapnik_style()
-        elif self.legend_point_id is not None:
-            legend_point = LegendPoint.objects.get(id=self.legend_point_id)
-            style = legend_point.mapnik_style(
+        elif (self.legend_id is not None and
+              self.legend_type == LEGEND_TYPE_SHAPELEGENDPOINT):
+
+            shape_legend_point = ShapeLegendPoint.objects.get(id=self.legend_id)
+            style = shape_legend_point.legend_point.mapnik_style(
                 value_field=str(self.value_field))
         else:
             # Show layer with default legend.
@@ -248,9 +261,13 @@ class AdapterShapefile(WorkspaceItemAdapter):
         """
         Returns symbol.
         """
-        if icon_style is None and self.legend_point_id is not None:
-            legend_object = LegendPoint.objects.get(pk=self.legend_point_id)
-            icon_style = legend_object.icon_style()
+        if (icon_style is None and
+            self.legend_id is not None and
+            self.legend_type == LEGEND_TYPE_SHAPELEGENDPOINT):
+
+            legend_object = ShapeLegendPoint.objects.get(pk=self.legend_id)
+            icon_style = legend_object.legend_point.icon_style()
+
         return super(AdapterShapefile, self).symbol_url(
             identifier=identifier,
             start_date=start_date,
@@ -266,14 +283,20 @@ class AdapterShapefile(WorkspaceItemAdapter):
         feat = lyr.GetNextFeature()
 
         item, google_x, google_y, feat_items = None, None, None, None
+
+        # Find one (and only) feature.
         while feat is not None:
             geom = feat.GetGeometryRef()
             feat_items = feat.items()
+            # Add stripped keys. Sometimes columnnames contain spaces at the end.
+            for key in feat_items.keys():
+                feat_items[key.strip()] = feat_items[key]
             if geom and feat_items[self.search_property_id] == id:
                 item = loads(geom.ExportToWkt())
                 google_x, google_y = coordinates.rd_to_google(*item.coords[0])
                 break
             feat = lyr.GetNextFeature()
+
 
         values = []  # contains {'name': <name>, 'value': <value>}
         for field in self.display_fields:
@@ -334,17 +357,34 @@ class AdapterShapefile(WorkspaceItemAdapter):
                       width=width, height=height, today=today)
         graph.axes.grid(True)
 
-        his = His.objects.all()[0]  # Test: take first object.
-        hf = his.hisfile()
+        # his = His.objects.all()[0]  # Test: take first object.
+        shape = self._legend_object.shape
+        if shape.his is None:
+            logger.debug('Shapefile %s does not have associated his file.' % shape)
+            graph.suptitle('No data.')
+            graph.add_today()
+            return graph.http_png()
+
+        hf = shape.his.hisfile()
         # parameter = hf.parameters()[2]  # Test: take first parameter.
         parameters = hf.parameters()
-        location = hf.locations()[0]  # Test: take first location.
+        locations = hf.locations()
+        parameter = shape.his_parameter
 
         # Convert dates to datetimes
         start_datetime = datetime.datetime.combine(start_date, datetime.time())
         end_datetime = datetime.datetime.combine(end_date, datetime.time())
-        for index, identifier in enumerate(identifiers):
-            parameter = parameters[index % len(parameters)]
+        location_count = 0
+        for identifier in identifiers:
+            location = identifier['id']
+
+            if location not in locations:
+                # Skip location if not available in his file.
+                logger.debug('Location "%s" not in his file "%s".' % (location, shape.his))
+                continue
+            location_count += 1
+
+            # parameter = parameters[index % len(parameters)]
             timeseries = hf.get_timeseries(
                 location, parameter, start_datetime, end_datetime, list)
 
@@ -356,6 +396,8 @@ class AdapterShapefile(WorkspaceItemAdapter):
                             color=line_styles[str(identifier)]['color'],
                             label=parameter)
 
+        title = '%s (%d locations)' % (parameter, location_count)
+        graph.suptitle(title)
         # if legend:
         #     graph.legend()
 

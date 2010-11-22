@@ -42,7 +42,9 @@ class Shape(models.Model):
                                     null=True, blank=True)
 
     his = models.ForeignKey('His', null=True, blank=True)
-    his_parameter = models.CharField(max_length=20, null=True, blank=True)
+    his_parameter = models.CharField(
+        max_length=80, null=True, blank=True,
+        help_text=u'i.e. Discharge max (m\\xb3/s) for Discharge max (m\xb3/s)')
 
     def __unicode__(self):
         return '%s' % self.name
@@ -162,6 +164,7 @@ class ShapeLegend(models.Model):
         result = ((
                 '{"layer_name": "%s", '
                 '"legend_id": "%d", '
+                '"legend_type": "ShapeLegend", '
                 '"value_field": "%s", '
                 '"value_name": "%s", '
                 '"layer_filename": "%s", '
@@ -169,7 +172,7 @@ class ShapeLegend(models.Model):
                 '"search_property_name": "%s", '
                 '"display_fields": %s}') % (
                 str(self),
-                self.legend.id,
+                self.id,
                 self.value_field,
                 self.name,
                 self.shape.shp_file.path,
@@ -206,7 +209,8 @@ class ShapeLegendPoint(models.Model):
                           for sf in self.shape.shapefield_set.all()]
         result = ((
                 '{"layer_name": "%s", '
-                '"legend_point_id": "%d", '
+                '"legend_id": "%d", '
+                '"legend_type": "ShapeLegendPoint", '
                 '"value_field": "%s", '
                 '"value_name": "%s", '
                 '"layer_filename": "%s", '
@@ -214,7 +218,7 @@ class ShapeLegendPoint(models.Model):
                 '"search_property_name": "%s", '
                 '"display_fields": %s}') % (
                 str(self),
-                self.legend_point.id,
+                self.id,
                 self.value_field,
                 self.name,
                 self.shape.shp_file.path,
@@ -237,6 +241,4 @@ class His(models.Model):
 
     def hisfile(self):
         result = HISFile(self.filename.path)
-        print result.parameters()
-        print result.locations()
         return result
