@@ -12,12 +12,8 @@ from django.utils import simplejson as json
 
 from lizard_map import coordinates
 from lizard_map.adapter import Graph
-from lizard_map.models import Legend
-from lizard_map.models import LegendPoint
 from lizard_map.utility import float_to_string
 from lizard_map.workspace import WorkspaceItemAdapter
-from lizard_shape.models import His
-from lizard_shape.models import Shape
 from lizard_shape.models import ShapeLegend
 from lizard_shape.models import ShapeLegendPoint
 
@@ -149,12 +145,14 @@ class AdapterShapefile(WorkspaceItemAdapter):
             self.legend_type == LEGEND_TYPE_SHAPELEGEND):
 
             shape_legend = ShapeLegend.objects.get(id=self.legend_id)
-            style = shape_legend.legend.mapnik_style(value_field=str(self.value_field))
+            style = shape_legend.legend.mapnik_style(
+                value_field=str(self.value_field))
             # style = self._default_mapnik_style()
         elif (self.legend_id is not None and
               self.legend_type == LEGEND_TYPE_SHAPELEGENDPOINT):
 
-            shape_legend_point = ShapeLegendPoint.objects.get(id=self.legend_id)
+            shape_legend_point = ShapeLegendPoint.objects.get(
+                id=self.legend_id)
             style = shape_legend_point.legend_point.mapnik_style(
                 value_field=str(self.value_field))
         else:
@@ -288,7 +286,8 @@ class AdapterShapefile(WorkspaceItemAdapter):
         while feat is not None:
             geom = feat.GetGeometryRef()
             feat_items = feat.items()
-            # Add stripped keys. Sometimes columnnames contain spaces at the end.
+            # Add stripped keys. Sometimes columnnames contain spaces
+            # at the end.
             for key in feat_items.keys():
                 feat_items[key.strip()] = feat_items[key]
             if geom and feat_items[self.search_property_id] == id:
@@ -296,7 +295,6 @@ class AdapterShapefile(WorkspaceItemAdapter):
                 google_x, google_y = coordinates.rd_to_google(*item.coords[0])
                 break
             feat = lyr.GetNextFeature()
-
 
         values = []  # contains {'name': <name>, 'value': <value>}
         for field in self.display_fields:
@@ -360,7 +358,9 @@ class AdapterShapefile(WorkspaceItemAdapter):
         # his = His.objects.all()[0]  # Test: take first object.
         shape = self._legend_object.shape
         if shape.his is None:
-            logger.debug('Shapefile %s does not have associated his file.' % shape)
+            logger.debug(
+                'Shapefile %s does not have associated his file.'
+                % shape)
             graph.suptitle('No data.')
             graph.add_today()
             return graph.http_png()
@@ -380,7 +380,8 @@ class AdapterShapefile(WorkspaceItemAdapter):
 
             if location not in locations:
                 # Skip location if not available in his file.
-                logger.debug('Location "%s" not in his file "%s".' % (location, shape.his))
+                logger.debug('Location "%s" not in his file "%s".' % (
+                        location, shape.his))
                 continue
             location_count += 1
 
