@@ -385,8 +385,13 @@ class AdapterShapefile(WorkspaceItemAdapter):
             location_count += 1
 
             # parameter = parameters[index % len(parameters)]
-            timeseries = hf.get_timeseries(
-                location, parameter, start_datetime, end_datetime, list)
+            try:
+                timeseries = hf.get_timeseries(
+                    location, parameter, start_datetime, end_datetime, list)
+            except KeyError:
+                logger.error('Parameter %s not in hisfile. Choices are: %r' %
+                             (parameter, parameters))
+                continue
 
             # Plot data.
             dates = [row[0] for row in timeseries]
