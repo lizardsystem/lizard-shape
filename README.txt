@@ -2,6 +2,26 @@ lizard-shape
 ==========================================
 
 Introduction
+------------
+
+Lizard-shape is a service to upload and to display shapefiles in a
+webinterface. It implements the lizard-map adapter. Lizad-shape
+provides several legends to color the points, lines or areas. It can
+also show timeseries from hisfiles.
+
+Features:
+
+- Upload shapefiles in the django admin.
+
+- Make a line/area legend: provide min/max/<min/>max colors and the
+  number of steps.
+
+- Make a point legend: same as line/area legend, but with icon.
+
+- Upload HIS file and choose the parameter. When a feature is chosen
+  the contents of that location will be shown.
+
+- Make a tree structure with your shapefiles.
 
 
 Usage

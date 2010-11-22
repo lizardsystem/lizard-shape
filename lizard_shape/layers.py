@@ -192,6 +192,11 @@ class AdapterShapefile(WorkspaceItemAdapter):
                 distance = query_point.distance(item)
                 feat_items = feat.items()
 
+                # Add stripped keys, because column names can contain
+                # spaces after the 'real' name.
+                for key in feat_items.keys():
+                    feat_items[key.strip()] = feat_items[key]
+
                 if not radius or (radius is not None and distance < radius):
                     # Found an item.
                     if self.search_property_name not in feat_items:
@@ -199,10 +204,11 @@ class AdapterShapefile(WorkspaceItemAdapter):
                         # valid field in the shapefile dbf.
                         logger.error(
                             ('Search: The field "%s" cannot be found in '
-                             'shapefile "%s". '
+                             'shapefile "%s". Available fields: %r'
                              'Check your settings in '
                              'lizard_shape.models.Shape.') %
-                            (self.search_property_name, self.layer_name))
+                            (self.search_property_name, self.layer_name,
+                             feat_items.keys()))
                         break  # You don't have to search other rows.
                     name = str(feat_items[self.search_property_name])
 
@@ -213,8 +219,10 @@ class AdapterShapefile(WorkspaceItemAdapter):
                             logger.error(
                                 ('Search: The field "%s" cannot be found in '
                                  'shapefile "%s". Check value_field in your '
-                                 'legend settings.') %
-                                (self.value_field, self.layer_name))
+                                 'legend settings. Options are: %s') %
+                                (self.value_field,
+                                 self.layer_name,
+                                 feat_items.keys()))
                             break  # You don't have to search other rows.
                         name += ' - %s=%s' % (
                             self.value_name,
