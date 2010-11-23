@@ -238,9 +238,15 @@ class AdapterShapefile(WorkspaceItemAdapter):
                             str(float_to_string(feat_items[self.value_field])))
                     result = {'distance': distance,
                               'name': name,
-                              'google_coords':
-                              coordinates.rd_to_google(*item.coords[0]),
                               'workspace_item': self.workspace_item}
+                    try:
+                        result.update(
+                            {'google_coords':
+                                 coordinates.rd_to_google(*item.coords[0])})
+                    except NotImplementedError:
+                        logger.warning("Got a NotImplementedError in search. "
+                                       "Ignoring coordinates.")
+
                     if (self.search_property_id and
                         self.search_property_id in feat_items):
                         result.update(
