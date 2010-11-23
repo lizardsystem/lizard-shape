@@ -37,10 +37,10 @@
     }
   }, 
   {
-    "pk": 2, 
+    "pk": 1, 
     "model": "lizard_shape.shapelegendpoint", 
     "fields": {
-      "value_field": "TYPE", 
+      "value_field": "ID", 
       "shape_template": 1
     }
   }, 

@@ -122,8 +122,9 @@ class AdapterShapefile(WorkspaceItemAdapter):
             LEGEND_TYPE_SHAPELEGENDPOINT: ShapeLegendPoint}
         legend_model = legend_models[self.legend_type]
 
+        legend_object = None
         if self.legend_id is not None:
-            legend_object = legend_model.objects.get(id=self.legend_id)
+            legend_object = legend_model.objects.get(pk=self.legend_id)
         return legend_object
 
     def legend(self, updates=None):
