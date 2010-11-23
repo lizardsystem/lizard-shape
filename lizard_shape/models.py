@@ -19,7 +19,8 @@ class ShapeNameError(Exception):
 
 class Shape(models.Model):
     """
-    Here you can upload your shapefiles: .dbf, .prj, .shp, .shx files
+    Here you can upload your shapefiles: .dbf, .prj, .shp, .shx
+    files. Select a shape template and you got your shapefile layout.
     """
 
     name = models.CharField(max_length=80)
@@ -31,20 +32,12 @@ class Shape(models.Model):
     shx_file = models.FileField(upload_to=UPLOAD_TO)
     prj_file = models.FileField(upload_to=UPLOAD_TO)
 
-    id_field = models.CharField(
-        max_length=20, null=True, blank=True,
-        help_text='The id field must be filled for searching and for his files.')
-    name_field = models.CharField(
-        max_length=20, null=True, blank=True,
-        help_text='The name field must be filled for mouseovers, popups.')
-
-    legend = models.ManyToManyField(Legend, through='ShapeLegend',
-                                    null=True, blank=True)
-
     his = models.ForeignKey('His', null=True, blank=True)
     his_parameter = models.CharField(
         max_length=80, null=True, blank=True,
         help_text=u'i.e. Discharge max (m\\xb3/s) for Discharge max (m\xb3/s)')
+
+    template = models.ForeignKey('ShapeTemplate')
 
     def __unicode__(self):
         return '%s' % self.name
@@ -101,6 +94,25 @@ class Shape(models.Model):
         return []
 
 
+class ShapeTemplate(models.Model):
+    """
+    A shape template contains fieldnames. It also has configured
+    legends and fields referenced to it. Create a template once and
+    use it many times in shapes.
+    """
+
+    name = models.CharField(max_length=80)
+    id_field = models.CharField(
+        max_length=20, null=True, blank=True,
+        help_text='The id field must be filled for searching and for his files.')
+    name_field = models.CharField(
+        max_length=20, null=True, blank=True,
+        help_text='The name field must be filled for mouseovers, popups.')
+
+    def __unicode__(self):
+        return '%s' % self.name
+
+
 class ShapeField(models.Model):
     """
     Which fields do we want to display in a popup? Used by adapter in
@@ -109,7 +121,7 @@ class ShapeField(models.Model):
     name = models.CharField(max_length=80)
     field = models.CharField(max_length=20)
 
-    shape = models.ForeignKey('Shape')
+    shape_template = models.ForeignKey('ShapeTemplate')
 
     def __unicode__(self):
         return u'%s - %s' % (self.shape, self.name)
@@ -135,32 +147,29 @@ class Category(AL_Node):
         return '%s' % self.name
 
 
-class ShapeLegend(models.Model):
+class ShapeLegend(Legend):
     """
     Legend for shapefile:
     - Which field to use for value?
     """
 
-    name = models.CharField(max_length=80)
-    shape = models.ForeignKey(Shape)
-    legend = models.ForeignKey(Legend)
+    shape_template = models.ForeignKey('ShapeTemplate')
     value_field = models.CharField(max_length=20)
 
     def __unicode__(self):
-        return '%s - %s' % (self.shape, self.name)
+        return '%s - %s' % (self.shape_template, self.descriptor)
 
-    @property
-    def adapter_layer_json(self):
+    def adapter_layer_json(self, shape):
         """
         Defines adapter_layer_json for adapter_shapefile (from
         lizard-map).
         """
-        id_field = (self.shape.id_field
-                    if self.shape.id_field else "")
-        name_field = (self.shape.name_field
-                      if self.shape.name_field else "")
+        id_field = (self.shape_template.id_field
+                    if self.shape_template.id_field else "")
+        name_field = (self.shape_template.name_field
+                      if self.shape_template.name_field else "")
         display_fields = [{'name': sf.name, 'field': sf.field}
-                          for sf in self.shape.shapefield_set.all()]
+                          for sf in self.shape_template.shapefield_set.all()]
         result = ((
                 '{"layer_name": "%s", '
                 '"legend_id": "%d", '
@@ -170,43 +179,42 @@ class ShapeLegend(models.Model):
                 '"layer_filename": "%s", '
                 '"search_property_id": "%s", '
                 '"search_property_name": "%s", '
+                '"shape_id": "%d", '
                 '"display_fields": %s}') % (
                 str(self),
                 self.id,
                 self.value_field,
-                self.name,
-                self.shape.shp_file.path,
+                self.descriptor,
+                shape.shp_file.path,
                 id_field,
                 name_field,
+                shape.id,
                 json.dumps(display_fields)))
         return result
 
 
-class ShapeLegendPoint(models.Model):
+class ShapeLegendPoint(LegendPoint):
     """
     Legend for point shapefile.
     """
 
-    name = models.CharField(max_length=80)
-    shape = models.ForeignKey(Shape)
-    legend_point = models.ForeignKey(LegendPoint)
+    shape_template = models.ForeignKey('ShapeTemplate')
     value_field = models.CharField(max_length=20)
 
     def __unicode__(self):
-        return '%s - %s' % (self.shape, self.name)
+        return '%s - %s' % (self.shape_template, self.descriptor)
 
-    @property
-    def adapter_layer_json(self):
+    def adapter_layer_json(self, shape):
         """
         Defines adapter_layer_json for adapter_shapefile (from
         lizard-map).
         """
-        id_field = (self.shape.id_field
-                    if self.shape.id_field else "")
-        name_field = (self.shape.name_field
-                      if self.shape.name_field else "")
+        id_field = (self.shape_template.id_field
+                    if self.shape_template.id_field else "")
+        name_field = (self.shape_template.name_field
+                      if self.shape_template.name_field else "")
         display_fields = [{'name': sf.name, 'field': sf.field}
-                          for sf in self.shape.shapefield_set.all()]
+                          for sf in self.shape_template.shapefield_set.all()]
         result = ((
                 '{"layer_name": "%s", '
                 '"legend_id": "%d", '
@@ -216,14 +224,16 @@ class ShapeLegendPoint(models.Model):
                 '"layer_filename": "%s", '
                 '"search_property_id": "%s", '
                 '"search_property_name": "%s", '
+                '"shape_id": "%d", '
                 '"display_fields": %s}') % (
                 str(self),
                 self.id,
                 self.value_field,
-                self.name,
-                self.shape.shp_file.path,
+                self.descriptor,
+                shape.shp_file.path,
                 id_field,
                 name_field,
+                shape.id,
                 json.dumps(display_fields)))
         return result
 

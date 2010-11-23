@@ -4,6 +4,7 @@ from django import forms
 from lizard_shape.models import Category
 from lizard_shape.models import His
 from lizard_shape.models import Shape
+from lizard_shape.models import ShapeTemplate
 from lizard_shape.models import ShapeField
 from lizard_shape.models import ShapeLegend
 from lizard_shape.models import ShapeLegendPoint
@@ -79,6 +80,9 @@ class ShapeLegendPointInline(admin.TabularInline):
 
 class ShapeAdmin(admin.ModelAdmin):
     form = ShapeForm
+
+
+class ShapeTemplateAdmin(admin.ModelAdmin):
     inlines = [ShapeLegendInline, ShapeLegendPointInline, ]
 
 
@@ -89,6 +93,7 @@ class ShapeInline(admin.TabularInline):
 admin.site.register(Category)
 admin.site.register(His)
 admin.site.register(Shape, ShapeAdmin)
+admin.site.register(ShapeTemplate, ShapeTemplateAdmin)
 admin.site.register(ShapeField)
 admin.site.register(ShapeLegend)
 admin.site.register(ShapeLegendPoint)

@@ -29,26 +29,28 @@ def homepage(request,
         for category in categories:
             # Append sub categories.
             children = get_tree(parent=category)
-            # Append shapes by legend.
-            shapelegends = ShapeLegend.objects.filter(shape__category=category)
-            # Legends for lines.
-            for shapelegend in shapelegends:
-                children.append({
-                        'name': str(shapelegend),
-                        'type': 'shape',
-                        'adapter_layer_json': shapelegend.adapter_layer_json})
-            # Legends for points.
-            shapelegendpoints = ShapeLegendPoint.objects.filter(
-                shape__category=category)
-            for shapelegendpoint in shapelegendpoints:
-                children.append({
-                        'name': str(shapelegendpoint),
-                        'type': 'shape',
-                        'adapter_layer_json': shapelegendpoint.adapter_layer_json})
-            row = {'name': category.name,
-                   'type': 'category',
-                   'children': children}
-            result.append(row)
+            # Find shapes.
+            shapes = category.shapes.all()
+            for shape in shapes:
+                # Append shapes by legend.
+                shapelegends = shape.template.shapelegend_set.all()
+                # Legends for lines.
+                for shapelegend in shapelegends:
+                    children.append({
+                            'name': str(shapelegend),
+                            'type': 'shape',
+                            'adapter_layer_json': shapelegend.adapter_layer_json(shape)})
+                # Legends for points.
+                shapelegendpoints = shape.template.shapelegendpoint_set.all()
+                for shapelegendpoint in shapelegendpoints:
+                    children.append({
+                            'name': str(shapelegendpoint),
+                            'type': 'shape',
+                            'adapter_layer_json': shapelegendpoint.adapter_layer_json(shape)})
+                row = {'name': category.name,
+                       'type': 'category',
+                       'children': children}
+                result.append(row)
         return result
 
     shapes_tree = get_tree()

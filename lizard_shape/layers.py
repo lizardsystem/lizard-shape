@@ -14,6 +14,7 @@ from lizard_map import coordinates
 from lizard_map.adapter import Graph
 from lizard_map.utility import float_to_string
 from lizard_map.workspace import WorkspaceItemAdapter
+from lizard_shape.models import Shape
 from lizard_shape.models import ShapeLegend
 from lizard_shape.models import ShapeLegendPoint
 
@@ -90,6 +91,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
         self.legend_type = layer_arguments.get('legend_type', None)
         self.value_field = layer_arguments.get('value_field', None)
         self.value_name = layer_arguments.get('value_name', None)
+        self.shape_id = layer_arguments.get('shape_id', None)
         self.display_fields = layer_arguments.get('display_fields', [])
         if not self.display_fields:
             self.display_fields = [
@@ -141,23 +143,15 @@ class AdapterShapefile(WorkspaceItemAdapter):
 
         layer.datasource = mapnik.Shapefile(
             file=self.layer_filename)
-        if (self.legend_id is not None and
-            self.legend_type == LEGEND_TYPE_SHAPELEGEND):
 
-            shape_legend = ShapeLegend.objects.get(id=self.legend_id)
-            style = shape_legend.legend.mapnik_style(
-                value_field=str(self.value_field))
-            # style = self._default_mapnik_style()
-        elif (self.legend_id is not None and
-              self.legend_type == LEGEND_TYPE_SHAPELEGENDPOINT):
-
-            shape_legend_point = ShapeLegendPoint.objects.get(
-                id=self.legend_id)
-            style = shape_legend_point.legend_point.mapnik_style(
+        if self.legend_id is not None:
+            legend = self._legend_object
+            style = legend.mapnik_style(
                 value_field=str(self.value_field))
         else:
             # Show layer with default legend.
             style = self._default_mapnik_style()
+
         style_name = str('Area style %s::%s::%s' % (
                 self.layer_filename,
                 self.legend_id,
@@ -264,7 +258,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
             self.legend_type == LEGEND_TYPE_SHAPELEGENDPOINT):
 
             legend_object = ShapeLegendPoint.objects.get(pk=self.legend_id)
-            icon_style = legend_object.legend_point.icon_style()
+            icon_style = legend_object.icon_style()
 
         return super(AdapterShapefile, self).symbol_url(
             identifier=identifier,
@@ -356,8 +350,9 @@ class AdapterShapefile(WorkspaceItemAdapter):
         graph.axes.grid(True)
 
         # his = His.objects.all()[0]  # Test: take first object.
-        shape = self._legend_object.shape
-        if shape.his is None:
+        if self.shape_id is not None:
+            shape = Shape.objects.get(pk=self.shape_id)
+        if self.shape_id is None or shape.his is None:
             logger.debug(
                 'Shapefile %s does not have associated his file.'
                 % shape)

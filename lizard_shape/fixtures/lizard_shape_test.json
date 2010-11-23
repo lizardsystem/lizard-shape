@@ -1,302 +1,55 @@
 [
   {
-    "pk": 1,
-    "model": "lizard_shape.shape",
+    "pk": 1, 
+    "model": "lizard_shape.shape", 
     "fields": {
-      "shp_file": "lizard_shape/shapes/AfvoerendOppervlak_Tak_line.shp",
-      "description": "",
-      "prj_file": "lizard_shape/shapes/AfvoerendOppervlak_Tak_line.prj",
-      "id_field": null,
-      "dbf_file": "lizard_shape/shapes/AfvoerendOppervlak_Tak_line.dbf",
-      "shx_file": "lizard_shape/shapes/AfvoerendOppervlak_Tak_line.shx",
-      "slug": "test",
-      "name": "test"
+      "his": 1, 
+      "shp_file": "lizard_shape/shapes/Sbk_Culv_n_3.shp", 
+      "description": "", 
+      "prj_file": "lizard_shape/shapes/Sbk_Culv_n_3.prj", 
+      "dbf_file": "lizard_shape/shapes/Sbk_Culv_n_3.dbf", 
+      "template": 1, 
+      "shx_file": "lizard_shape/shapes/Sbk_Culv_n_3.shx", 
+      "slug": "his", 
+      "his_parameter": "Discharge max (m\u00b3/s)", 
+      "name": "His"
     }
-  },
+  }, 
   {
-    "pk": 2,
-    "model": "lizard_shape.shape",
+    "pk": 1, 
+    "model": "lizard_shape.shapetemplate", 
     "fields": {
-      "shp_file": "lizard_shape/shapes/Knoop.shp",
-      "description": "",
-      "prj_file": "lizard_shape/shapes/Knoop.prj",
-      "id_field": null,
-      "dbf_file": "lizard_shape/shapes/Knoop.dbf",
-      "shx_file": "lizard_shape/shapes/Knoop.shx",
-      "slug": "knoop",
-      "name": "knoop"
+      "name_field": "ID", 
+      "name": "default", 
+      "id_field": "ID"
     }
-  },
+  }, 
   {
-    "pk": 3,
-    "model": "lizard_shape.shape",
-    "fields": {
-      "shp_file": "lizard_shape/shapes/GeslotenLeiding_line.shp",
-      "description": "",
-      "prj_file": "lizard_shape/shapes/GeslotenLeiding_line.prj",
-      "id_field": null,
-      "dbf_file": "lizard_shape/shapes/GeslotenLeiding_line.dbf",
-      "shx_file": "lizard_shape/shapes/GeslotenLeiding_line.shx",
-      "slug": "lines",
-      "name": "lines"
-    }
-  },
-  {
-    "pk": 4,
-    "model": "lizard_shape.shape",
-    "fields": {
-      "shp_file": "lizard_shape/shapes/Overstort_Knoop.shp",
-      "description": "",
-      "prj_file": "lizard_shape/shapes/Overstort_Knoop.prj",
-      "id_field": null,
-      "dbf_file": "lizard_shape/shapes/Overstort_Knoop.dbf",
-      "shx_file": "lizard_shape/shapes/Overstort_Knoop.shx",
-      "slug": "overstort",
-      "name": "overstort"
-    }
-  },
-  {
-    "pk": 5,
-    "model": "lizard_shape.shape",
-    "fields": {
-      "shp_file": "lizard_shape/shapes/Wieringen.shp",
-      "description": "",
-      "prj_file": "lizard_shape/shapes/Wieringen.prj",
-      "id_field": "PEILVAKID",
-      "dbf_file": "lizard_shape/shapes/Wieringen.dbf",
-      "shx_file": "lizard_shape/shapes/Wieringen.shx",
-      "slug": "vlakken",
-      "name": "vlakken"
-    }
-  },
-  {
-    "pk": 1,
-    "model": "lizard_shape.category",
+    "pk": 1, 
+    "model": "lizard_shape.category", 
     "fields": {
       "shapes": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ],
-      "name": "root",
-      "parent": null,
+        1
+      ], 
+      "name": "root", 
+      "parent": null, 
       "slug": "root"
     }
-  },
+  }, 
   {
-    "pk": 1,
-    "model": "lizard_shape.shapelegend",
+    "pk": 2, 
+    "model": "lizard_shape.shapelegendpoint", 
     "fields": {
-      "value_field": "gvh_vla",
-      "shape": 1,
-      "name": "test shapefile",
-      "legend": 1
+      "value_field": "TYPE", 
+      "shape_template": 1
     }
-  },
+  }, 
   {
-    "pk": 2,
-    "model": "lizard_shape.shapelegend",
+    "pk": 1, 
+    "model": "lizard_shape.his", 
     "fields": {
-      "value_field": "ovh_vla",
-      "shape": 1,
-      "name": "ovh_vla",
-      "legend": 1
-    }
-  },
-  {
-    "pk": 4,
-    "model": "lizard_shape.shapelegend",
-    "fields": {
-      "value_field": "afv_vla",
-      "shape": 3,
-      "name": "test lines",
-      "legend": 1
-    }
-  },
-  {
-    "pk": 5,
-    "model": "lizard_shape.shapelegend",
-    "fields": {
-      "value_field": "ONVSTED_HA",
-      "shape": 5,
-      "name": "Onverhard stedelijk (ha)",
-      "legend": 1
-    }
-  },
-  {
-    "pk": 1,
-    "model": "lizard_shape.shapelegendpoint",
-    "fields": {
-      "legend_point": 1,
-      "value_field": "mvd_niv",
-      "shape": 2,
-      "name": "knoop test"
-    }
-  },
-  {
-    "pk": 2,
-    "model": "lizard_shape.shapelegendpoint",
-    "fields": {
-      "legend_point": 2,
-      "value_field": "mvd_niv",
-      "shape": 2,
-      "name": "mNAP"
-    }
-  },
-  {
-    "pk": 3,
-    "model": "lizard_shape.shapelegendpoint",
-    "fields": {
-      "legend_point": 2,
-      "value_field": "bws_gem",
-      "shape": 4,
-      "name": "gemiddelde buitenwaterstand"
-    }
-  },
-  {
-    "pk": 1,
-    "model": "lizard_map.workspace",
-    "fields": {
-      "name": "temp",
-      "visible": false,
-      "owner": null
-    }
-  },
-  {
-    "pk": 2,
-    "model": "lizard_map.workspace",
-    "fields": {
-      "name": "Workspace",
-      "visible": false,
-      "owner": null
-    }
-  },
-  {
-    "pk": 2,
-    "model": "lizard_map.workspaceitem",
-    "fields": {
-      "index": 0,
-      "name": "knoop - mNAP",
-      "visible": false,
-      "adapter_layer_json": "{\"layer_name\": \"mNAP\", \"legend_point_id\": \"2\", \"value_field\": \"mvd_niv\", \"layer_filename\": \"/home/jack/svn/djangoapps/lizard-shape/var/media/lizard_shape/shapes/Knoop.shp\", \"search_property_name\": \"WGBNAAM\"}",
-      "workspace": 2,
-      "adapter_class": "adapter_shapefile"
-    }
-  },
-  {
-    "pk": 4,
-    "model": "lizard_map.workspaceitem",
-    "fields": {
-      "index": 10,
-      "name": "lines - test lines",
-      "visible": false,
-      "adapter_layer_json": "{\"layer_name\": \"test lines\", \"legend_id\": \"1\", \"value_field\": \"afv_vla\", \"layer_filename\": \"/home/jack/svn/djangoapps/lizard-shape/var/media/lizard_shape/shapes/GeslotenLeiding_line.shp\", \"search_property_name\": \"WGBNAAM\"}",
-      "workspace": 2,
-      "adapter_class": "adapter_shapefile"
-    }
-  },
-  {
-    "pk": 12,
-    "model": "lizard_map.workspaceitem",
-    "fields": {
-      "index": 20,
-      "name": "vlakken - Onverhard stedelijk (ha)",
-      "visible": true,
-      "adapter_layer_json": "{\"layer_name\": \"vlakken - Onverhard stedelijk (ha)\", \"legend_id\": \"1\", \"value_field\": \"ONVSTED_HA\", \"value_name\": \"Onverhard stedelijk (ha)\", \"layer_filename\": \"/home/jack/svn/djangoapps/lizard-shape/var/media/lizard_shape/shapes/Wieringen.shp\", \"search_property_name\": \"PEILVAKID\"}",
-      "workspace": 1,
-      "adapter_class": "adapter_shapefile"
-    }
-  },
-  {
-    "pk": 8,
-    "model": "lizard_map.workspaceitem",
-    "fields": {
-      "index": 30,
-      "name": "test - ovh_vla",
-      "visible": true,
-      "adapter_layer_json": "{\"layer_name\": \"ovh_vla\", \"legend_id\": \"1\", \"value_field\": \"ovh_vla\", \"layer_filename\": \"/home/jack/svn/djangoapps/lizard-shape/var/media/lizard_shape/shapes/AfvoerendOppervlak_Tak_line.shp\", \"search_property_name\": \"WGBNAAM\"}",
-      "workspace": 2,
-      "adapter_class": "adapter_shapefile"
-    }
-  },
-  {
-    "pk": 10,
-    "model": "lizard_map.workspaceitem",
-    "fields": {
-      "index": 40,
-      "name": "vlakken - onvsted_ha",
-      "visible": false,
-      "adapter_layer_json": "{\"layer_name\": \"onvsted_ha\", \"legend_id\": \"1\", \"value_field\": \"ONVSTED_HA\", \"layer_filename\": \"/home/jack/svn/djangoapps/lizard-shape/var/media/lizard_shape/shapes/Wieringen.shp\", \"search_property_name\": \"WGBNAAM\"}",
-      "workspace": 2,
-      "adapter_class": "adapter_shapefile"
-    }
-  },
-  {
-    "pk": 11,
-    "model": "lizard_map.workspaceitem",
-    "fields": {
-      "index": 50,
-      "name": "overstort - gemiddelde buitenwaterstand",
-      "visible": true,
-      "adapter_layer_json": "{\"layer_name\": \"gemiddelde buitenwaterstand\", \"legend_point_id\": \"2\", \"value_field\": \"bws_gem\", \"layer_filename\": \"/home/jack/svn/djangoapps/lizard-shape/var/media/lizard_shape/shapes/Overstort_Knoop.shp\", \"search_property_name\": \"WGBNAAM\"}",
-      "workspace": 2,
-      "adapter_class": "adapter_shapefile"
-    }
-  },
-  {
-    "pk": 1,
-    "model": "lizard_map.workspacecollage",
-    "fields": {
-      "name": "Collage",
-      "workspace": 2
-    }
-  },
-  {
-    "pk": 1,
-    "model": "lizard_map.legend",
-    "fields": {
-      "too_low_color": "111111",
-      "max_value": 100.0,
-      "min_value": 0.0,
-      "descriptor": "default",
-      "steps": 5,
-      "too_high_color": "999999",
-      "min_color": "ff0000",
-      "max_color": "0000ff"
-    }
-  },
-  {
-    "pk": 1,
-    "model": "lizard_map.legendpoint",
-    "fields": {
-      "icon": "meetpuntPeil.png",
-      "too_low_color": "111111",
-      "max_value": 100.0,
-      "min_value": 0.0,
-      "mask": "meetpuntPeil_mask.png",
-      "descriptor": "default",
-      "steps": 5,
-      "too_high_color": "999999",
-      "min_color": "ff0000",
-      "max_color": "0000ff"
-    }
-  },
-  {
-    "pk": 2,
-    "model": "lizard_map.legendpoint",
-    "fields": {
-      "icon": "waterstand.png",
-      "too_low_color": "000055",
-      "max_value": 3.0,
-      "min_value": 1.0,
-      "mask": "waterstand_mask.png",
-      "descriptor": "waterniveau mNAP",
-      "steps": 10,
-      "too_high_color": "00ff00",
-      "min_color": "0000ff",
-      "max_color": "7799ff"
+      "name": "Hisfile", 
+      "filename": "lizard_shape/his/VoorJack_4.his"
     }
   }
 ]
