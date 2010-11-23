@@ -56,6 +56,9 @@ class AdapterShapefile(WorkspaceItemAdapter):
     * resource_module -- module that contains the shapefile resource
     * resource name -- name of the shapefile resource
 
+    * shape_id -- required by image function, or it will output an
+      empty graph.
+
     """
     def __init__(self, *args, **kwargs):
         """Store the name and location of the shapefile to render.
