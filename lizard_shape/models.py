@@ -101,10 +101,12 @@ class ShapeTemplate(models.Model):
     use it many times in shapes.
     """
 
-    name = models.CharField(max_length=80)
+    name = models.CharField(
+        max_length=80,
+        help_text='Display name.')
     id_field = models.CharField(
         max_length=20, null=True, blank=True,
-        help_text='The id field must be filled for searching and for his files.')
+        help_text='The id field must be filled for searching and his files.')
     name_field = models.CharField(
         max_length=20, null=True, blank=True,
         help_text='The name field must be filled for mouseovers, popups.')
@@ -134,9 +136,13 @@ class Category(AL_Node):
     Optionally connect shapes to nodes.
     """
 
-    name = models.CharField(max_length=80)
-    slug = models.SlugField(max_length=20, unique=True)
-    parent = models.ForeignKey('Category', null=True, blank=True)
+    name = models.CharField(
+        max_length=80,
+        help_text='i.e. max debiet.')
+    slug = models.SlugField(
+        max_length=20, unique=True)
+    parent = models.ForeignKey(
+        'Category', null=True, blank=True)
 
     # For treebeard.
     node_order_by = ['name']
@@ -198,7 +204,9 @@ class ShapeLegendPoint(LegendPoint):
     Legend for point shapefile.
     """
 
-    shape_template = models.ForeignKey('ShapeTemplate')
+    shape_template = models.ForeignKey(
+        'ShapeTemplate',
+        help_text='Select a shape template for visualization.')
     value_field = models.CharField(max_length=20)
 
     def __unicode__(self):
@@ -243,7 +251,8 @@ class His(models.Model):
     Sobek HIS files and their relation to a shapefile.
     """
 
-    name = models.CharField(max_length=80)
+    name = models.CharField(max_length=80,
+                            help_text='Display name.')
     filename = models.FileField(upload_to=UPLOAD_HIS)
 
     def __unicode__(self):
