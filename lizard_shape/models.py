@@ -1,16 +1,22 @@
 # (c) Nelen & Schuurmans.  GPL licensed, see LICENSE.txt.
 from django.db import models
 from django.utils import simplejson as json
+import mapnik
+import logging
 
 from treebeard.al_tree import AL_Node
 from nens.sobek import HISFile
 
+from lizard_map.mapnik_helper import point_rule
+from lizard_map.models import ColorField
 from lizard_map.models import Legend
 from lizard_map.models import LegendPoint
 
 # The default location from MEDIA_ROOT to upload files to.
 UPLOAD_TO = "lizard_shape/shapes"
 UPLOAD_HIS = "lizard_shape/his"
+
+logger = logging.getLogger(__name__)
 
 
 class ShapeNameError(Exception):
@@ -80,6 +86,9 @@ class Shape(models.Model):
         # Add all shapelegendspoints.
         result.extend([s.adapter_layer_json
                        for s in self.shapelegendpoint_set.all()])
+        # Add all shapelegendsclasses.
+        result.extend([s.adapter_layer_json
+                       for s in self.shapelegendclass_set.all()])
         return result
 
     def timeseries(self, location_name, start=None, end=None):
@@ -244,6 +253,117 @@ class ShapeLegendPoint(LegendPoint):
                 shape.id,
                 json.dumps(display_fields)))
         return result
+
+
+class ShapeLegendClass(models.Model):
+    """
+    Legend for classes.
+    """
+
+    descriptor = models.CharField(max_length=80)
+    shape_template = models.ForeignKey(
+        'ShapeTemplate',
+        help_text='Select a shape template for visualization.')
+    value_field = models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return '%s - %s' % (self.shape_template, self.descriptor)
+
+    def adapter_layer_json(self, shape):
+        id_field = (self.shape_template.id_field
+                    if self.shape_template.id_field else "")
+        name_field = (self.shape_template.name_field
+                      if self.shape_template.name_field else "")
+        display_fields = [{'name': sf.name, 'field': sf.field}
+                          for sf in self.shape_template.shapefield_set.all()]
+        result = json.dumps({
+                'layer_name': str(self),
+                'legend_type': 'ShapeLegendClass',
+                'legend_id': self.id,
+                'shape_id': shape.id,
+                'display_fields': json.dumps(display_fields),
+                'value_field': self.value_field,
+                'value_name': self.descriptor,
+                'layer_filename': shape.shp_file.path,
+                'search_property_id': id_field,
+                'search_property_name': name_field,
+                })
+        return result
+
+    def mapnik_style(self, value_field=None):
+        """
+        Generates mapnik style from this object.
+
+        TODO: implement point legend.
+        TODO: implement >= and < (not is_exact)
+        """
+        if value_field is None:
+            value_field = 'value'
+        style = mapnik.Style()
+        classes = self.shapelegendsingleclass_set.all()
+
+        # Add a rule for each class
+        for c in classes:
+            layout_rule = mapnik.Rule()
+            if c.color_inside:
+                area_looks = mapnik.PolygonSymbolizer(
+                    mapnik.Color('#' + c.color_inside))
+                area_looks.fill_opacity = 0.5
+                layout_rule.symbols.append(area_looks)
+            if c.color:
+                line_looks = mapnik.LineSymbolizer(
+                    mapnik.Color('#' + c.color), c.size)
+                layout_rule.symbols.append(line_looks)
+            if c.is_exact:
+                mapnik_filter = str("[%s] = '%s'" % (value_field, c.min_value))
+                logger.debug('adding mapnik_filter: %s' % mapnik_filter)
+                layout_rule.filter = mapnik.Filter(mapnik_filter)
+            style.rules.append(layout_rule)
+
+        return style
+
+
+class ShapeLegendSingleClass(models.Model):
+    """
+    Single entry for ShapeLegendClasses.
+
+    if is_exact == True, only the min_value will be taken.
+
+    if is_exact == False:
+    - if min_value is omitted, it is considered a lower boundary
+    - if max_value is omitted, it is considered a upper boundary
+    - thus, if both are omitted, it is considered a default value,
+
+    If icon is omitted, the entry is considered a line or area.
+
+    Size is:
+    - the linewidth in case of a line
+    - the border width in case of an area (TODO)
+    - the relative size in case of an icon (TODO)
+
+    color can be omitted for areas where the inside has a color.
+    color_inside is used for areas only.
+    """
+
+    shape_legend_class = models.ForeignKey('ShapeLegendClass')
+
+    min_value = models.CharField(max_length=80, null=True, blank=True)
+    max_value = models.CharField(max_length=80, null=True, blank=True)
+
+    is_exact = models.BooleanField(default=False)
+
+    color = ColorField(null=True, blank=True)
+    color_inside = ColorField(null=True, blank=True)
+    size = models.FloatField(default=1.0)
+    icon = models.CharField(max_length=80, null=True, blank=True)
+    mask = models.CharField(max_length=80, null=True, blank=True)
+
+    def __unicode__(self):
+        if self.is_exact:
+            return '%s: %s - %s' % (self.shape_legend_class, self.min_value, self.color)
+        else:
+            return '%s: (%s, %s) - %s' % (self.shape_legend_class,
+                                          self.min_value, self.max_value, self.color)
 
 
 class His(models.Model):

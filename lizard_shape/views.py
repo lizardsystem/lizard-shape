@@ -47,10 +47,17 @@ def homepage(request,
                             'name': str(shapelegendpoint),
                             'type': 'shape',
                             'adapter_layer_json': shapelegendpoint.adapter_layer_json(shape)})
-                row = {'name': category.name,
-                       'type': 'category',
-                       'children': children}
-                result.append(row)
+                # Legends for points, lines, areas in classes.
+                shapelegendclasses = shape.template.shapelegendclass_set.all()
+                for shapelegendclass in shapelegendclasses:
+                    children.append({
+                            'name': str(shapelegendclass),
+                            'type': 'shape',
+                            'adapter_layer_json': shapelegendclass.adapter_layer_json(shape)})
+            row = {'name': category.name,
+                   'type': 'category',
+                   'children': children}
+            result.append(row)
         return result
 
     shapes_tree = get_tree()

@@ -18,6 +18,7 @@ install_requires = [
     'django-treebeard',
     'nens',
     'shapely',
+    'south',
     ],
 
 tests_require = [

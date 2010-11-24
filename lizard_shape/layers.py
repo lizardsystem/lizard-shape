@@ -16,11 +16,13 @@ from lizard_map.utility import float_to_string
 from lizard_map.workspace import WorkspaceItemAdapter
 from lizard_shape.models import Shape
 from lizard_shape.models import ShapeLegend
+from lizard_shape.models import ShapeLegendClass
 from lizard_shape.models import ShapeLegendPoint
 
 logger = logging.getLogger(__name__)
 
 LEGEND_TYPE_SHAPELEGEND = 'ShapeLegend'
+LEGEND_TYPE_SHAPELEGENDCLASS = 'ShapeLegendClass'
 LEGEND_TYPE_SHAPELEGENDPOINT = 'ShapeLegendPoint'
 
 
@@ -119,7 +121,8 @@ class AdapterShapefile(WorkspaceItemAdapter):
     def _legend_object(self):
         legend_models = {
             LEGEND_TYPE_SHAPELEGEND: ShapeLegend,
-            LEGEND_TYPE_SHAPELEGENDPOINT: ShapeLegendPoint}
+            LEGEND_TYPE_SHAPELEGENDPOINT: ShapeLegendPoint,
+            LEGEND_TYPE_SHAPELEGENDCLASS: ShapeLegendClass}
         legend_model = legend_models[self.legend_type]
 
         legend_object = None
@@ -128,8 +131,17 @@ class AdapterShapefile(WorkspaceItemAdapter):
         return legend_object
 
     def legend(self, updates=None):
-        return super(AdapterShapefile, self).legend_default(
-            self._legend_object)
+        if (self.legend_type == LEGEND_TYPE_SHAPELEGEND or
+            self.legend_type == LEGEND_TYPE_SHAPELEGENDPOINT):
+            return super(AdapterShapefile, self).legend_default(
+                self._legend_object)
+
+        # LEGEND_TYPE_SHAPELEGENDCLASS
+        icon_style_template = {'icon': 'empty.png',
+                               'mask': ('empty_mask.png', ),
+                               'color': (1, 1, 1, 1)}
+        legend_result = []
+        return legend_result
 
     def layer(self, layer_ids=None, request=None):
         """Return layer and styles for a shapefile.
@@ -392,11 +404,14 @@ class AdapterShapefile(WorkspaceItemAdapter):
 
             # parameter = parameters[index % len(parameters)]
             try:
+                # u'Discharge max (m\xb3/s)' -> 'Discharge max (m\xb3/s)'
+                # TODO: make better.
+                weird_repr = ('%r' % parameter)[2:-1].replace("\\xb3", "\xb3")
                 timeseries = hf.get_timeseries(
-                    location, parameter, start_datetime, end_datetime, list)
+                    location, weird_repr, start_datetime, end_datetime, list)
             except KeyError:
-                logger.error('Parameter %s not in hisfile. Choices are: %r' %
-                             (parameter, parameters))
+                logger.error('Parameter %r not in his file. Choices are: %r' %
+                             (weird_repr, parameters))
                 continue
 
             # Plot data.

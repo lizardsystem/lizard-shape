@@ -3,25 +3,59 @@
     "pk": 1, 
     "model": "lizard_shape.shape", 
     "fields": {
-      "his": 1, 
-      "shp_file": "lizard_shape/shapes/Sbk_Culv_n_3.shp", 
+      "his": null, 
+      "shp_file": "lizard_shape/shapes/Oevers_v3_1.shp", 
       "description": "", 
-      "prj_file": "lizard_shape/shapes/Sbk_Culv_n_3.prj", 
-      "dbf_file": "lizard_shape/shapes/Sbk_Culv_n_3.dbf", 
+      "prj_file": "lizard_shape/shapes/Oevers_v3_1.prj", 
+      "dbf_file": "lizard_shape/shapes/Oevers_v3_1.dbf", 
       "template": 1, 
-      "shx_file": "lizard_shape/shapes/Sbk_Culv_n_3.shx", 
-      "slug": "his", 
-      "his_parameter": "Discharge max (m\u00b3/s)", 
-      "name": "His"
+      "shx_file": "lizard_shape/shapes/Oevers_v3_1.shx", 
+      "slug": "oevers", 
+      "his_parameter": "", 
+      "name": "Oevers"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "lizard_shape.shape", 
+    "fields": {
+      "his": null, 
+      "shp_file": "lizard_shape/shapes/Kansen_oevers.shp", 
+      "description": "", 
+      "prj_file": "lizard_shape/shapes/Kansen_oevers.prj", 
+      "dbf_file": "lizard_shape/shapes/Kansen_oevers.dbf", 
+      "template": 2, 
+      "shx_file": "lizard_shape/shapes/Kansen_oevers.shx", 
+      "slug": "kansen", 
+      "his_parameter": "", 
+      "name": "Kansen"
     }
   }, 
   {
     "pk": 1, 
     "model": "lizard_shape.shapetemplate", 
     "fields": {
-      "name_field": "ID", 
-      "name": "default", 
-      "id_field": "ID"
+      "name_field": "WG_ID", 
+      "name": "Oevers", 
+      "id_field": "WG_ID"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "lizard_shape.shapetemplate", 
+    "fields": {
+      "name_field": "ID_plan", 
+      "name": "Kansen", 
+      "id_field": "WG_ID"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "lizard_shape.shapefield", 
+    "fields": {
+      "field": "STREEFBEEL", 
+      "name": "Streefbeel", 
+      "shape_template": 1
     }
   }, 
   {
@@ -29,7 +63,8 @@
     "model": "lizard_shape.category", 
     "fields": {
       "shapes": [
-        1
+        1, 
+        2
       ], 
       "name": "root", 
       "parent": null, 
@@ -38,18 +73,110 @@
   }, 
   {
     "pk": 1, 
-    "model": "lizard_shape.shapelegendpoint", 
+    "model": "lizard_shape.shapelegendclass", 
     "fields": {
-      "value_field": "ID", 
-      "shape_template": 1
+      "descriptor": "kunstwerken", 
+      "shape_template": 1, 
+      "value_field": "STREEFBEEL"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "lizard_shape.shapelegendclass", 
+    "fields": {
+      "descriptor": "kansen", 
+      "shape_template": 2, 
+      "value_field": "WG_ID"
     }
   }, 
   {
     "pk": 1, 
-    "model": "lizard_shape.his", 
+    "model": "lizard_shape.shapelegendsingleclass", 
     "fields": {
-      "name": "Hisfile", 
-      "filename": "lizard_shape/his/VoorJack_4.his"
+      "shape_legend_class": 1, 
+      "is_exact": true, 
+      "color": "0000ff", 
+      "max_value": "", 
+      "min_value": "Boezemwater", 
+      "mask": "", 
+      "color_inside": "", 
+      "icon": "", 
+      "size": 2.0
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "lizard_shape.shapelegendsingleclass", 
+    "fields": {
+      "shape_legend_class": 1, 
+      "is_exact": true, 
+      "color": "ff0000", 
+      "max_value": "", 
+      "min_value": "Cultuurlijk", 
+      "mask": "", 
+      "color_inside": "", 
+      "icon": "", 
+      "size": 1.0
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "lizard_shape.shapelegendsingleclass", 
+    "fields": {
+      "shape_legend_class": 1, 
+      "is_exact": true, 
+      "color": "ffff00", 
+      "max_value": "", 
+      "min_value": "Landbouw", 
+      "mask": "", 
+      "color_inside": "", 
+      "icon": "", 
+      "size": 1.0
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "lizard_shape.shapelegendsingleclass", 
+    "fields": {
+      "shape_legend_class": 1, 
+      "is_exact": true, 
+      "color": "00ff00", 
+      "max_value": "", 
+      "min_value": "Natuurlijk", 
+      "mask": "", 
+      "color_inside": "", 
+      "icon": "", 
+      "size": 1.0
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "lizard_shape.shapelegendsingleclass", 
+    "fields": {
+      "shape_legend_class": 1, 
+      "is_exact": true, 
+      "color": "ff00ff", 
+      "max_value": "", 
+      "min_value": "Notsloot", 
+      "mask": "", 
+      "color_inside": "", 
+      "icon": "", 
+      "size": 1.0
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "lizard_shape.shapelegendsingleclass", 
+    "fields": {
+      "shape_legend_class": 2, 
+      "is_exact": false, 
+      "color": "ff00ff", 
+      "max_value": "", 
+      "min_value": "", 
+      "mask": "", 
+      "color_inside": "", 
+      "icon": "", 
+      "size": 3.0
     }
   }
 ]

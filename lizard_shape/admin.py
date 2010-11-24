@@ -7,6 +7,8 @@ from lizard_shape.models import Shape
 from lizard_shape.models import ShapeTemplate
 from lizard_shape.models import ShapeField
 from lizard_shape.models import ShapeLegend
+from lizard_shape.models import ShapeLegendClass
+from lizard_shape.models import ShapeLegendSingleClass
 from lizard_shape.models import ShapeLegendPoint
 
 
@@ -78,22 +80,44 @@ class ShapeLegendPointInline(admin.TabularInline):
     model = ShapeLegendPoint
 
 
+class ShapeLegendClassInline(admin.TabularInline):
+    model = ShapeLegendClass
+
+
+class ShapeFieldInline(admin.TabularInline):
+    model = ShapeField
+
+
 class ShapeAdmin(admin.ModelAdmin):
     form = ShapeForm
 
 
 class ShapeTemplateAdmin(admin.ModelAdmin):
-    inlines = [ShapeLegendInline, ShapeLegendPointInline, ]
+    inlines = [
+        ShapeLegendInline,
+        ShapeLegendPointInline,
+        ShapeLegendClassInline,
+        ShapeFieldInline]
 
 
 class ShapeInline(admin.TabularInline):
     model = Shape
 
 
+class ShapeLegendSingleClassInline(admin.TabularInline):
+    model = ShapeLegendSingleClass
+
+
+class ShapeLegendClassAdmin(admin.ModelAdmin):
+    inlines = [ShapeLegendSingleClassInline, ]
+
+
 admin.site.register(Category)
 admin.site.register(His)
 admin.site.register(Shape, ShapeAdmin)
-admin.site.register(ShapeTemplate, ShapeTemplateAdmin)
 admin.site.register(ShapeField)
 admin.site.register(ShapeLegend)
+admin.site.register(ShapeLegendClass, ShapeLegendClassAdmin)
 admin.site.register(ShapeLegendPoint)
+admin.site.register(ShapeLegendSingleClass)
+admin.site.register(ShapeTemplate, ShapeTemplateAdmin)

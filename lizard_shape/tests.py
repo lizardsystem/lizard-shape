@@ -5,11 +5,8 @@ from django.db import IntegrityError
 from django.forms import ValidationError
 from django.test import TestCase
 from django.test.client import Client
-import pkg_resources
 
-import lizard_map.models
 import lizard_shape.layers
-from lizard_map.models import WorkspaceItem
 from lizard_shape.admin import check_extension_or_error
 from lizard_shape.layers import AdapterShapefile
 from lizard_shape.models import Category
@@ -113,7 +110,7 @@ class AdminTest(TestCase):
         check_extension_or_error(filename, 'shp')
         check_extension_or_error(filename, 'shp', extension_name='Shapefile')
 
-    def test_check_extension(self):
+    def test_check_extension2(self):
         """
         Checks filename with correct relative filename.
         """
@@ -169,5 +166,4 @@ class AdapterShapefileTestSuite(TestCase):
         self.assertEqual(adapter.resource_module, 'lizard_map')
         self.assertEqual(adapter.resource_name, 'Resource name')
         self.assertEqual(adapter.search_property_name, 'Search property name')
-
 
