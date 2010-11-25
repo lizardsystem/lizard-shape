@@ -5,6 +5,10 @@ Changelog of lizard-shape
 0.5 (unreleased)
 ----------------
 
+- Extend shapefile adapter with adapter functions.
+
+- Implemented shapelegendclass. Refactored legend stuff.
+
 - Moved shapefile adapter from lizard-map to here.
 
 
