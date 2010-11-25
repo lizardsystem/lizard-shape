@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-0.5 (unreleased)
+0.5 (2010-11-25)
 ----------------
 
 - Extend shapefile adapter with adapter functions.
