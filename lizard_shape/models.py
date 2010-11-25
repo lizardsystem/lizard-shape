@@ -135,7 +135,7 @@ class ShapeField(models.Model):
     shape_template = models.ForeignKey('ShapeTemplate')
 
     def __unicode__(self):
-        return u'%s - %s' % (self.shape, self.name)
+        return u'%s - %s' % (self.shape_template, self.name)
 
 
 class Category(AL_Node):
@@ -281,7 +281,7 @@ class ShapeLegendClass(models.Model):
                 'legend_type': 'ShapeLegendClass',
                 'legend_id': self.id,
                 'shape_id': shape.id,
-                'display_fields': json.dumps(display_fields),
+                'display_fields': display_fields,
                 'value_field': self.value_field,
                 'value_name': self.descriptor,
                 'layer_filename': shape.shp_file.path,

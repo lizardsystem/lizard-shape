@@ -268,7 +268,10 @@ class AdapterShapefile(WorkspaceItemAdapter):
             feat = lyr.GetNextFeature()
         results = sorted(results, key=lambda a: a['distance'])
 
-        return results
+        if len(results) > 10:
+            logger.warning('A lot of results found (%d), just taking top 10.' %
+                           len(results))
+        return results[:10]
 
     def symbol_url(self, identifier=None, start_date=None,
                    end_date=None, icon_style=None):
@@ -288,17 +291,28 @@ class AdapterShapefile(WorkspaceItemAdapter):
             end_date=end_date,
             icon_style=icon_style)
 
-    def location(self, id):
-        """Find id in shape. Used by html function."""
-
+    def location(self, id, ids=None):
+        """Find id in shape. If 1 id given, return dict. If multiple
+        ids given, return list of dicts.
+        """
         ds = osgeo.ogr.Open(self.layer_filename)
         lyr = ds.GetLayer()
         lyr.ResetReading()
         feat = lyr.GetNextFeature()
 
         item, google_x, google_y, feat_items = None, None, None, None
+        id_list = []
+        if id is not None:
+            id_list.append(id)
+        if ids is not None:
+            id_list.extend([identifier['id'] for identifier in ids])
+        if len(id_list) == 0:
+            logger.warning('No id given in call to location. Should never happen.')
+            return {}
 
-        # Find one (and only) feature.
+        result = []
+
+        # Find one features.
         while feat is not None:
             geom = feat.GetGeometryRef()
             feat_items = feat.items()
@@ -306,27 +320,32 @@ class AdapterShapefile(WorkspaceItemAdapter):
             # at the end.
             for key in feat_items.keys():
                 feat_items[key.strip()] = feat_items[key]
-            if geom and feat_items[self.search_property_id] == id:
+            if geom and id_list.count(feat_items[self.search_property_id]) > 0:
                 item = loads(geom.ExportToWkt())
                 google_x, google_y = coordinates.rd_to_google(*item.coords[0])
-                break
+
+                values = []  # contains {'name': <name>, 'value': <value>}
+                for field in self.display_fields:
+                    values.append({'name': field['name'],
+                                   'value': feat_items[str(field['field'])]})
+                name = feat_items[self.search_property_name]
+                result.append({
+                        'name': name,
+                        'shortname': name,
+                        'value_name': self.value_name,
+                        'value': feat_items[self.value_field],
+                        'values': values,
+                        'object': feat_items,
+                        'workspace_item': self.workspace_item,
+                        'identifier': {'id': id},
+                        })
+
             feat = lyr.GetNextFeature()
 
-        values = []  # contains {'name': <name>, 'value': <value>}
-        for field in self.display_fields:
-            values.append({'name': field['name'],
-                           'value': feat_items[str(field['field'])]})
-        name = feat_items[self.search_property_name]
-        return {
-            'name': name,
-            'shortname': name,
-            'value_name': self.value_name,
-            'value': feat_items[self.value_field],
-            'values': values,
-            'object': feat_items,
-            'workspace_item': self.workspace_item,
-            'identifier': {'id': id},
-            }
+        if len(result) == 1:
+            return result[0]
+        else:
+            return result
 
     def html(self, snippet_group=None, identifiers=None, layout_options=None):
         """
@@ -335,24 +354,28 @@ class AdapterShapefile(WorkspaceItemAdapter):
         if snippet_group:
             snippets = snippet_group.snippets.all()
             identifiers = [snippet.identifier for snippet in snippets]
-        display_group = [
-            self.location(**identifier) for identifier in identifiers]
+        display_group = self.location(None, identifiers)
         add_snippet = False
         if layout_options and 'add_snippet' in layout_options:
             add_snippet = layout_options['add_snippet']
 
-        # Testing: images for timeseries
-        img_url = reverse(
-                "lizard_map.workspace_item_image",
-                kwargs={'workspace_item_id': self.workspace_item.id},
-                )
-        identifiers_escaped = [json.dumps(identifier).replace('"', '%22')
-                               for identifier in identifiers]
-        img_url = img_url + '?' + '&'.join(['identifier=%s' % i for i in
-                                            identifiers_escaped])
+        # Images for timeseries
+
+        img_url = None
+        if self.shape_id is not None:
+            shape = Shape.objects.get(pk=self.shape_id)
+            if shape.his:
+                img_url = reverse(
+                    "lizard_map.workspace_item_image",
+                    kwargs={'workspace_item_id': self.workspace_item.id},
+                    )
+                identifiers_escaped = [json.dumps(identifier).replace('"', '%22')
+                                       for identifier in identifiers]
+                img_url = img_url + '?' + '&'.join(['identifier=%s' % i for i in
+                                                    identifiers_escaped])
 
         return render_to_string(
-            'lizard_map/popup_shape.html',
+            'lizard_shape/popup_shape.html',
             {'display_group': display_group,
              'add_snippet': add_snippet,
              'symbol_url': self.symbol_url(),
