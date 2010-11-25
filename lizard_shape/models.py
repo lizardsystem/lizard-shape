@@ -293,9 +293,6 @@ class ShapeLegendClass(models.Model):
     def mapnik_style(self, value_field=None):
         """
         Generates mapnik style from this object.
-
-        TODO: implement point legend.
-        TODO: implement >= and < (not is_exact)
         """
         if value_field is None:
             value_field = 'value'
@@ -314,11 +311,35 @@ class ShapeLegendClass(models.Model):
                 line_looks = mapnik.LineSymbolizer(
                     mapnik.Color('#' + c.color), c.size)
                 layout_rule.symbols.append(line_looks)
+            mapnik_filter = None
             if c.is_exact:
                 mapnik_filter = str("[%s] = '%s'" % (value_field, c.min_value))
+            else:
+                if c.min_value and c.max_value:
+                    mapnik_filter = str("[%s] >= %s and [%s] < %s"
+                                        % (value_field,
+                                           c.min_value,
+                                           c.max_value))
+                elif c.min_value and not c.max_value:
+                    mapnik_filter = str("[%s] >= %s"
+                                        % (value_field,
+                                           c.min_value))
+                elif not c.min_value and c.max_value:
+                    mapnik_filter = str("[%s] < %s"
+                                        % (value_field,
+                                           c.max_value))
+            if mapnik_filter is not None:
                 logger.debug('adding mapnik_filter: %s' % mapnik_filter)
                 layout_rule.filter = mapnik.Filter(mapnik_filter)
+
             style.rules.append(layout_rule)
+
+            # Add icon rule, if applicable.
+            if c.icon:
+                style.rules.append(
+                    point_rule(c.icon, c.mask,
+                               c.color, mapnik_filter))
+
 
         return style
 
@@ -343,6 +364,8 @@ class ShapeLegendSingleClass(models.Model):
 
     color can be omitted for areas where the inside has a color.
     color_inside is used for areas only.
+
+    TODO: if icon is used, mask must be filled in too.
     """
 
     shape_legend_class = models.ForeignKey('ShapeLegendClass')
@@ -360,10 +383,16 @@ class ShapeLegendSingleClass(models.Model):
 
     def __unicode__(self):
         if self.is_exact:
-            return '%s: %s - %s' % (self.shape_legend_class, self.min_value, self.color)
+            return '%s: %s - %s' % (
+                self.shape_legend_class,
+                self.min_value,
+                self.color)
         else:
-            return '%s: (%s, %s) - %s' % (self.shape_legend_class,
-                                          self.min_value, self.max_value, self.color)
+            return '%s: (%s, %s) - %s' % (
+                self.shape_legend_class,
+                self.min_value,
+                self.max_value,
+                self.color)
 
 
 class His(models.Model):

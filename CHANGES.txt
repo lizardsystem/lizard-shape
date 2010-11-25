@@ -5,7 +5,11 @@ Changelog of lizard-shape
 0.6 (unreleased)
 ----------------
 
+- Added adapter.legend for LEGEND_TYPE_SHAPELEGENDCLASS.
+
 - Added popup_shape.
+
+- Pinned lizard-map 1.25.
 
 - Improved adapter.
 

@@ -141,6 +141,22 @@ class AdapterShapefile(WorkspaceItemAdapter):
                                'mask': ('empty_mask.png', ),
                                'color': (1, 1, 1, 1)}
         legend_result = []
+        legend = self._legend_object
+
+        if legend is not None:
+            for single_class in legend.shapelegendsingleclass_set.all():
+                icon_style = icon_style_template.copy()
+                icon_style.update({
+                        'color': single_class.color.to_tuple()})
+                if single_class.icon:
+                    icon_style.update({'icon': single_class.icon})
+                if single_class.mask:
+                    icon_style.update({'mask': (single_class.mask, )})
+                img_url = self.symbol_url(icon_style=icon_style)
+
+                legend_row = {'img_url': img_url,
+                              'description': single_class.min_value}
+                legend_result.append(legend_row)
         return legend_result
 
     def layer(self, layer_ids=None, request=None):
