@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-0.6 (unreleased)
+0.6 (2010-11-29)
 ----------------
 
 - Added adapter.legend for LEGEND_TYPE_SHAPELEGENDCLASS.
