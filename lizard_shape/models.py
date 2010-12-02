@@ -42,7 +42,7 @@ class Shape(models.Model):
     his = models.ForeignKey('His', null=True, blank=True)
     his_parameter = models.CharField(
         max_length=80, null=True, blank=True,
-        help_text=u'i.e. Discharge max (m\\xb3/s) for Discharge max (m\xb3/s)')
+        help_text=u'i.e. Discharge max (m\xb3/s)')
 
     template = models.ForeignKey('ShapeTemplate')
 

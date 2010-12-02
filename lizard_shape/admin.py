@@ -90,6 +90,7 @@ class ShapeFieldInline(admin.TabularInline):
 
 class ShapeAdmin(admin.ModelAdmin):
     form = ShapeForm
+    list_display = ('name', 'template', )
 
 
 class ShapeTemplateAdmin(admin.ModelAdmin):
