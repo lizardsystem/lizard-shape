@@ -15,6 +15,7 @@ from lizard_map.adapter import Graph
 from lizard_map.utility import float_to_string
 from lizard_map.workspace import WorkspaceItemAdapter
 from lizard_shape.models import Shape
+from lizard_shape.models import ShapeField
 from lizard_shape.models import ShapeLegend
 from lizard_shape.models import ShapeLegendClass
 from lizard_shape.models import ShapeLegendPoint
@@ -100,7 +101,9 @@ class AdapterShapefile(WorkspaceItemAdapter):
         self.display_fields = layer_arguments.get('display_fields', [])
         if not self.display_fields:
             self.display_fields = [
-                {'name': self.value_name, 'field': self.value_field}]
+                {'name': self.value_name,
+                 'field': self.value_field,
+                 'field_type': ShapeField.FIELD_TYPE_NORMAL}]
 
     def _default_mapnik_style(self):
         """
@@ -209,9 +212,17 @@ class AdapterShapefile(WorkspaceItemAdapter):
         implementation was done with shapely.
 
         """
+        logger.debug("Searching coordinates (%0.2f, %0.2f) radius %r..." %
+                     (x, y, radius))
+
         if not self.search_property_name:
             # We don't have anything to return, so don't search.
             return []
+
+        if radius is not None:
+            # Manually make radius smaller
+            logger.debug("Adjusting radius...")
+            radius = radius * 0.2
 
         rd_x, rd_y = coordinates.google_to_rd(x, y)
         query_point = Point(rd_x, rd_y)
@@ -281,10 +292,10 @@ class AdapterShapefile(WorkspaceItemAdapter):
                             {'identifier':
                                  {'id': feat_items[self.search_property_id]}})
                     else:
-                        # Required by lizard-map.
-                        result.update(
-                            {'identifier':
-                                 {'id': None}})
+                        logger.error("Problem with search_property_id: %s. "
+                                     "List of available properties: %r" %
+                                     (self.search_property_id,
+                                      feat_items.keys()))
                     results.append(result)
             feat = lyr.GetNextFeature()
         results = sorted(results, key=lambda a: a['distance'])
@@ -316,6 +327,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
         """Find id in shape. If 1 id given, return dict. If multiple
         ids given, return list of dicts.
         """
+
         ds = osgeo.ogr.Open(self.layer_filename)
         lyr = ds.GetLayer()
         lyr.ResetReading()
@@ -330,6 +342,9 @@ class AdapterShapefile(WorkspaceItemAdapter):
         if len(id_list) == 0:
             logger.warning('No id given in call to location. Should never happen.')
             return {}
+
+        logger.debug("Location(s): %r" % id_list)
+        logger.debug("Fields to display: %r" % self.display_fields)
 
         result = []
 
@@ -352,10 +367,14 @@ class AdapterShapefile(WorkspaceItemAdapter):
                 item = loads(geom.ExportToWkt())
                 google_x, google_y = coordinates.rd_to_google(*item.coords[0])
 
-                values = []  # contains {'name': <name>, 'value': <value>}
+                # contains {'name': <name>, 'value': <value>, 'value_type: 1/2/3'}
+                values = []
+
                 for field in self.display_fields:
                     values.append({'name': field['name'],
-                                   'value': feat_items[str(field['field'])]})
+                                   'value': feat_items[str(field['field'])],
+                                   'value_type': field['field_type']})
+
                 name = feat_items[self.search_property_name]
                 result.append({
                         'name': name,
@@ -365,7 +384,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
                         'values': values,
                         'object': feat_items,
                         'workspace_item': self.workspace_item,
-                        'identifier': {'id': id},
+                        'identifier': {'id': id}
                         })
 
             feat = lyr.GetNextFeature()
@@ -379,9 +398,13 @@ class AdapterShapefile(WorkspaceItemAdapter):
         """
         Renders table with shape attributes.
         """
+
+        logger.debug("Generating html popup...")
+
         if snippet_group:
             snippets = snippet_group.snippets.all()
             identifiers = [snippet.identifier for snippet in snippets]
+
         display_group = self.location(None, identifiers)
         add_snippet = False
         if layout_options and 'add_snippet' in layout_options:

@@ -45,9 +45,23 @@
       {% for row in display_object.values %}
       <tr>
         <td>
-        {{ row.name }}</td>
+        {{ row.name }}
+        </td>
+        {% ifequal row.value_type 1 %}{# Normal (see: ShapeField) #}
         <td>
-        {{ row.value }}</td>
+        {{ row.value }}
+        </td>
+        {% endifequal %}
+        {% ifequal row.value_type 2 %}{# Image link #}
+        <td>
+          <img src="{{ row.value|safe }}"/>
+        </td>
+        {% endifequal %}
+        {% ifequal row.value_type 3 %}{# Weblink#}
+        <td>
+          <a href="{{ row.value|safe }}">link</a>
+        </td>
+        {% endifequal %}
       </tr>
       {% endfor %}
     </tbody>

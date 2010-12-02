@@ -289,7 +289,9 @@ class ShapeLegendClass(models.Model):
                     if self.shape_template.id_field else "")
         name_field = (self.shape_template.name_field
                       if self.shape_template.name_field else "")
-        display_fields = [{'name': sf.name, 'field': sf.field}
+        display_fields = [{'name': sf.name,
+                           'field': sf.field,
+                           'field_type': sf.field_type}
                           for sf in self.shape_template.shapefield_set.all()]
         result = json.dumps({
                 'layer_name': str(self),

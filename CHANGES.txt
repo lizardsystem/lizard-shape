@@ -2,10 +2,10 @@ Changelog of lizard-shape
 ===================================================
 
 
-0.8 (unreleased)
+0.8 (2010-12-02)
 ----------------
 
-- Nothing changed yet.
+- Make use of field_type: image, link or normal.
 
 
 0.7 (2010-12-02)
