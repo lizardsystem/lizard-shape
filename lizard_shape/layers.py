@@ -323,9 +323,11 @@ class AdapterShapefile(WorkspaceItemAdapter):
             end_date=end_date,
             icon_style=icon_style)
 
-    def location(self, id, ids=None):
+    def location(self, id, ids=None, force_list=False):
         """Find id in shape. If 1 id given, return dict. If multiple
         ids given, return list of dicts.
+
+        Optional: force_list forces the output in list format
         """
 
         ds = osgeo.ogr.Open(self.layer_filename)
@@ -384,12 +386,14 @@ class AdapterShapefile(WorkspaceItemAdapter):
                         'values': values,
                         'object': feat_items,
                         'workspace_item': self.workspace_item,
-                        'identifier': {'id': id}
+                        'identifier': {'id': feat_items[self.search_property_id]}
                         })
 
             feat = lyr.GetNextFeature()
 
-        if len(result) == 1:
+        logger.debug("%d result(s) found" % len(result))
+
+        if len(result) == 1 and not force_list:
             return result[0]
         else:
             return result
@@ -405,7 +409,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
             snippets = snippet_group.snippets.all()
             identifiers = [snippet.identifier for snippet in snippets]
 
-        display_group = self.location(None, identifiers)
+        display_group = self.location(None, identifiers, force_list=True)
         add_snippet = False
         if layout_options and 'add_snippet' in layout_options:
             add_snippet = layout_options['add_snippet']

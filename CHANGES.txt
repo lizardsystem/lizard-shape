@@ -2,10 +2,14 @@ Changelog of lizard-shape
 ===================================================
 
 
-0.9 (unreleased)
+0.9 (2010-12-02)
 ----------------
 
-- Nothing changed yet.
+- Bugfix popup when clicking on single object.
+
+- Updated admin.
+
+- Updates model help_text.
 
 
 0.8 (2010-12-02)
