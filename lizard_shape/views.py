@@ -8,8 +8,6 @@ from lizard_map.daterange import current_start_end_dates
 from lizard_map.workspace import WorkspaceManager
 
 from lizard_shape.models import Category
-from lizard_shape.models import ShapeLegend
-from lizard_shape.models import ShapeLegendPoint
 
 
 def homepage(request,

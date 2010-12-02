@@ -1,6 +1,7 @@
 # (c) Nelen & Schuurmans.  GPL licensed, see LICENSE.txt.
 from django.db import models
 from django.utils import simplejson as json
+from django.utils.translation import ugettext as _
 import mapnik
 import logging
 
@@ -129,10 +130,24 @@ class ShapeField(models.Model):
     Which fields do we want to display in a popup? Used by adapter in
     lizard-map.
     """
+    FIELD_TYPE_NORMAL = 1
+    FIELD_TYPE_LINK_IMAGE = 2
+    FIELD_TYPE_WEBLINK = 3
+
+    FIELD_TYPE_CHOICES = (
+        (FIELD_TYPE_NORMAL, _('normal')),
+        (FIELD_TYPE_LINK_IMAGE, _('link to image')),
+        (FIELD_TYPE_WEBLINK, _('weblink')),
+        )
+
     name = models.CharField(max_length=80)
     field = models.CharField(max_length=20)
+    field_type = models.IntegerField(
+        choices=FIELD_TYPE_CHOICES,
+        default=FIELD_TYPE_NORMAL)
 
     shape_template = models.ForeignKey('ShapeTemplate')
+
 
     def __unicode__(self):
         return u'%s - %s' % (self.shape_template, self.name)
@@ -319,6 +334,7 @@ class ShapeLegendClass(models.Model):
                     mapnik_filter = str("[%s] >= %s and [%s] < %s"
                                         % (value_field,
                                            c.min_value,
+                                           value_field,
                                            c.max_value))
                 elif c.min_value and not c.max_value:
                     mapnik_filter = str("[%s] >= %s"

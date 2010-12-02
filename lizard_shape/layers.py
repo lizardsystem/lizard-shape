@@ -280,6 +280,11 @@ class AdapterShapefile(WorkspaceItemAdapter):
                         result.update(
                             {'identifier':
                                  {'id': feat_items[self.search_property_id]}})
+                    else:
+                        # Required by lizard-map.
+                        result.update(
+                            {'identifier':
+                                 {'id': None}})
                     results.append(result)
             feat = lyr.GetNextFeature()
         results = sorted(results, key=lambda a: a['distance'])
@@ -336,7 +341,14 @@ class AdapterShapefile(WorkspaceItemAdapter):
             # at the end.
             for key in feat_items.keys():
                 feat_items[key.strip()] = feat_items[key]
-            if geom and id_list.count(feat_items[self.search_property_id]) > 0:
+            if self.search_property_id not in feat_items:
+                logger.error("Search property id '%s' not available. "
+                             "Options are: %r" % (self.search_property_id,
+                                                  feat_items.keys()))
+            if (geom and
+                self.search_property_id in feat_items and
+                id_list.count(feat_items[self.search_property_id]) > 0):
+
                 item = loads(geom.ExportToWkt())
                 google_x, google_y = coordinates.rd_to_google(*item.coords[0])
 
