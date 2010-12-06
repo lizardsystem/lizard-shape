@@ -2,10 +2,10 @@ Changelog of lizard-shape
 ===================================================
 
 
-0.10 (unreleased)
+0.10 (2010-12-06)
 -----------------
 
-- Nothing changed yet.
+- Rename title from Flow to Shape.
 
 
 0.9 (2010-12-02)
