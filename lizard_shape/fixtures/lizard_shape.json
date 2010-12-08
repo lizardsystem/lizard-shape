@@ -1,0 +1,1839 @@
+[
+  {
+    "pk": 2,
+    "model": "lizard_shape.shapetemplate",
+    "fields": {
+      "name_field": "ID_plan",
+      "name": "Kansen",
+      "id_field": "WG_ID"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "lizard_shape.shapetemplate",
+    "fields": {
+      "name_field": "WG_ID",
+      "name": "Uitvoeringsplan",
+      "id_field": "WG_ID"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "lizard_shape.shapetemplate",
+    "fields": {
+      "name_field": "WG_ID",
+      "name": "Oevers",
+      "id_field": "WG_ID"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "lizard_shape.shapetemplate",
+    "fields": {
+      "name_field": "ide_knp",
+      "name": "Resultaten",
+      "id_field": "ide_knp"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "lizard_shape.shapetemplate",
+    "fields": {
+      "name_field": "leiding_id",
+      "name": "Rioolgemalen",
+      "id_field": "leiding_id"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "lizard_shape.shapetemplate",
+    "fields": {
+      "name_field": "ide_kn1",
+      "name": "Regenwateruitlaten",
+      "id_field": "ide_kn1"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "lizard_shape.shapetemplate",
+    "fields": {
+      "name_field": "leiding_id",
+      "name": "Strengen",
+      "id_field": "leiding_id"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "lizard_shape.shapetemplate",
+    "fields": {
+      "name_field": "knoop_id",
+      "name": "Putten",
+      "id_field": "knoop_id"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "lizard_shape.shapetemplate",
+    "fields": {
+      "name_field": "PROJ_CODE",
+      "name": "Rioolsaneringen",
+      "id_field": "PROJ_CODE"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "lizard_shape.shapetemplate",
+    "fields": {
+      "name_field": "leiding_id",
+      "name": "Rioolstelsel",
+      "id_field": "leiding_id"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "lizard_shape.shapetemplate",
+    "fields": {
+      "name_field": "geb_id1",
+      "name": "Gemeentebredekoppelkaart",
+      "id_field": "geb_id1"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "STREEFBEEL",
+      "name": "Streefbeel",
+      "shape_template": 1,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 2,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "pro_mat",
+      "name": "Materiaal",
+      "shape_template": 4,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 3,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "Max_VALUE",
+      "name": "Max discharge",
+      "shape_template": 9,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 4,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "VALUE",
+      "name": "Water op straat",
+      "shape_template": 9,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 6,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "vrwa",
+      "name": "VRWA",
+      "shape_template": 10,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 7,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "datum",
+      "name": "Datum",
+      "shape_template": 10,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 12,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "pmp_an1",
+      "name": "Aanslagpeil",
+      "shape_template": 12,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 13,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "pmp_af1",
+      "name": "Afslagpeil",
+      "shape_template": 12,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 11,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "pmp_pc1",
+      "name": "Pompcapaciteit",
+      "shape_template": 12,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 9,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "ovs_bre",
+      "name": "Drempelbreedte",
+      "shape_template": 11,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 10,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "ovs_niv",
+      "name": "Drempelniveau",
+      "shape_template": 11,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 14,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "pro_bre",
+      "name": "Breedte",
+      "shape_template": 4,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 15,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "a_bob_kn1",
+      "name": "Aanname bob kn1",
+      "shape_template": 4,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 16,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "a_bob_kn2",
+      "name": "Aanname bob kn2",
+      "shape_template": 4,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 17,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "datum",
+      "name": "Datum",
+      "shape_template": 4,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 18,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "lei_typ",
+      "name": "Leidingtype",
+      "shape_template": 4,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 19,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "a_pro_bre",
+      "name": "Aanname breedte",
+      "shape_template": 4,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 20,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "Naam_",
+      "name": "Naam",
+      "shape_template": 13,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 21,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "PROJ_CODE",
+      "name": "Project code",
+      "shape_template": 13,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 22,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "LINK_VISIE",
+      "name": "Link Visie",
+      "shape_template": 13,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 23,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "poep",
+      "name": "Poep",
+      "shape_template": 14,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 5,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "rwa",
+      "name": "RWA",
+      "shape_template": 10,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 8,
+    "model": "lizard_shape.shapefield",
+    "fields": {
+      "field": "type",
+      "name": "Stelseltype",
+      "shape_template": 10,
+      "field_type": 1
+    }
+  },
+  {
+    "pk": 11,
+    "model": "lizard_shape.category",
+    "fields": {
+      "shapes": [
+        11,
+        13,
+        6,
+        7
+      ],
+      "name": "Themakaarten",
+      "parent": 8,
+      "slug": "themakaarten_almr"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "lizard_shape.category",
+    "fields": {
+      "shapes": [],
+      "name": "Grondwater",
+      "parent": null,
+      "slug": "grondwater"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "lizard_shape.category",
+    "fields": {
+      "shapes": [
+        7
+      ],
+      "name": "Modelresultaten",
+      "parent": null,
+      "slug": "modelresultaten"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "lizard_shape.category",
+    "fields": {
+      "shapes": [
+        3,
+        4,
+        5
+      ],
+      "name": "Oevers",
+      "parent": null,
+      "slug": "root"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "lizard_shape.category",
+    "fields": {
+      "shapes": [],
+      "name": "Openbare ruimte",
+      "parent": null,
+      "slug": "Openbareruimte"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "lizard_shape.category",
+    "fields": {
+      "shapes": [],
+      "name": "Oppervlaktewater",
+      "parent": null,
+      "slug": "oppervlaktewater"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "lizard_shape.category",
+    "fields": {
+      "shapes": [
+        15
+      ],
+      "name": "Riolering",
+      "parent": null,
+      "slug": "riolering"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "lizard_shape.category",
+    "fields": {
+      "shapes": [],
+      "name": "Werk in uitvoering",
+      "parent": null,
+      "slug": "werkinuitvoering"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "uitvoeringen",
+      "shape_template": 3,
+      "value_field": "STREEFBEEL"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "kansen",
+      "shape_template": 2,
+      "value_field": "WG_ID"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "oevers",
+      "shape_template": 1,
+      "value_field": "STREEFBEEL"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Bob kn1",
+      "shape_template": 4,
+      "value_field": "bob_kn1"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Bob kn2",
+      "shape_template": 4,
+      "value_field": "bob_kn2"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Materiaal",
+      "shape_template": 4,
+      "value_field": "pro_mat"
+    }
+  },
+  {
+    "pk": 22,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Leidingtype",
+      "shape_template": 4,
+      "value_field": "lei_typ"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Aanname bob kn2",
+      "shape_template": 4,
+      "value_field": "a_bob_kn2"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Aanname bob kn1",
+      "shape_template": 4,
+      "value_field": "a_bob_kn1"
+    }
+  },
+  {
+    "pk": 23,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Aanname breedte",
+      "shape_template": 4,
+      "value_field": "a_pro_bre"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Bok",
+      "shape_template": 8,
+      "value_field": "knp_bok"
+    }
+  },
+  {
+    "pk": 24,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Maaiveld",
+      "shape_template": 8,
+      "value_field": "mvd_niv"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Water op straat",
+      "shape_template": 9,
+      "value_field": "VALUE"
+    }
+  },
+  {
+    "pk": 25,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Jaar",
+      "shape_template": 13,
+      "value_field": "NAAM_"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Stelseltype",
+      "shape_template": 10,
+      "value_field": "type"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Aanname maaiveld",
+      "shape_template": 8,
+      "value_field": "a_mvd_niv"
+    }
+  },
+  {
+    "pk": 26,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "leidingen",
+      "shape_template": 14,
+      "value_field": "leiding_id"
+    }
+  },
+  {
+    "pk": 27,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "RWA",
+      "shape_template": 10,
+      "value_field": "rwa"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Max discharge",
+      "shape_template": 9,
+      "value_field": "Max_VALUE"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Breedte",
+      "shape_template": 4,
+      "value_field": "pro_bre"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Pompcapaciteit",
+      "shape_template": 12,
+      "value_field": "pmp_pc1"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "lizard_shape.shapelegendclass",
+    "fields": {
+      "descriptor": "Drempelniveau",
+      "shape_template": 11,
+      "value_field": "ovs_niv"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 1,
+      "is_exact": true,
+      "color": "0000ff",
+      "max_value": "",
+      "min_value": "Boezemwater",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 2.0
+    }
+  },
+  {
+    "pk": 2,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 1,
+      "is_exact": true,
+      "color": "ff0000",
+      "max_value": "",
+      "min_value": "Cultuurlijk",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 7,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 3,
+      "is_exact": false,
+      "color": "ff8000",
+      "max_value": "",
+      "min_value": "",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 5.0
+    }
+  },
+  {
+    "pk": 6,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 2,
+      "is_exact": false,
+      "color": "ff00ff",
+      "max_value": "",
+      "min_value": "",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 5.0
+    }
+  },
+  {
+    "pk": 3,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 1,
+      "is_exact": true,
+      "color": "ffff00",
+      "max_value": "",
+      "min_value": "Landbouw",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 2.0
+    }
+  },
+  {
+    "pk": 4,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 1,
+      "is_exact": true,
+      "color": "00ff00",
+      "max_value": "",
+      "min_value": "Natuurlijk",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 2.0
+    }
+  },
+  {
+    "pk": 5,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 1,
+      "is_exact": true,
+      "color": "ff00ff",
+      "max_value": "",
+      "min_value": "Notsloot",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 2.0
+    }
+  },
+  {
+    "pk": 26,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 11,
+      "is_exact": false,
+      "color": "00ffff",
+      "max_value": "",
+      "min_value": "9",
+      "mask": "empty_mask.png",
+      "color_inside": "00ffff",
+      "icon": "empty.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 29,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 10,
+      "is_exact": false,
+      "color": "0080FF",
+      "max_value": "-8",
+      "min_value": "",
+      "mask": "empty_mask.png",
+      "color_inside": "0080FF",
+      "icon": "point.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 27,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 11,
+      "is_exact": false,
+      "color": "ffffff",
+      "max_value": "",
+      "min_value": "0",
+      "mask": "empty_mask.png",
+      "color_inside": "ffffff",
+      "icon": "empty.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 28,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 11,
+      "is_exact": false,
+      "color": "ff0000",
+      "max_value": "",
+      "min_value": "4",
+      "mask": "empty_mask.png",
+      "color_inside": "ff0000",
+      "icon": "empty.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 14,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 7,
+      "is_exact": true,
+      "color": "ff0000",
+      "max_value": "",
+      "min_value": "00",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 15,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 7,
+      "is_exact": true,
+      "color": "000000",
+      "max_value": "",
+      "min_value": "01",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 30,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 10,
+      "is_exact": false,
+      "color": "80FF00",
+      "max_value": "-6",
+      "min_value": "-8",
+      "mask": "empty_mask.png",
+      "color_inside": "80FF00",
+      "icon": "point.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 31,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 10,
+      "is_exact": false,
+      "color": "FFFF00",
+      "max_value": "-4",
+      "min_value": "-6",
+      "mask": "empty_mask.png",
+      "color_inside": "FFFF00",
+      "icon": "point.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 32,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 10,
+      "is_exact": false,
+      "color": "FF8000",
+      "max_value": "-2",
+      "min_value": "-4",
+      "mask": "empty_mask.png",
+      "color_inside": "FF8000",
+      "icon": "point.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 33,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 10,
+      "is_exact": false,
+      "color": "FF0000",
+      "max_value": "",
+      "min_value": "-2",
+      "mask": "empty_mask.png",
+      "color_inside": "FF0000",
+      "icon": "point.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 46,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 16,
+      "is_exact": false,
+      "color": "ffffff",
+      "max_value": "-6",
+      "min_value": "",
+      "mask": "overstort_mask.png",
+      "color_inside": "ffffff",
+      "icon": "overstort.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 47,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 16,
+      "is_exact": false,
+      "color": "ffffff",
+      "max_value": "-4",
+      "min_value": "-6",
+      "mask": "overstort_mask.png",
+      "color_inside": "ffffff",
+      "icon": "overstort.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 48,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 16,
+      "is_exact": false,
+      "color": "ffffff",
+      "max_value": "",
+      "min_value": "-4",
+      "mask": "overstort_mask.png",
+      "color_inside": "ffffff",
+      "icon": "overstort.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 35,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 14,
+      "is_exact": false,
+      "color": "FFFF00",
+      "max_value": "1800",
+      "min_value": "900",
+      "mask": "empty_mask.png",
+      "color_inside": "FFFF00",
+      "icon": "empty.png",
+      "size": 2.0
+    }
+  },
+  {
+    "pk": 36,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 14,
+      "is_exact": false,
+      "color": "FF8000",
+      "max_value": "3600",
+      "min_value": "1800",
+      "mask": "empty_mask.png",
+      "color_inside": "FF8000",
+      "icon": "empty.png",
+      "size": 4.0
+    }
+  },
+  {
+    "pk": 37,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 14,
+      "is_exact": false,
+      "color": "8000FF",
+      "max_value": "",
+      "min_value": "3600",
+      "mask": "empty_mask.png",
+      "color_inside": "8000FF",
+      "icon": "empty.png",
+      "size": 8.0
+    }
+  },
+  {
+    "pk": 45,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 15,
+      "is_exact": false,
+      "color": "",
+      "max_value": "",
+      "min_value": "",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 34,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 14,
+      "is_exact": false,
+      "color": "80FF00",
+      "max_value": "900",
+      "min_value": "1",
+      "mask": "empty_mask.png",
+      "color_inside": "80FF00",
+      "icon": "empty.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 49,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 17,
+      "is_exact": false,
+      "color": "00cc00",
+      "max_value": "10",
+      "min_value": "",
+      "mask": "gemaal_mask.png",
+      "color_inside": "00cc00",
+      "icon": "gemaal.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 50,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 17,
+      "is_exact": false,
+      "color": "cccc00",
+      "max_value": "50",
+      "min_value": "10",
+      "mask": "gemaal_mask.png",
+      "color_inside": "cccc00",
+      "icon": "gemaal.png",
+      "size": 2.0
+    }
+  },
+  {
+    "pk": 51,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 17,
+      "is_exact": false,
+      "color": "cc6600",
+      "max_value": "100",
+      "min_value": "50",
+      "mask": "gemaal_mask.png",
+      "color_inside": "cc6600",
+      "icon": "gemaal.png",
+      "size": 3.0
+    }
+  },
+  {
+    "pk": 52,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 17,
+      "is_exact": false,
+      "color": "cc0000",
+      "max_value": "",
+      "min_value": "100",
+      "mask": "gemaal_mask.png",
+      "color_inside": "cc0000",
+      "icon": "gemaal.png",
+      "size": 4.0
+    }
+  },
+  {
+    "pk": 13,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 6,
+      "is_exact": true,
+      "color": "000000",
+      "max_value": "",
+      "min_value": "0",
+      "mask": "",
+      "color_inside": "000000",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 53,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 6,
+      "is_exact": true,
+      "color": "0000DD",
+      "max_value": "",
+      "min_value": "1",
+      "mask": "",
+      "color_inside": "0000DD",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 54,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 6,
+      "is_exact": true,
+      "color": "00DD00",
+      "max_value": "",
+      "min_value": "2",
+      "mask": "",
+      "color_inside": "00DD00",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 55,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 6,
+      "is_exact": true,
+      "color": "ffffff",
+      "max_value": "",
+      "min_value": "99",
+      "mask": "",
+      "color_inside": "ffffff",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 16,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 5,
+      "is_exact": true,
+      "color": "000000",
+      "max_value": "",
+      "min_value": "0",
+      "mask": "",
+      "color_inside": "000000",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 17,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 5,
+      "is_exact": true,
+      "color": "ff0000",
+      "max_value": "",
+      "min_value": "1",
+      "mask": "",
+      "color_inside": "000000",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 18,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 5,
+      "is_exact": true,
+      "color": "ffff00",
+      "max_value": "",
+      "min_value": "2",
+      "mask": "",
+      "color_inside": "ffff00",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 56,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 5,
+      "is_exact": false,
+      "color": "ffffff",
+      "max_value": "",
+      "min_value": "99",
+      "mask": "",
+      "color_inside": "ffffff",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 24,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 11,
+      "is_exact": false,
+      "color": "000000",
+      "max_value": "",
+      "min_value": "99",
+      "mask": "empty_mask.png",
+      "color_inside": "000000",
+      "icon": "empty.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 25,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 11,
+      "is_exact": false,
+      "color": "0000ff",
+      "max_value": "",
+      "min_value": "10",
+      "mask": "empty_mask.png",
+      "color_inside": "0000ff",
+      "icon": "empty.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 38,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 13,
+      "is_exact": false,
+      "color": "52A8FF",
+      "max_value": "0.2",
+      "min_value": "0",
+      "mask": "empty_mask.png",
+      "color_inside": "52A8FF",
+      "icon": "empty.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 39,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 13,
+      "is_exact": false,
+      "color": "5252FF",
+      "max_value": "0.4",
+      "min_value": "0.2",
+      "mask": "empty_mask.png",
+      "color_inside": "5252FF",
+      "icon": "empty.png",
+      "size": 2.0
+    }
+  },
+  {
+    "pk": 40,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 13,
+      "is_exact": false,
+      "color": "0000D6",
+      "max_value": "0.6",
+      "min_value": "0.4",
+      "mask": "empty_mask.png",
+      "color_inside": "0000D6",
+      "icon": "empty.png",
+      "size": 4.0
+    }
+  },
+  {
+    "pk": 41,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 13,
+      "is_exact": false,
+      "color": "00009B",
+      "max_value": "",
+      "min_value": "0.6",
+      "mask": "empty_mask.png",
+      "color_inside": "00009B",
+      "icon": "empty.png",
+      "size": 8.0
+    }
+  },
+  {
+    "pk": 8,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 4,
+      "is_exact": false,
+      "color": "0000CC",
+      "max_value": "0.25",
+      "min_value": "0.1",
+      "mask": "",
+      "color_inside": "0000CC",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 9,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 4,
+      "is_exact": false,
+      "color": "00CC00",
+      "max_value": "0.4",
+      "min_value": "0.25",
+      "mask": "",
+      "color_inside": "00CC00",
+      "icon": "",
+      "size": 2.0
+    }
+  },
+  {
+    "pk": 10,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 4,
+      "is_exact": false,
+      "color": "CCCC00",
+      "max_value": "0.5",
+      "min_value": "0.4",
+      "mask": "",
+      "color_inside": "CCCC00",
+      "icon": "",
+      "size": 3.0
+    }
+  },
+  {
+    "pk": 11,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 4,
+      "is_exact": false,
+      "color": "CC6600",
+      "max_value": "0.6",
+      "min_value": "0.5",
+      "mask": "",
+      "color_inside": "CC6600",
+      "icon": "",
+      "size": 4.0
+    }
+  },
+  {
+    "pk": 12,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 4,
+      "is_exact": false,
+      "color": "CC0000",
+      "max_value": "",
+      "min_value": "0.6",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 5.0
+    }
+  },
+  {
+    "pk": 57,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 22,
+      "is_exact": true,
+      "color": "CC6600",
+      "max_value": "",
+      "min_value": "00",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 58,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 22,
+      "is_exact": true,
+      "color": "0000CC",
+      "max_value": "",
+      "min_value": "01",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 59,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 22,
+      "is_exact": true,
+      "color": "CC0000",
+      "max_value": "",
+      "min_value": "02",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 60,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 22,
+      "is_exact": true,
+      "color": "000000",
+      "max_value": "",
+      "min_value": "04",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 61,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 22,
+      "is_exact": true,
+      "color": "CC00CC",
+      "max_value": "",
+      "min_value": "99",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 62,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 23,
+      "is_exact": false,
+      "color": "CCCC00",
+      "max_value": "",
+      "min_value": "0",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 63,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 23,
+      "is_exact": false,
+      "color": "CC6600",
+      "max_value": "",
+      "min_value": "2",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 64,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 23,
+      "is_exact": false,
+      "color": "CC0000",
+      "max_value": "",
+      "min_value": "4",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 65,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 24,
+      "is_exact": false,
+      "color": "0080FF",
+      "max_value": "-6",
+      "min_value": "",
+      "mask": "empty_mask.png",
+      "color_inside": "0080FF",
+      "icon": "point.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 66,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 24,
+      "is_exact": false,
+      "color": "80FF00",
+      "max_value": "-4",
+      "min_value": "-6",
+      "mask": "empty_mask.png",
+      "color_inside": "80FF00",
+      "icon": "point.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 67,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 24,
+      "is_exact": false,
+      "color": "FFFF00",
+      "max_value": "-2",
+      "min_value": "-4",
+      "mask": "empty_mask.png",
+      "color_inside": "FFFF00",
+      "icon": "point.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 68,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 24,
+      "is_exact": false,
+      "color": "FF8000",
+      "max_value": "0",
+      "min_value": "-2",
+      "mask": "empty_mask.png",
+      "color_inside": "FF8000",
+      "icon": "point.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 69,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 24,
+      "is_exact": false,
+      "color": "FF0000",
+      "max_value": "",
+      "min_value": "0",
+      "mask": "empty_mask.png",
+      "color_inside": "FF0000",
+      "icon": "point.png",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 70,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 25,
+      "is_exact": true,
+      "color": "00009B",
+      "max_value": "",
+      "min_value": "Rioolsanering in 2006",
+      "mask": "",
+      "color_inside": "00009B",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 71,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 25,
+      "is_exact": true,
+      "color": "0000D6",
+      "max_value": "",
+      "min_value": "Rioolsanering in 2007",
+      "mask": "",
+      "color_inside": "0000D6",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 72,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 25,
+      "is_exact": true,
+      "color": "5252FF",
+      "max_value": "",
+      "min_value": "Rioolsanering in 2008",
+      "mask": "",
+      "color_inside": "5252FF",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 73,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 25,
+      "is_exact": true,
+      "color": "52A8FF",
+      "max_value": "",
+      "min_value": "Rioolsanering in 2009",
+      "mask": "",
+      "color_inside": "52A8FF",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 42,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 15,
+      "is_exact": true,
+      "color": "B2A1C7",
+      "max_value": "",
+      "min_value": "Gescheiden",
+      "mask": "",
+      "color_inside": "B2A1C7",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 43,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 15,
+      "is_exact": true,
+      "color": "FABF8F",
+      "max_value": "",
+      "min_value": "VGS",
+      "mask": "",
+      "color_inside": "FABF8F",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 44,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 15,
+      "is_exact": true,
+      "color": "C2D69B",
+      "max_value": "",
+      "min_value": "VRWA",
+      "mask": "",
+      "color_inside": "C2D69B",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 74,
+    "model": "lizard_shape.shapelegendsingleclass",
+    "fields": {
+      "shape_legend_class": 26,
+      "is_exact": false,
+      "color": "000000",
+      "max_value": "",
+      "min_value": "",
+      "mask": "",
+      "color_inside": "",
+      "icon": "",
+      "size": 1.0
+    }
+  },
+  {
+    "pk": 1,
+    "model": "lizard_shape.his",
+    "fields": {
+      "name": "Max debiet",
+      "filename": "lizard_shape/his/discharge_max.his"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "lizard_shape.his",
+    "fields": {
+      "name": "Max debiet leidingen",
+      "filename": "lizard_shape/his/discharge_max_reachsegments.his"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "lizard_shape.his",
+    "fields": {
+      "name": "Maxlvlfromstrtlvl_centrumalmr",
+      "filename": "lizard_shape/his/maxlvlstrlvl.his"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "lizard_flow.area",
+    "fields": {
+      "slug": "oppervlaktewater",
+      "parent": 1,
+      "name": "Oppervlaktewater"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "lizard_flow.area",
+    "fields": {
+      "slug": "riolering",
+      "parent": 1,
+      "name": "Riolering"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "lizard_flow.area",
+    "fields": {
+      "slug": "bestaandestad",
+      "parent": 5,
+      "name": "Bestaande stad"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "lizard_flow.area",
+    "fields": {
+      "slug": "ontwikkeling",
+      "parent": 5,
+      "name": "Ontwikkeling"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "lizard_flow.area",
+    "fields": {
+      "slug": "bestaandestad_opp",
+      "parent": 8,
+      "name": "Bestaande stad"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "lizard_flow.area",
+    "fields": {
+      "slug": "ontwikkeling_opp",
+      "parent": 8,
+      "name": "Ontwikkeling"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "lizard_flow.area",
+    "fields": {
+      "slug": "almere",
+      "parent": null,
+      "name": "Almere"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "lizard_flow.project",
+    "fields": {
+      "description": "",
+      "name": "Herberekening 2010",
+      "area": 6
+    }
+  },
+  {
+    "pk": 4,
+    "model": "lizard_flow.project",
+    "fields": {
+      "description": "",
+      "name": "Herberekening 2008",
+      "area": 6
+    }
+  },
+  {
+    "pk": 4,
+    "model": "lizard_flow.case",
+    "fields": {
+      "shapes": [],
+      "name": "Buiten",
+      "archive_location": "I:\\CT\\Riolering\\ontwerp\\buiten",
+      "variation_id": 9473,
+      "created_by": "Jonas van Schrojenstein Lantman",
+      "project": 5,
+      "variation_remarks": "Ontwikkeling Sieradenbuurt Variant 1",
+      "contact_person": "Arjo Hof",
+      "delivery_date": "2010-07-03",
+      "variation_location": "3T2"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "lizard_flow.case",
+    "fields": {
+      "shapes": [],
+      "name": "Haven",
+      "archive_location": "I:\\CT\\Riolering\\Ontwerp",
+      "variation_id": 9474,
+      "created_by": "Jonas van Schrojenstein Lantman",
+      "project": 5,
+      "variation_remarks": "Ontwikkelingen Diamantenbuurt Variant 2",
+      "contact_person": "Arjo Hof",
+      "delivery_date": "2010-12-02",
+      "variation_location": "3T3"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "lizard_flow.case",
+    "fields": {
+      "shapes": [],
+      "name": "Centrum",
+      "archive_location": "I:\\CT\\Ontwerp\\Riolering",
+      "variation_id": 9475,
+      "created_by": "Jonas van Schrojenstein Lantman",
+      "project": 5,
+      "variation_remarks": "Ontwikkeling grachtenbuurt ",
+      "contact_person": "Arjo Hof",
+      "delivery_date": "2010-12-02",
+      "variation_location": "3T4"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "lizard_flow.scenario",
+    "fields": {
+      "case": 6,
+      "name": "Bui08 - RWA"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "lizard_flow.resultcategory",
+    "fields": {
+      "name": "Basisinformatie"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "lizard_flow.resultcategory",
+    "fields": {
+      "name": "Nabewerkt"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "lizard_flow.resultcategory",
+    "fields": {
+      "name": "Model"
+    }
+  }
+]
