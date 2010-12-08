@@ -157,8 +157,12 @@ class AdapterShapefile(WorkspaceItemAdapter):
                     icon_style.update({'mask': (single_class.mask, )})
                 img_url = self.symbol_url(icon_style=icon_style)
 
+                if single_class.label:
+                    description = single_class.label
+                else:
+                    description = single_class.min_value
                 legend_row = {'img_url': img_url,
-                              'description': single_class.min_value}
+                              'description': description}
                 legend_result.append(legend_row)
         return legend_result
 

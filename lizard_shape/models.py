@@ -388,6 +388,10 @@ class ShapeLegendSingleClass(models.Model):
 
     shape_legend_class = models.ForeignKey('ShapeLegendClass')
 
+    label = models.CharField(
+        max_length=200, null=True, blank=True,
+        help_text="Fill in if you want a custom label.")
+
     min_value = models.CharField(max_length=80, null=True, blank=True)
     max_value = models.CharField(max_length=80, null=True, blank=True)
 

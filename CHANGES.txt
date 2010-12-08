@@ -5,7 +5,7 @@ Changelog of lizard-shape
 0.12 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Added optional legend class labels.
 
 
 0.11 (2010-12-08)
