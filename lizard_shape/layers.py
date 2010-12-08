@@ -342,7 +342,8 @@ class AdapterShapefile(WorkspaceItemAdapter):
         if ids is not None:
             id_list.extend([identifier['id'] for identifier in ids])
         if len(id_list) == 0:
-            logger.warning('No id given in call to location. Should never happen.')
+            logger.warning('No id given in call to location. '
+                           'Should never happen.')
             return {}
 
         logger.debug("Location(s): %r" % id_list)
@@ -366,10 +367,16 @@ class AdapterShapefile(WorkspaceItemAdapter):
                 self.search_property_id in feat_items and
                 id_list.count(feat_items[self.search_property_id]) > 0):
 
-                item = loads(geom.ExportToWkt())
-                google_x, google_y = coordinates.rd_to_google(*item.coords[0])
+                # item = loads(geom.ExportToWkt())
 
-                # contains {'name': <name>, 'value': <value>, 'value_type: 1/2/3'}
+                # Polygons get an error when getting coords. Coords
+                # are not needed any more, so leave them out.
+
+                # google_x, google_y = coordinates.rd_to_google(
+                #     *item.coords[0])
+
+                # contains {'name': <name>, 'value': <value>,
+                # 'value_type: 1/2/3'}
                 values = []
 
                 for field in self.display_fields:
@@ -386,8 +393,8 @@ class AdapterShapefile(WorkspaceItemAdapter):
                         'values': values,
                         'object': feat_items,
                         'workspace_item': self.workspace_item,
-                        'identifier': {'id': feat_items[self.search_property_id]}
-                        })
+                        'identifier': {'id': feat_items[
+                                self.search_property_id]}})
 
             feat = lyr.GetNextFeature()
 
@@ -424,10 +431,11 @@ class AdapterShapefile(WorkspaceItemAdapter):
                     "lizard_map.workspace_item_image",
                     kwargs={'workspace_item_id': self.workspace_item.id},
                     )
-                identifiers_escaped = [json.dumps(identifier).replace('"', '%22')
-                                       for identifier in identifiers]
-                img_url = img_url + '?' + '&'.join(['identifier=%s' % i for i in
-                                                    identifiers_escaped])
+                identifiers_escaped = [
+                    json.dumps(identifier).replace('"', '%22')
+                    for identifier in identifiers]
+                img_url = img_url + '?' + '&'.join(
+                    ['identifier=%s' % i for i in identifiers_escaped])
 
         return render_to_string(
             'lizard_shape/popup_shape.html',
