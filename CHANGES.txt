@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-0.11 (unreleased)
+0.11 (2010-12-08)
 -----------------
 
 - Bugfix polygon popup.
