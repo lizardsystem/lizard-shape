@@ -264,21 +264,23 @@ class AdapterShapefile(WorkspaceItemAdapter):
                         break  # You don't have to search other rows.
                     name = str(feat_items[self.search_property_name])
 
-                    if self.value_field:
-                        if self.value_field not in feat_items:
+                    if self.display_fields:
+                        if self.display_fields[0]['field'] not in feat_items:
                             # This means that the value_field is not a
                             # valid field in the shapefile dbf.
                             logger.error(
                                 ('Search: The field "%s" cannot be found in '
                                  'shapefile "%s". Check value_field in your '
                                  'legend settings. Options are: %s') %
-                                (self.value_field,
+                                (self.display_fields[0]['field'],
                                  self.layer_name,
                                  feat_items.keys()))
                             break  # You don't have to search other rows.
                         name += ' - %s=%s' % (
-                            self.value_name,
-                            str(float_to_string(feat_items[self.value_field])))
+                            self.display_fields[0]['name'],
+                            str(float_to_string(feat_items[
+                                        self.display_fields[0]['field']])))
+
                     result = {'distance': distance,
                               'name': name,
                               'workspace_item': self.workspace_item}

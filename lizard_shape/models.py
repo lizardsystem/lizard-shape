@@ -145,9 +145,13 @@ class ShapeField(models.Model):
     field_type = models.IntegerField(
         choices=FIELD_TYPE_CHOICES,
         default=FIELD_TYPE_NORMAL)
+    index = models.IntegerField(default=1000)
 
     shape_template = models.ForeignKey('ShapeTemplate')
 
+
+    class Meta:
+        ordering = ('index', )
 
     def __unicode__(self):
         return u'%s - %s' % (self.shape_template, self.name)

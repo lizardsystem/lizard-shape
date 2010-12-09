@@ -2,8 +2,11 @@ Changelog of lizard-shape
 ===================================================
 
 
-0.12 (unreleased)
+0.12 (2010-12-09)
 -----------------
+
+- Name in hover popup now uses ShapeFields first field instead of the
+  value_field.
 
 - Added optional legend class labels.
 
