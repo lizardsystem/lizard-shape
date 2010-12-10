@@ -5,7 +5,8 @@ Changelog of lizard-shape
 0.13 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Simplify __unicode__ function of ShapeLegendClass. Very important
+  for various views (i.e. results in flow).
 
 
 0.12 (2010-12-09)
