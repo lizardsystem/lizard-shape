@@ -5,7 +5,7 @@ Changelog of lizard-shape
 0.14 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Update categories view.
 
 
 0.13 (2010-12-10)
