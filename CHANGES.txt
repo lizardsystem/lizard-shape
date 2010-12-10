@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-0.13 (unreleased)
+0.13 (2010-12-10)
 -----------------
 
 - Simplify __unicode__ function of ShapeLegendClass. Very important
