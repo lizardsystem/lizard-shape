@@ -5,7 +5,7 @@ Changelog of lizard-shape
 1.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Added initial South migration.
 
 
 1.0 (2010-12-10)
