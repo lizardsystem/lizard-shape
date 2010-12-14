@@ -71,24 +71,44 @@ class AdapterShapefile(WorkspaceItemAdapter):
         object renders the shapefile that is specified by default_layer_name,
         default_resource_module and default_resource_name.
 
+        There are a few possibilities to define your shape:
+
+        - PREFERRED shape_id is defined
+
+        - resource_module and resource_name are defined.
+
+        - layer_filename is defined. It's a link to a absolute
+          filename. Not recommended because it allows injections.
+
         """
         super(AdapterShapefile, self).__init__(*args, **kwargs)
 
         layer_arguments = kwargs['layer_arguments']
         self.layer_name = str(layer_arguments['layer_name'])
         layer_filename = layer_arguments.get('layer_filename', None)
+        self.shape_id = layer_arguments.get('shape_id', None)
+
+        self.shape = None
+        if self.shape_id is not None:
+            self.shape = Shape.objects.get(pk=self.shape_id)
+
         if layer_filename is not None:
             self.layer_filename = str(layer_filename)
             self.resource_module = None
             self.resource_name = None
         else:
             # If layer_filename is not defined, resource_module and
-            # resource_name must be defined.
-            self.resource_module = str(layer_arguments['resource_module'])
-            self.resource_name = str(layer_arguments['resource_name'])
-            self.layer_filename = pkg_resources.resource_filename(
-                self.resource_module,
-                self.resource_name)
+            # resource_name must be defined OR shape(_id) must be
+            # defined.
+            if self.shape is not None:
+                self.layer_filename = str(self.shape.shp_file.file.name)
+            else:
+                # resource_module and resource_name must be defined
+                self.resource_module = str(layer_arguments['resource_module'])
+                self.resource_name = str(layer_arguments['resource_name'])
+                self.layer_filename = pkg_resources.resource_filename(
+                    self.resource_module,
+                    self.resource_name)
         self.search_property_name = \
             layer_arguments.get('search_property_name', "")
         self.search_property_id = \
@@ -97,7 +117,6 @@ class AdapterShapefile(WorkspaceItemAdapter):
         self.legend_type = layer_arguments.get('legend_type', None)
         self.value_field = layer_arguments.get('value_field', None)
         self.value_name = layer_arguments.get('value_name', None)
-        self.shape_id = layer_arguments.get('shape_id', None)
         self.display_fields = layer_arguments.get('display_fields', [])
         if not self.display_fields:
             self.display_fields = [

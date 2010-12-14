@@ -5,6 +5,7 @@ from django.db import IntegrityError
 from django.forms import ValidationError
 from django.test import TestCase
 from django.test.client import Client
+import pkg_resources
 
 import lizard_shape.layers
 from lizard_shape.admin import check_extension_or_error
@@ -131,16 +132,51 @@ class AdminTest(TestCase):
 
 
 class AdapterShapefileTestSuite(TestCase):
-    """WMS layer functions are generally defined in layers.py. One can add his
-    own in other apps. shapefile_layer is an example function.
-    """
+    """WMS layer functions are generally defined in layers.py. One can
+    add his own in other apps.
 
-    def test_initialization(self):
+    There are 3 ways to define a shapefile:
+    - Using a shape_id which refers to lizard_shape.models.Shape
+    - Using resource_module and resource_name.
+    - Using the layer_argument layer_filename.
+    """
+    fixtures = ['lizard_shape_test', ]
+
+    def test_initialization1(self):
+        """Init using shape_id - the shapefile is in
+        var/media/lizard_shape/shapes/..."""
+        mock_workspace = None
+        layer_arguments = {
+            'layer_name': 'Waterlichamen',
+            'shape_id': 1}
+        ws_adapter = lizard_shape.layers.AdapterShapefile(
+            mock_workspace, layer_arguments=layer_arguments)
+        layers, styles = ws_adapter.layer()
+        # TODO: test output.
+
+    def test_initialization2(self):
+        """Init using resource_module and resource_name"""
         mock_workspace = None
         layer_arguments = {
             'layer_name': 'Waterlichamen',
             'resource_module': 'lizard_map',
             'resource_name': 'test_shapefiles/KRWwaterlichamen_merge.shp',
+            'search_property_name': 'WGBNAAM'}
+        ws_adapter = lizard_shape.layers.AdapterShapefile(
+            mock_workspace, layer_arguments=layer_arguments)
+        layers, styles = ws_adapter.layer()
+        # TODO: test output.
+
+    def test_initialization3(self):
+        """Init using layer_filename"""
+        mock_workspace = None
+        resource_module = 'lizard_map'
+        resource_name = 'test_shapefiles/KRWwaterlichamen_merge.shp'
+        layer_filename = pkg_resources.resource_filename(
+            resource_module, resource_name)
+        layer_arguments = {
+            'layer_name': 'Waterlichamen',
+            'layer_filename': layer_filename,
             'search_property_name': 'WGBNAAM'}
         ws_adapter = lizard_shape.layers.AdapterShapefile(
             mock_workspace, layer_arguments=layer_arguments)
