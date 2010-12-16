@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.1 (unreleased)
+1.1 (2010-12-16)
 ----------------
 
 - Added more shapefile options.
