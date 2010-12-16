@@ -5,6 +5,8 @@ Changelog of lizard-shape
 1.1 (unreleased)
 ----------------
 
+- Added more shapefile options.
+
 - Added initial South migration.
 
 
