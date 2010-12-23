@@ -5,7 +5,9 @@ Changelog of lizard-shape
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Added tests.
+
+- Removed unused function get_adapter_layer_json_list.
 
 
 1.1 (2010-12-16)

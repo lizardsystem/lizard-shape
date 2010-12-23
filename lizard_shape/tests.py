@@ -100,6 +100,13 @@ class ModelShapeTest(TestCase):
         self.shape.shp_file.name = 'oeloebloe.shp'
         self.assertRaises(ShapeNameError, self.shape.save)
 
+    def test_timeseries(self):
+        """
+        There is not his-file associated with the shape.
+        """
+        self.assertEquals(self.shape.timeseries('asdf'), [])
+
+
 
 class AdminTest(TestCase):
 

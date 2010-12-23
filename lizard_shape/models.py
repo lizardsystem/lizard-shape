@@ -75,23 +75,6 @@ class Shape(models.Model):
             raise ShapeNameError(
                 "Uploaded files do not have common filename base.")
 
-    def get_adapter_layer_json_list(self):
-        """
-        Calculates all adapter_layer_jsons from available legends and
-        return in list.
-        """
-        result = []
-        # Add all shapelegends.
-        result.extend([s.adapter_layer_json
-                       for s in self.shapelegend_set.all()])
-        # Add all shapelegendspoints.
-        result.extend([s.adapter_layer_json
-                       for s in self.shapelegendpoint_set.all()])
-        # Add all shapelegendsclasses.
-        result.extend([s.adapter_layer_json
-                       for s in self.shapelegendclass_set.all()])
-        return result
-
     def timeseries(self, location_name, start=None, end=None):
         """
         Returns timeseries from hisfile in a dict associating
