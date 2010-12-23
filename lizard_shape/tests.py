@@ -13,6 +13,7 @@ from lizard_shape.layers import AdapterShapefile
 from lizard_shape.models import Category
 from lizard_shape.models import Shape
 from lizard_shape.models import ShapeLegend
+from lizard_shape.models import ShapeLegendPoint
 from lizard_shape.models import ShapeTemplate
 from lizard_shape.models import ShapeNameError
 
@@ -126,6 +127,16 @@ class ModelShapeTest(TestCase):
             value_field='mock_value_field')
         shape_legend.save()  # MUST use a saved shape_legend.
         shape_legend.adapter_layer_json(self.shape)
+
+    def test_shapelegendpoint(self):
+        """
+        Make a shape legend.
+        """
+        shape_legend_point = ShapeLegendPoint(
+            shape_template=self.shape_template,
+            value_field='mock_value_field')
+        shape_legend_point.save()  # MUST use a saved shape_legend.
+        shape_legend_point.adapter_layer_json(self.shape)
 
 
 class AdminTest(TestCase):
