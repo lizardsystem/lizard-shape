@@ -34,27 +34,30 @@ def homepage(request,
                 shapelegends = shape.template.shapelegend_set.all()
                 # Legends for lines.
                 for shapelegend in shapelegends:
-                    children.append({
-                            'name': '%s - %s' % (
+                    children.append(
+                        {'name': '%s - %s' % (
                                 str(shape), str(shapelegend)),
-                            'type': 'shape',
-                            'adapter_layer_json': shapelegend.adapter_layer_json(shape)})
+                         'type': 'shape',
+                         'adapter_layer_json':
+                         shapelegend.adapter_layer_json(shape)})
                 # Legends for points.
                 shapelegendpoints = shape.template.shapelegendpoint_set.all()
                 for shapelegendpoint in shapelegendpoints:
-                    children.append({
-                            'name': '%s - %s' % (
+                    children.append(
+                        {'name': '%s - %s' % (
                                 str(shape), str(shapelegendpoint)),
-                            'type': 'shape',
-                            'adapter_layer_json': shapelegendpoint.adapter_layer_json(shape)})
+                         'type': 'shape',
+                         'adapter_layer_json':
+                         shapelegendpoint.adapter_layer_json(shape)})
                 # Legends for points, lines, areas in classes.
                 shapelegendclasses = shape.template.shapelegendclass_set.all()
                 for shapelegendclass in shapelegendclasses:
-                    children.append({
-                            'name': '%s - %s' % (
+                    children.append(
+                        {'name': '%s - %s' % (
                                 str(shape), str(shapelegendclass)),
-                            'type': 'shape',
-                            'adapter_layer_json': shapelegendclass.adapter_layer_json(shape)})
+                         'type': 'shape',
+                         'adapter_layer_json':
+                         shapelegendclass.adapter_layer_json(shape)})
             row = {'name': category.name,
                    'type': 'category',
                    'children': children}

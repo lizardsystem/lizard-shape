@@ -149,7 +149,6 @@ class ShapeField(models.Model):
 
     shape_template = models.ForeignKey('ShapeTemplate')
 
-
     class Meta:
         ordering = ('index', )
 
@@ -361,7 +360,6 @@ class ShapeLegendClass(models.Model):
                 style.rules.append(
                     point_rule(c.icon, c.mask,
                                c.color, mapnik_filter))
-
 
         return style
 
