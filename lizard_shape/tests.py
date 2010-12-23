@@ -12,6 +12,8 @@ from lizard_shape.admin import check_extension_or_error
 from lizard_shape.layers import AdapterShapefile
 from lizard_shape.models import Category
 from lizard_shape.models import Shape
+from lizard_shape.models import ShapeLegend
+from lizard_shape.models import ShapeTemplate
 from lizard_shape.models import ShapeNameError
 
 
@@ -57,7 +59,16 @@ class ModelShapeTest(TestCase):
     fixtures = ['lizard_shape_test']
 
     def setUp(self):
+        """
+        One can make a shape template. The shape template contains
+        fields for id, name and legend info.
+        """
         self.shape = Shape.objects.all()[0]
+        self.shape_template = ShapeTemplate(
+            name='test_template',
+            id_field='mock_id_field',
+            name_field='mock_name_field')
+        self.shape_template.save()
 
     def test_shape(self):
         """
@@ -106,6 +117,15 @@ class ModelShapeTest(TestCase):
         """
         self.assertEquals(self.shape.timeseries('asdf'), [])
 
+    def test_shapelegend(self):
+        """
+        Make a shape legend.
+        """
+        shape_legend = ShapeLegend(
+            shape_template=self.shape_template,
+            value_field='mock_value_field')
+        shape_legend.save()  # MUST use a saved shape_legend.
+        shape_legend.adapter_layer_json(self.shape)
 
 
 class AdminTest(TestCase):
