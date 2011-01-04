@@ -251,6 +251,12 @@ class AdapterShapefile(WorkspaceItemAdapter):
         query_point = Point(rd_x, rd_y)
         ds = osgeo.ogr.Open(self.layer_filename)
         lyr = ds.GetLayer()
+        if radius is not None:
+            lyr.SetSpatialFilterRect(
+                rd_x-radius,
+                rd_y-radius,
+                rd_x+radius,
+                rd_y+radius)
         lyr.ResetReading()
         feat = lyr.GetNextFeature()
 
@@ -263,12 +269,13 @@ class AdapterShapefile(WorkspaceItemAdapter):
                 distance = query_point.distance(item)
                 feat_items = feat.items()
 
-                # Add stripped keys, because column names can contain
-                # spaces after the 'real' name.
-                for key in feat_items.keys():
-                    feat_items[key.strip()] = feat_items[key]
 
                 if not radius or (radius is not None and distance < radius):
+                    # Add stripped keys, because column names can contain
+                    # spaces after the 'real' name.
+                    for key in feat_items.keys():
+                        feat_items[key.strip()] = feat_items[key]
+
                     # Found an item.
                     if self.search_property_name not in feat_items:
                         # This means that the search_property_name is not a
