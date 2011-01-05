@@ -253,10 +253,10 @@ class AdapterShapefile(WorkspaceItemAdapter):
         lyr = ds.GetLayer()
         if radius is not None:
             lyr.SetSpatialFilterRect(
-                rd_x-radius,
-                rd_y-radius,
-                rd_x+radius,
-                rd_y+radius)
+                rd_x - radius,
+                rd_y - radius,
+                rd_x + radius,
+                rd_y + radius)
         lyr.ResetReading()
         feat = lyr.GetNextFeature()
 
@@ -268,7 +268,6 @@ class AdapterShapefile(WorkspaceItemAdapter):
                 item = loads(geom.ExportToWkt())
                 distance = query_point.distance(item)
                 feat_items = feat.items()
-
 
                 if not radius or (radius is not None and distance < radius):
                     # Add stripped keys, because column names can contain

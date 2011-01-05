@@ -240,4 +240,3 @@ class AdapterShapefileTestSuite(TestCase):
         self.assertEqual(adapter.resource_module, 'lizard_map')
         self.assertEqual(adapter.resource_name, 'Resource name')
         self.assertEqual(adapter.search_property_name, 'Search property name')
-
