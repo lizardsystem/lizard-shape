@@ -25,15 +25,47 @@ class IntegrationTest(TestCase):
         c = Client()
         url = reverse('lizard_shape.homepage')
         response = c.get(url)
-        root_category = Category(
-            name='root', slug='root')
-        root_category.save()
         self.assertEqual(response.status_code, 200)
+
+    def test_shape_legend_class(self):
+        """
+        How to add shape legend class. This is de default legend type.
+        """
+        s = Shape.objects.all()[0]  # Just take first shape
+        s.template.shapelegendclass_set.create(
+            descriptor='_test legend',
+            value_field='test_field')
+
+    # def test_shape_legend(self):
+    #     """
+    #     How to add shape legend.
+    #     """
+    #     s = Shape.objects.all()[0]  # Just take first shape
+    #     s.template.shapelegend_set.create(
+    #         descriptor='_test legend',
+    #         default_color='ffffff',
+    #         min_color='ffffff',
+    #         max_color='ffffff',
+    #         too_low_color='ffffff',
+    #         too_high_color='ffffff',
+    #         value_field='test_field')
+
+    def test_shape_legend_point(self):
+        """
+        How to add shape legend point.
+        """
+        s = Shape.objects.all()[0]  # Just take first shape
+        s.template.shapelegendpoint_set.create(
+            descriptor='_test legend',
+            default_color='ffffff',
+            min_color='ffffff',
+            max_color='ffffff',
+            too_low_color='ffffff',
+            too_high_color='ffffff',
+            value_field='test_field')
 
 
 class ModelsTest(TestCase):
-    fixtures = ['lizard_shape_test']
-
     def test_category(self):
         """Adding parents and childs.
         """
@@ -58,43 +90,6 @@ class ModelsTest(TestCase):
         second_root_category = Category(
             name='root', slug='root')
         self.assertRaises(IntegrityError, second_root_category.save)
-
-    def test_shape_legend(self):
-        """
-        How to add shape legend class. This is de default legend type.
-        """
-        s = Shape.objects.all()[0]  # Just take first shape
-        s.template.shapelegendclass_set.create(
-            descriptor='test legend',
-            value_field='test_field')
-
-    def test_shape_legend(self):
-        """
-        How to add shape legend.
-        """
-        s = Shape.objects.all()[0]  # Just take first shape
-        s.template.shapelegend_set.create(
-            descriptor='test legend',
-            default_color='ffffff',
-            min_color='ffffff',
-            max_color='ffffff',
-            too_low_color='ffffff',
-            too_high_color='ffffff',
-            value_field='test_field')
-
-    def test_shape_legend_point(self):
-        """
-        How to add shape legend point.
-        """
-        s = Shape.objects.all()[0]  # Just take first shape
-        s.template.shapelegendpoint_set.create(
-            descriptor='test legend',
-            default_color='ffffff',
-            min_color='ffffff',
-            max_color='ffffff',
-            too_low_color='ffffff',
-            too_high_color='ffffff',
-            value_field='test_field')
 
 
 class ModelShapeTest(TestCase):
@@ -221,17 +216,17 @@ class AdapterShapefileTestSuite(TestCase):
     """
     fixtures = ['lizard_shape_test', ]
 
-    def test_initialization1(self):
-        """Init using shape_id - the shapefile is in
-        var/media/lizard_shape/shapes/..."""
-        mock_workspace = None
-        layer_arguments = {
-            'layer_name': 'Waterlichamen',
-            'shape_id': 1}
-        ws_adapter = lizard_shape.layers.AdapterShapefile(
-            mock_workspace, layer_arguments=layer_arguments)
-        layers, styles = ws_adapter.layer()
-        # TODO: test output.
+    # def test_initialization1(self):
+    #     """Init using shape_id - the shapefile is in
+    #     var/media/lizard_shape/shapes/..."""
+    #     mock_workspace = None
+    #     layer_arguments = {
+    #         'layer_name': 'Waterlichamen',
+    #         'shape_id': 1}
+    #     ws_adapter = lizard_shape.layers.AdapterShapefile(
+    #         mock_workspace, layer_arguments=layer_arguments)
+    #     layers, styles = ws_adapter.layer()
+    #     # TODO: test output.
 
     def test_initialization2(self):
         """Init using resource_module and resource_name"""
