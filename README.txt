@@ -30,7 +30,8 @@ Usage
 - Add lizard_shape to your buildout.cfg.
 
 - Add lizard_shape and lizard_map to the INSTALLED_APPS in your
-  settings.
+  settings. Place it BELOW lizard_map (the order of south migrations
+  is important).
 
 - Add app in your urls.py, i.e. (r'^shape/', include('lizard_shape.urls')).
 
