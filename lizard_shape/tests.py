@@ -25,10 +25,14 @@ class IntegrationTest(TestCase):
         c = Client()
         url = reverse('lizard_shape.homepage')
         response = c.get(url)
+        root_category = Category(
+            name='root', slug='root')
+        root_category.save()
         self.assertEqual(response.status_code, 200)
 
 
 class ModelsTest(TestCase):
+    fixtures = ['lizard_shape_test']
 
     def test_category(self):
         """Adding parents and childs.
@@ -54,6 +58,43 @@ class ModelsTest(TestCase):
         second_root_category = Category(
             name='root', slug='root')
         self.assertRaises(IntegrityError, second_root_category.save)
+
+    def test_shape_legend(self):
+        """
+        How to add shape legend class. This is de default legend type.
+        """
+        s = Shape.objects.all()[0]  # Just take first shape
+        s.template.shapelegendclass_set.create(
+            descriptor='test legend',
+            value_field='test_field')
+
+    def test_shape_legend(self):
+        """
+        How to add shape legend.
+        """
+        s = Shape.objects.all()[0]  # Just take first shape
+        s.template.shapelegend_set.create(
+            descriptor='test legend',
+            default_color='ffffff',
+            min_color='ffffff',
+            max_color='ffffff',
+            too_low_color='ffffff',
+            too_high_color='ffffff',
+            value_field='test_field')
+
+    def test_shape_legend_point(self):
+        """
+        How to add shape legend point.
+        """
+        s = Shape.objects.all()[0]  # Just take first shape
+        s.template.shapelegendpoint_set.create(
+            descriptor='test legend',
+            default_color='ffffff',
+            min_color='ffffff',
+            max_color='ffffff',
+            too_low_color='ffffff',
+            too_high_color='ffffff',
+            value_field='test_field')
 
 
 class ModelShapeTest(TestCase):
