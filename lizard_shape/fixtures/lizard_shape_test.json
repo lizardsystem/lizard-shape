@@ -1,59 +1,90 @@
 [
   {
-    "pk": 1,
-    "model": "lizard_shape.shape",
+    "pk": 1, 
+    "model": "lizard_shape.shape", 
     "fields": {
-      "his": null,
-      "shp_file": "lizard_shape/shapes/Kansen oevers.shp",
-      "description": "",
-      "prj_file": "lizard_shape/shapes/Kansen oevers.prj",
-      "dbf_file": "lizard_shape/shapes/Kansen oevers.dbf",
-      "template": 1,
-      "shx_file": "lizard_shape/shapes/Kansen oevers.shx",
-      "slug": "oevers",
-      "his_parameter": "",
+      "his": null, 
+      "shp_file": "lizard_shape/shapes/Kansen Oevers.shp", 
+      "description": "", 
+      "prj_file": "lizard_shape/shapes/Kansen Oevers.prj", 
+      "dbf_file": "lizard_shape/shapes/Kansen Oevers.dbf", 
+      "template": 1, 
+      "shx_file": "lizard_shape/shapes/Kansen Oevers.shx", 
+      "slug": "oevers", 
+      "his_parameter": "", 
       "name": "Oevers"
     }
-  },
+  }, 
   {
-    "pk": 1,
-    "model": "lizard_shape.shapetemplate",
+    "pk": 1, 
+    "model": "lizard_shape.shapetemplate", 
     "fields": {
-      "name_field": "CODE",
-      "name": "Oevers",
+      "name_field": "CODE", 
+      "name": "Oevers", 
       "id_field": "CODE"
     }
-  },
+  }, 
   {
-    "pk": 1,
-    "model": "lizard_shape.shapefield",
+    "pk": 1, 
+    "model": "lizard_shape.shapefield", 
     "fields": {
-      "field": "CODE",
-      "name": "Code",
+      "field": "CODE", 
+      "index": 1000, 
+      "name": "Code", 
+      "shape_template": 1, 
+      "field_type": 1
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "lizard_shape.category", 
+    "fields": {
+      "shapes": [
+        1
+      ], 
+      "name": "root", 
+      "parent": null, 
+      "slug": "root"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "lizard_shape.shapelegend", 
+    "fields": {
+      "value_field": "test_field", 
       "shape_template": 1
     }
-  },
+  }, 
   {
-    "pk": 1,
-    "model": "lizard_shape.shapelegendclass",
+    "pk": 2, 
+    "model": "lizard_shape.shapelegendpoint", 
     "fields": {
-      "descriptor": "categorie",
-      "shape_template": 1,
+      "value_field": "test_field", 
+      "shape_template": 1
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "lizard_shape.shapelegendclass", 
+    "fields": {
+      "descriptor": "categorie", 
+      "shape_template": 1, 
       "value_field": "CODE_CAT"
     }
-  },
+  }, 
   {
-    "pk": 1,
-    "model": "lizard_shape.shapelegendsingleclass",
+    "pk": 1, 
+    "model": "lizard_shape.shapelegendsingleclass", 
     "fields": {
-      "shape_legend_class": 1,
-      "is_exact": true,
-      "color": "0000ff",
-      "max_value": "",
-      "min_value": "PRIMAIR",
-      "mask": "",
-      "color_inside": "",
-      "icon": "",
+      "shape_legend_class": 1, 
+      "is_exact": true, 
+      "color": "0000ff", 
+      "max_value": "", 
+      "min_value": "PRIMAIR", 
+      "mask": "", 
+      "label": null, 
+      "color_inside": "", 
+      "icon": "", 
       "size": 2.0
     }
   }
