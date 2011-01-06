@@ -16,6 +16,7 @@ from lizard_shape.layers import LEGEND_TYPE_SHAPELEGENDCLASS
 from lizard_shape.models import Category
 from lizard_shape.models import Shape
 from lizard_shape.models import ShapeLegend
+from lizard_shape.models import ShapeLegendClass
 from lizard_shape.models import ShapeLegendPoint
 from lizard_shape.models import ShapeTemplate
 from lizard_shape.models import ShapeNameError
@@ -176,6 +177,13 @@ class ModelShapeTest(TestCase):
             value_field='mock_value_field')
         shape_legend_point.save()  # MUST use a saved shape_legend.
         shape_legend_point.adapter_layer_json(self.shape)
+
+    def test_shapelegendclass_mapnik(self):
+        """
+        Test mapnik output of shapelegendclass
+        """
+        slc = ShapeLegendClass.objects.all()[0]
+        slc.mapnik_style()
 
 
 class AdminTest(TestCase):
