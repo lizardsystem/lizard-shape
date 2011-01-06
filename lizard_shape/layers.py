@@ -12,6 +12,7 @@ from django.utils import simplejson as json
 
 from lizard_map import coordinates
 from lizard_map.adapter import Graph
+from lizard_map.coordinates import detect_prj
 from lizard_map.utility import float_to_string
 from lizard_map.workspace import WorkspaceItemAdapter
 from lizard_shape.models import Shape
@@ -89,8 +90,10 @@ class AdapterShapefile(WorkspaceItemAdapter):
         self.shape_id = layer_arguments.get('shape_id', None)
 
         self.shape = None
+        self.prj = None  # Projection from .prj file
         if self.shape_id is not None:
             self.shape = Shape.objects.get(pk=self.shape_id)
+            self.prj = self.shape.prj_file.file.read()
 
         if layer_filename is not None:
             self.layer_filename = str(layer_filename)
@@ -196,7 +199,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
         """
         layers = []
         styles = {}
-        layer = mapnik.Layer(self.layer_name, coordinates.RD)
+        layer = mapnik.Layer(self.layer_name, detect_prj(self.prj))
         # TODO: ^^^ translation!
 
         layer.datasource = mapnik.Shapefile(

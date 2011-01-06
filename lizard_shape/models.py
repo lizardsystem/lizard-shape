@@ -310,12 +310,14 @@ class ShapeLegendClass(models.Model):
                     mapnik.Color('#' + c.color_inside))
                 area_looks.fill_opacity = 0.5
                 layout_rule.symbols.append(area_looks)
+                logger.debug('adding polygon symbolizer')
             if c.color:
                 line_looks = mapnik.LineSymbolizer(
                     mapnik.Color('#' + c.color), c.size)
                 layout_rule.symbols.append(line_looks)
+                logger.debug('adding line symbolizer')
             mapnik_filter = None
-            if c.is_exact or c.min_value == c.max_value:
+            if c.is_exact or c.min_value and c.min_value == c.max_value:
                 # Check if c.min_value is parsable as float. Yes:
                 # compare like float.
                 try:
