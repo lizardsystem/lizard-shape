@@ -315,8 +315,16 @@ class ShapeLegendClass(models.Model):
                     mapnik.Color('#' + c.color), c.size)
                 layout_rule.symbols.append(line_looks)
             mapnik_filter = None
-            if c.is_exact:
-                mapnik_filter = str("[%s] = '%s'" % (value_field, c.min_value))
+            if c.is_exact or c.min_value == c.max_value:
+                # Check if c.min_value is parsable as float. Yes:
+                # compare like float.
+                try:
+                    float(c.min_value)
+                    mapnik_filter = str("[%s] = %s" % (
+                            value_field, c.min_value))
+                except ValueError:
+                    mapnik_filter = str("[%s] = '%s'" % (
+                            value_field, c.min_value))
             else:
                 if c.min_value and c.max_value:
                     mapnik_filter = str("[%s] >= %s and [%s] < %s"
