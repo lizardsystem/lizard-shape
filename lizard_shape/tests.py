@@ -1,5 +1,7 @@
 # (c) Nelen & Schuurmans.  GPL licensed, see LICENSE.txt.
+import datetime
 
+from django.core.files.base import ContentFile
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.forms import ValidationError
@@ -10,6 +12,7 @@ import pkg_resources
 import lizard_shape.layers
 from lizard_shape.admin import check_extension_or_error
 from lizard_shape.layers import AdapterShapefile
+from lizard_shape.layers import LEGEND_TYPE_SHAPELEGENDCLASS
 from lizard_shape.models import Category
 from lizard_shape.models import Shape
 from lizard_shape.models import ShapeLegend
@@ -216,26 +219,59 @@ class AdapterShapefileTestSuite(TestCase):
     """
     fixtures = ['lizard_shape_test', ]
 
-    # def test_initialization1(self):
-    #     """Init using shape_id - the shapefile is in
-    #     var/media/lizard_shape/shapes/..."""
-    #     mock_workspace = None
-    #     layer_arguments = {
-    #         'layer_name': 'Waterlichamen',
-    #         'shape_id': 1}
-    #     ws_adapter = lizard_shape.layers.AdapterShapefile(
-    #         mock_workspace, layer_arguments=layer_arguments)
-    #     layers, styles = ws_adapter.layer()
-    #     # TODO: test output.
+    def setUp(self):
+        self.resource_module = 'lizard_map'
+        self.resource_name = 'test_shapefiles/KRWwaterlichamen_merge'
+        self.layer_filename = pkg_resources.resource_filename(
+            self.resource_module, self.resource_name + '.shp')
+        self.noext = pkg_resources.resource_filename(
+            self.resource_module, self.resource_name)
+
+        # Upload files for shape with id=1 so that it points to a
+        # valid shapefile
+        self.shape = Shape.objects.get(pk=1)
+
+        content = ContentFile(open(self.noext + '.shp').read())
+        self.shape.shp_file.save(self.noext + '.shp', content, save=False)
+        content = ContentFile(open(self.noext + '.dbf').read())
+        self.shape.dbf_file.save(self.noext + '.dbf', content, save=False)
+        content = ContentFile(open(self.noext + '.shx').read())
+        self.shape.shx_file.save(self.noext + '.shx', content, save=False)
+        content = ContentFile(open(self.noext + '.prj').read())
+        self.shape.prj_file.save(self.noext + '.prj', content, save=False)
+
+        self.shape.save()
+
+        # Now make the adapter.
+        mock_workspace = None
+        layer_arguments = {
+            'layer_name': 'Waterlichamen',
+            'shape_id': 1,
+            'search_property_name': 'OWANAAM',
+            'search_property_id': 'OWAIDENT',
+            'value_field': 'OWANAAM',
+            'legend_id': 1,
+            'legend_type': LEGEND_TYPE_SHAPELEGENDCLASS}
+        self.adapter = lizard_shape.layers.AdapterShapefile(
+            mock_workspace, layer_arguments=layer_arguments)
+
+    def tearDown(self):
+        # Ensures deletion of uploaded files.
+        self.shape.delete()
+
+    def test_initialization1(self):
+        """Init using shape_id - the shapefile is in
+        var/media/lizard_shape/shapes/..."""
+        layers, styles = self.adapter.layer()
 
     def test_initialization2(self):
         """Init using resource_module and resource_name"""
         mock_workspace = None
         layer_arguments = {
             'layer_name': 'Waterlichamen',
-            'resource_module': 'lizard_map',
-            'resource_name': 'test_shapefiles/KRWwaterlichamen_merge.shp',
-            'search_property_name': 'WGBNAAM'}
+            'resource_module': self.resource_module,
+            'resource_name': self.resource_name + '.shp',
+            'search_property_name': 'OWANAAM'}
         ws_adapter = lizard_shape.layers.AdapterShapefile(
             mock_workspace, layer_arguments=layer_arguments)
         layers, styles = ws_adapter.layer()
@@ -244,14 +280,10 @@ class AdapterShapefileTestSuite(TestCase):
     def test_initialization3(self):
         """Init using layer_filename"""
         mock_workspace = None
-        resource_module = 'lizard_map'
-        resource_name = 'test_shapefiles/KRWwaterlichamen_merge.shp'
-        layer_filename = pkg_resources.resource_filename(
-            resource_module, resource_name)
         layer_arguments = {
             'layer_name': 'Waterlichamen',
-            'layer_filename': layer_filename,
-            'search_property_name': 'WGBNAAM'}
+            'layer_filename': self.layer_filename,
+            'search_property_name': 'OWANAAM'}
         ws_adapter = lizard_shape.layers.AdapterShapefile(
             mock_workspace, layer_arguments=layer_arguments)
         layers, styles = ws_adapter.layer()
@@ -276,3 +308,41 @@ class AdapterShapefileTestSuite(TestCase):
         self.assertEqual(adapter.resource_module, 'lizard_map')
         self.assertEqual(adapter.resource_name, 'Resource name')
         self.assertEqual(adapter.search_property_name, 'Search property name')
+
+    def test_legend(self):
+        result = self.adapter.legend()
+        self.assertEquals(len(result), 1)
+
+    def test_search(self):
+        """
+        Searches on coordinate. On these coordinates there should only
+        be one result: Kortenhoefse plasen.
+        """
+        result = self.adapter.search(567427.0, 6841286.0, 2000.0)
+        self.assertEquals(result[0]['identifier']['id'], 'NL11_6_4')
+
+    def test_symbol_url(self):
+        url = self.adapter.symbol_url()
+        self.assertEquals(
+            url,
+            '/media/generated_icons/empty_empty_ffffff_0x0_r000_s0.png')
+
+    def test_location(self):
+        result = self.adapter.location('NL11_6_4')
+        self.assertEquals(result['identifier']['id'], 'NL11_6_4')
+
+    def test_html(self):
+        """Tests html output"""
+
+        # Does it crash?
+        self.adapter.html(identifiers=[{'id': 'NL11_6_4'}])
+
+    def test_image(self):
+        """
+        Tests if image will be generated.
+        """
+        # Only works if his file is present. Otherwise you get an
+        # empty graph.
+        start_date = datetime.date(2009, 1, 1)
+        end_date = datetime.date(2010, 1, 1)
+        self.adapter.image([{'id': 'NL11_6_4'}], start_date, end_date)

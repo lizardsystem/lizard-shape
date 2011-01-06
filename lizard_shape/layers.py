@@ -295,7 +295,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
                             # valid field in the shapefile dbf.
                             logger.error(
                                 ('Search: The field "%s" cannot be found in '
-                                 'shapefile "%s". Check value_field in your '
+                                 'shapefile "%s". Check displayfields in your '
                                  'legend settings. Options are: %s') %
                                 (self.display_fields[0]['field'],
                                  self.layer_name,
