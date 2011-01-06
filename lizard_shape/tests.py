@@ -319,7 +319,7 @@ class AdapterShapefileTestSuite(TestCase):
 
     def test_legend(self):
         result = self.adapter.legend()
-        self.assertEquals(len(result), 1)
+        self.assertEquals(len(result), 2)
 
     def test_search(self):
         """
