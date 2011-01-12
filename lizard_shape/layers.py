@@ -1,3 +1,5 @@
+from pyproj import Proj
+from pyproj import transform
 from shapely.geometry import Point
 from shapely.wkt import loads
 import datetime
@@ -13,6 +15,7 @@ from django.utils import simplejson as json
 from lizard_map import coordinates
 from lizard_map.adapter import Graph
 from lizard_map.coordinates import detect_prj
+from lizard_map.coordinates import google_projection
 from lizard_map.utility import float_to_string
 from lizard_map.workspace import WorkspaceItemAdapter
 from lizard_shape.models import Shape
@@ -29,7 +32,8 @@ LEGEND_TYPE_SHAPELEGENDPOINT = 'ShapeLegendPoint'
 
 
 class AdapterShapefile(WorkspaceItemAdapter):
-    """Render a WorkspaceItem using a shape file.
+    """Render a WorkspaceItem using a shape file. Registered as
+    'adapter_shapefile'
 
     Instance variables:
     * layer_name -- name of the WorkspaceItem that is rendered
@@ -222,6 +226,52 @@ class AdapterShapefile(WorkspaceItemAdapter):
         layers = [layer]
         return layers, styles
 
+    def extent(self, identifiers=None):
+        layer = mapnik.Layer(self.layer_name, detect_prj(self.prj))
+
+        layer.datasource = mapnik.Shapefile(
+            file=self.layer_filename)
+
+        ds = osgeo.ogr.Open(self.layer_filename)
+        lyr = ds.GetLayer()
+        lyr.ResetReading()
+        feat = lyr.GetNextFeature()
+
+        print 'asdf'
+
+        north = None
+        south = None
+        east = None
+        west = None
+        while feat is not None:
+            geom = feat.GetGeometryRef()
+            if geom:
+                item = loads(geom.ExportToWkt())
+                print item
+                centroid = item.centroid  # For polygons
+                x = centroid.x
+                y = centroid.y
+                if x > east or east is None:
+                    east = x
+                if x < west or west is None:
+                    west = x
+                if y < south or south is None:
+                    south = y
+                if y > north or north is None:
+                    north = y
+            feat = lyr.GetNextFeature()
+
+        west_transformed, north_transformed = transform(
+            Proj(detect_prj(self.prj)), google_projection, west, north)
+        east_transformed, south_transformed = transform(
+            Proj(detect_prj(self.prj)), google_projection, east, south)
+
+        return {
+            'north': north_transformed,
+            'west': west_transformed,
+            'south': south_transformed,
+            'east': east_transformed}
+
     def search(self, x, y, radius=None):
         """
         Search area, line or point.
@@ -230,8 +280,6 @@ class AdapterShapefile(WorkspaceItemAdapter):
         search_property_name are valid columns in your shapefile.
 
         x,y are google coordinates
-
-        !!!assumes the shapefile has RD projection!
 
         Note: due to mapnik #503 (http://trac.mapnik.org/ticket/503)
         the search does not work for lines and points. So the
@@ -250,16 +298,17 @@ class AdapterShapefile(WorkspaceItemAdapter):
             logger.debug("Adjusting radius...")
             radius = radius * 0.2
 
-        rd_x, rd_y = coordinates.google_to_rd(x, y)
-        query_point = Point(rd_x, rd_y)
+        transformed_x, transformed_y = transform(
+            google_projection, Proj(detect_prj(self.prj)), x, y)
+        query_point = Point(transformed_x, transformed_y)
         ds = osgeo.ogr.Open(self.layer_filename)
         lyr = ds.GetLayer()
         if radius is not None:
             lyr.SetSpatialFilterRect(
-                rd_x - radius,
-                rd_y - radius,
-                rd_x + radius,
-                rd_y + radius)
+                transformed_x - radius,
+                transformed_y - radius,
+                transformed_x + radius,
+                transformed_y + radius)
         lyr.ResetReading()
         feat = lyr.GetNextFeature()
 
@@ -315,7 +364,9 @@ class AdapterShapefile(WorkspaceItemAdapter):
                     try:
                         result.update(
                             {'google_coords':
-                                 coordinates.rd_to_google(*item.coords[0])})
+                                 transform(Proj(detect_prj(self.prj)),
+                                           google_projection,
+                                           *item.coords[0])})
                     except NotImplementedError:
                         logger.warning("Got a NotImplementedError in search. "
                                        "Ignoring coordinates.")

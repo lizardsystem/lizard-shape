@@ -228,6 +228,16 @@ class AdapterShapefileTestSuite(TestCase):
     fixtures = ['lizard_shape_test', ]
 
     def setUp(self):
+        """Set up the following variables:
+
+        - resource_module
+        - resource_name
+        - layer_filename
+        - noext (=layer_filename without extension)
+        - shape
+        - adapter
+        """
+
         self.resource_module = 'lizard_map'
         self.resource_name = 'test_shapefiles/KRWwaterlichamen_merge'
         self.layer_filename = pkg_resources.resource_filename(
@@ -354,3 +364,13 @@ class AdapterShapefileTestSuite(TestCase):
         start_date = datetime.date(2009, 1, 1)
         end_date = datetime.date(2010, 1, 1)
         self.adapter.image([{'id': 'NL11_6_4'}], start_date, end_date)
+
+    def test_extent(self):
+        """
+        Tests extent.
+        """
+        result = self.adapter.extent()
+        self.assertTrue('north' in result)
+        self.assertTrue('south' in result)
+        self.assertTrue('east' in result)
+        self.assertTrue('west' in result)

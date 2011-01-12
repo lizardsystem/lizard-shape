@@ -5,7 +5,9 @@ Changelog of lizard-shape
 1.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Added extent function to layer.
+
+- Added search support for shapefiles with WGS84 projection.
 
 
 1.3 (2011-01-11)
