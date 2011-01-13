@@ -237,8 +237,6 @@ class AdapterShapefile(WorkspaceItemAdapter):
         lyr.ResetReading()
         feat = lyr.GetNextFeature()
 
-        print 'asdf'
-
         north = None
         south = None
         east = None
@@ -247,7 +245,6 @@ class AdapterShapefile(WorkspaceItemAdapter):
             geom = feat.GetGeometryRef()
             if geom:
                 item = loads(geom.ExportToWkt())
-                print item
                 centroid = item.centroid  # For polygons
                 x = centroid.x
                 y = centroid.y
