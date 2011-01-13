@@ -17,6 +17,10 @@
          data-adapter-class="adapter_shapefile"
          data-name="{{ child.name }}">
     {{ child.name }}
+      {% if child.description %}{# show info button if description available #}
+      <span class="ss_sprite ss_information sidebarbox-action-icon legend-tooltip">&nbsp;</span>
+      <div class="tooltip">{% autoescape off %}{{ child.description }}{% endautoescape %}</div>
+      {% endif %}
     </div>
   {% endifequal %}
 </li>

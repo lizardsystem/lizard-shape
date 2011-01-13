@@ -37,6 +37,7 @@ def homepage(request,
                     children.append(
                         {'name': '%s - %s' % (
                                 str(shape), str(shapelegend)),
+                         'description': shape.description,
                          'type': 'shape',
                          'adapter_layer_json':
                          shapelegend.adapter_layer_json(shape)})
@@ -46,6 +47,7 @@ def homepage(request,
                     children.append(
                         {'name': '%s - %s' % (
                                 str(shape), str(shapelegendpoint)),
+                         'description': shape.description,
                          'type': 'shape',
                          'adapter_layer_json':
                          shapelegendpoint.adapter_layer_json(shape)})
@@ -55,6 +57,7 @@ def homepage(request,
                     children.append(
                         {'name': '%s - %s' % (
                                 str(shape), str(shapelegendclass)),
+                         'description': shape.description,
                          'type': 'shape',
                          'adapter_layer_json':
                          shapelegendclass.adapter_layer_json(shape)})

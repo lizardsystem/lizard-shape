@@ -5,6 +5,8 @@ Changelog of lizard-shape
 1.4 (unreleased)
 ----------------
 
+- Added info button to shape homepage when shape has a description.
+
 - Added datetime of hisfiles to popup.
 
 - Added unit to graphs.
