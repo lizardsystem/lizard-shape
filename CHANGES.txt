@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.4 (unreleased)
+1.4 (2011-01-13)
 ----------------
 
 - Added icon and color to ShapeLegendClass. The icons will display in
