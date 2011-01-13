@@ -392,12 +392,15 @@ class AdapterShapefile(WorkspaceItemAdapter):
         """
         Returns symbol.
         """
-        if (icon_style is None and
-            self.legend_id is not None and
-            self.legend_type == LEGEND_TYPE_SHAPELEGENDPOINT):
-
-            legend_object = ShapeLegendPoint.objects.get(pk=self.legend_id)
-            icon_style = legend_object.icon_style()
+        if icon_style is None and self.legend_id is not None:
+            if self.legend_type == LEGEND_TYPE_SHAPELEGENDPOINT:
+                legend_object = ShapeLegendPoint.objects.get(
+                    pk=self.legend_id)
+                icon_style = legend_object.icon_style()
+            elif self.legend_type == LEGEND_TYPE_SHAPELEGENDCLASS:
+                legend_object = ShapeLegendClass.objects.get(
+                    pk=self.legend_id)
+                icon_style = legend_object.icon_style()
 
         return super(AdapterShapefile, self).symbol_url(
             identifier=identifier,

@@ -356,6 +356,21 @@ class ShapeLegendClass(models.Model):
 
         return style
 
+    def icon_style(self):
+        icon = 'polygon.png'
+        color = (1.0, 1.0, 1.0, 1.0)
+        try:
+            singleclass = self.shapelegendsingleclass_set.all()[0]
+            if singleclass.color:
+                color = singleclass.color.to_tuple()
+            if singleclass.icon:
+                icon = singleclass.icon
+        except IndexError:
+            # Do nothing, everything has its default value.
+            pass
+        return {'icon': icon,
+                'mask': ('empty_mask.png', ),
+                'color': color}
 
 class ShapeLegendSingleClass(models.Model):
     """

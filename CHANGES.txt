@@ -5,6 +5,9 @@ Changelog of lizard-shape
 1.4 (unreleased)
 ----------------
 
+- Added icon and color to ShapeLegendClass. The icons will display in
+  the workspace.
+
 - Added info button to shape homepage when shape has a description.
 
 - Added datetime of hisfiles to popup.
