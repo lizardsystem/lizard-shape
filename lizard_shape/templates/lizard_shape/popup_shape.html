@@ -10,6 +10,9 @@
   </a>
 </div>
 {% endif %}
+{% if his_file_dtstart %}
+Data beschikbaar: {{ his_file_dtstart|date:"Y-m-d" }}
+{% endif %}
 {% for display_object in display_group %}
 <h3>Attributen - {{ display_object.name }}</h3>
 <table>

@@ -88,6 +88,14 @@ class ShapeFieldInline(admin.TabularInline):
     model = ShapeField
 
 
+def category_ancestors(obj):
+    return ', '.join([a.name for a in obj.get_ancestors()])
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('__unicode__', category_ancestors, )
+
+
 class ShapeAdmin(admin.ModelAdmin):
     form = ShapeForm
     list_display = ('name', 'template', )
@@ -113,7 +121,7 @@ class ShapeLegendClassAdmin(admin.ModelAdmin):
     inlines = [ShapeLegendSingleClassInline, ]
 
 
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(His)
 admin.site.register(Shape, ShapeAdmin)
 admin.site.register(ShapeField)

@@ -506,6 +506,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
         # Images for timeseries
 
         img_url = None
+        his_file_dtstart = None
         if self.shape_id is not None:
             shape = Shape.objects.get(pk=self.shape_id)
             if shape.his:
@@ -518,13 +519,15 @@ class AdapterShapefile(WorkspaceItemAdapter):
                     for identifier in identifiers]
                 img_url = img_url + '?' + '&'.join(
                     ['identifier=%s' % i for i in identifiers_escaped])
+                his_file_dtstart = shape.his.hisfile().dtstart
 
         return render_to_string(
             'lizard_shape/popup_shape.html',
             {'display_group': display_group,
              'add_snippet': add_snippet,
              'symbol_url': self.symbol_url(),
-             'img_url': img_url})
+             'img_url': img_url,
+             'his_file_dtstart': his_file_dtstart})
 
     def image(self, identifiers, start_date, end_date,
               width=380.0, height=250.0, layout_extra=None):
@@ -555,6 +558,10 @@ class AdapterShapefile(WorkspaceItemAdapter):
         parameters = hf.parameters()
         locations = hf.locations()
         parameter = shape.his_parameter
+
+        # We want the unit. The parameter often has the unit in it and
+        # it is the closest we can get to unit.
+        graph.axes.set_ylabel(parameter)
 
         # Convert dates to datetimes
         start_datetime = datetime.datetime.combine(start_date, datetime.time())

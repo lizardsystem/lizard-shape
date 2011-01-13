@@ -5,6 +5,12 @@ Changelog of lizard-shape
 1.4 (unreleased)
 ----------------
 
+- Added datetime of hisfiles to popup.
+
+- Added unit to graphs.
+
+- Added category ancestors to category admin page.
+
 - Added extent function to layer.
 
 - Added search support for shapefiles with WGS84 projection.
