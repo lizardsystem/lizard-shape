@@ -2,10 +2,10 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.5 (unreleased)
-----------------
+1.4.1 (2011-01-13)
+------------------
 
-- Nothing changed yet.
+- Added error check on hisfile.
 
 
 1.4 (2011-01-13)

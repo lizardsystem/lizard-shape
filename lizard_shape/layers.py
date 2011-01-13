@@ -522,7 +522,12 @@ class AdapterShapefile(WorkspaceItemAdapter):
                     for identifier in identifiers]
                 img_url = img_url + '?' + '&'.join(
                     ['identifier=%s' % i for i in identifiers_escaped])
-                his_file_dtstart = shape.his.hisfile().dtstart
+                try:
+                    his_file_dtstart = shape.his.hisfile().dtstart
+                except AttributeError:
+                    # The file probably does not exist
+                    # self.bin = input.read()
+                    pass
 
         return render_to_string(
             'lizard_shape/popup_shape.html',
