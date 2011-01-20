@@ -93,7 +93,8 @@ def category_ancestors(obj):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', category_ancestors, )
+    list_display = ('__unicode__', 'slug', category_ancestors, )
+    filter_horizontal = ('shapes', )
 
 
 class ShapeAdmin(admin.ModelAdmin):

@@ -47,7 +47,7 @@ class Shape(models.Model):
     template = models.ForeignKey('ShapeTemplate')
 
     def __unicode__(self):
-        return '%s' % self.name
+        return '%s (%s)' % (self.name, self.slug)
 
     def save(self, *args, **kwargs):
         """Check if constraints are met before saving model."""

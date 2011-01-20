@@ -32,7 +32,7 @@ def homepage(request,
             for shapelegend in shapelegends:
                 children.append(
                     {'name': '%s - %s' % (
-                            str(shape), str(shapelegend)),
+                            shape.name, str(shapelegend)),
                      'description': shape.description,
                      'type': 'shape',
                      'adapter_layer_json':
@@ -42,7 +42,7 @@ def homepage(request,
             for shapelegendpoint in shapelegendpoints:
                 children.append(
                     {'name': '%s - %s' % (
-                            str(shape), str(shapelegendpoint)),
+                            shape.name, str(shapelegendpoint)),
                      'description': shape.description,
                      'type': 'shape',
                      'adapter_layer_json':
@@ -52,7 +52,7 @@ def homepage(request,
             for shapelegendclass in shapelegendclasses:
                 children.append(
                     {'name': '%s - %s' % (
-                            str(shape), str(shapelegendclass)),
+                            shape.name, str(shapelegendclass)),
                      'description': shape.description,
                      'type': 'shape',
                      'adapter_layer_json':
@@ -70,7 +70,6 @@ def homepage(request,
             children = get_tree(parent=category)
             # Find shapes.
             shapes = category.shapes.all()
-            children += shape_treeitems(shapes)
             row = {'name': category.name,
                    'type': 'category',
                    'children': children}

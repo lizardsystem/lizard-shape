@@ -5,6 +5,8 @@ Changelog of lizard-shape
 1.4.2 (unreleased)
 ------------------
 
+- Added fields, filters to admin interface.
+
 - Added option to go to pages with user given root.
 
 
