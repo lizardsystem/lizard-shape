@@ -46,6 +46,9 @@ class Shape(models.Model):
 
     template = models.ForeignKey('ShapeTemplate')
 
+    class Meta:
+        ordering = ('name', )
+
     def __unicode__(self):
         return '%s (%s)' % (self.name, self.slug)
 

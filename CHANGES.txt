@@ -5,6 +5,8 @@ Changelog of lizard-shape
 1.4.2 (unreleased)
 ------------------
 
+- Added sorting to models.
+
 - Added unique constraint to shape template name.
 
 - Added fields, filters to admin interface. Improved maintainability
