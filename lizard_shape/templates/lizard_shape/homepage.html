@@ -6,7 +6,7 @@
 {% block sidebar %}
 <div class="sidebarbox sidebarbox-stretched">
   <h2>
-  Kaartlagen
+  {% firstof parent_category.name 'Kaartlagen' %}
   </h2>
   <ul id="area-pane"
       class="automatic-tree filetree pane">

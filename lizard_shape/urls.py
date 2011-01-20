@@ -11,6 +11,9 @@ urlpatterns = patterns(
     url(r'^$',
      'lizard_shape.views.homepage',
      name='lizard_shape.homepage'),
+    url(r'^category/(?P<root_slug>.*)/$',
+     'lizard_shape.views.homepage',
+     name='lizard_shape.homepage'),
     (r'^map/', include('lizard_map.urls')),
     )
 

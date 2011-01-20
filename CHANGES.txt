@@ -5,7 +5,7 @@ Changelog of lizard-shape
 1.4.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added option to go to pages with user given root.
 
 
 1.4.1 (2011-01-13)
