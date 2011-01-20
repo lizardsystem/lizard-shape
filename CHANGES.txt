@@ -5,9 +5,12 @@ Changelog of lizard-shape
 1.4.2 (unreleased)
 ------------------
 
-- Added fields, filters to admin interface.
+- Added unique constraint to shape template name.
 
-- Added option to go to pages with user given root.
+- Added fields, filters to admin interface. Improved maintainability
+  a little bit, but it still needs improvement.
+
+- Added option to go to pages with user given category root.
 
 
 1.4.1 (2011-01-13)

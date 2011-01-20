@@ -96,13 +96,17 @@ class ShapeTemplate(models.Model):
 
     name = models.CharField(
         max_length=80,
-        help_text='Display name.')
+        help_text='Display name.',
+        unique=True)
     id_field = models.CharField(
         max_length=20, null=True, blank=True,
         help_text='The id field must be filled for searching and his files.')
     name_field = models.CharField(
         max_length=20, null=True, blank=True,
         help_text='The name field must be filled for mouseovers, popups.')
+
+    class Meta:
+        ordering = ('name', )
 
     def __unicode__(self):
         return '%s' % self.name
@@ -159,8 +163,11 @@ class Category(AL_Node):
 
     shapes = models.ManyToManyField('Shape', null=True, blank=True)
 
+    class Meta:
+        ordering = ('name', )
+
     def __unicode__(self):
-        return '%s' % self.name
+        return '%s' % (self.name)
 
 
 class ShapeLegend(Legend):

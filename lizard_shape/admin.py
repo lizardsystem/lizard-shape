@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django import forms
+# from treebeard import admin as treebeard_admin
 
 from lizard_shape.models import Category
 from lizard_shape.models import His
@@ -89,17 +90,32 @@ class ShapeFieldInline(admin.TabularInline):
 
 
 def category_ancestors(obj):
-    return ', '.join([a.name for a in obj.get_ancestors()])
+    return ' -> '.join(['root'] + [a.name for a in obj.get_ancestors()])
+
+
+def category_descendants(obj):
+    return ', '.join([a.name for a in obj.get_descendants()])
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'slug', category_ancestors, )
+# class CategoryAdmin(treebeard_admin.TreeAdmin):
+    # pass
+    list_display = ('__unicode__', 'slug', category_ancestors,
+                    category_descendants)
+    list_filter = ('name', 'parent', 'slug', 'shapes', )
     filter_horizontal = ('shapes', )
+
+
+def shape_related_categories(obj):
+    """obj is a shape object"""
+    return ' / '.join([category_ancestors(c)
+                       for c in obj.category_set.all()])
 
 
 class ShapeAdmin(admin.ModelAdmin):
     form = ShapeForm
-    list_display = ('name', 'template', )
+    list_display = ('name', shape_related_categories, 'template', 'his')
+    list_filter = ('template', )
 
 
 class ShapeTemplateAdmin(admin.ModelAdmin):
