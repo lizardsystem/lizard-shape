@@ -85,6 +85,9 @@ class AdapterShapefile(WorkspaceItemAdapter):
         - layer_filename is defined. It's a link to a absolute
           filename. Not recommended because it allows injections.
 
+        - display_fields (optional): Defines the fields to be
+          displayed. List of dicts with keys name, field, field_type.
+
         """
         super(AdapterShapefile, self).__init__(*args, **kwargs)
 
@@ -344,8 +347,8 @@ class AdapterShapefile(WorkspaceItemAdapter):
                             # valid field in the shapefile dbf.
                             logger.error(
                                 ('Search: The field "%s" cannot be found in '
-                                 'shapefile "%s". Check displayfields in your '
-                                 'legend settings. Options are: %s') %
+                                 'shapefile "%s". Check display_fields. '
+                                 'Options are: %s') %
                                 (self.display_fields[0]['field'],
                                  self.layer_name,
                                  feat_items.keys()))
