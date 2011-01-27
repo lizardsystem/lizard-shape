@@ -2,10 +2,10 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.6 (unreleased)
+1.6 (2011-01-27)
 ----------------
 
-- Nothing changed yet.
+- Removed coords[0] in layers. Previously caused an error with polygons.
 
 
 1.5 (2011-01-20)
