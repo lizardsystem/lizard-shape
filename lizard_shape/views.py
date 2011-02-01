@@ -1,5 +1,6 @@
 # (c) Nelen & Schuurmans.  GPL licensed, see LICENSE.txt.
 
+from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -15,7 +16,8 @@ def homepage(request,
              root_slug=None,
              javascript_click_handler='popup_click_handler',
              javascript_hover_handler='popup_hover_handler',
-             template="lizard_shape/homepage.html"):
+             template="lizard_shape/homepage.html",
+             crumbs_prepend=None):
     """
     Main page for Shape.
     """
@@ -89,6 +91,14 @@ def homepage(request,
     date_range_form = DateRangeForm(
         current_start_end_dates(request, for_form=True))
 
+    if crumbs_prepend is not None:
+        crumbs = crumbs_prepend
+    else:
+        crumbs = [{'name': 'home', 'url': '/'}]
+    crumbs.append({'name': 'kaarten',
+                   'title': 'kaarten',
+                   'url': reverse('lizard_shape.homepage')})
+
     return render_to_response(
         template,
         {'javascript_hover_handler': javascript_hover_handler,
@@ -96,5 +106,6 @@ def homepage(request,
          'date_range_form': date_range_form,
          'workspaces': workspaces,
          'shapes_tree': shapes_tree,
-         'parent_category': parent_category},
+         'parent_category': parent_category,
+         'crumbs': crumbs},
         context_instance=RequestContext(request))

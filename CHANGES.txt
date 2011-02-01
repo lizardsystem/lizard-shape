@@ -5,7 +5,7 @@ Changelog of lizard-shape
 1.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Added option crumbs_prepend (see lizard_ui).
 
 
 1.6 (2011-01-27)
