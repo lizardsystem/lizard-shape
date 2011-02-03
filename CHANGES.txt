@@ -2,10 +2,10 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.8 (unreleased)
+1.8 (2011-02-03)
 ----------------
 
-- Nothing changed yet.
+- Bugfix breadcrumbs.
 
 
 1.7 (2011-02-01)
