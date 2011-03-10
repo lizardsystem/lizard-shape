@@ -2,10 +2,11 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.11 (unreleased)
+1.11 (2011-03-10)
 -----------------
 
-- Nothing changed yet.
+- Changed Category.__unicode__ so that the category pull down menu
+  shows the tree location.
 
 
 1.10 (2011-03-10)

@@ -170,7 +170,10 @@ class Category(AL_Node):
         ordering = ('name', )
 
     def __unicode__(self):
-        return '%s' % (self.name)
+        if self.parent is None:
+            return u'%s' % self.name
+        else:
+            return ' -> '.join([str(self.parent), self.name])
 
 
 class ShapeLegend(Legend):

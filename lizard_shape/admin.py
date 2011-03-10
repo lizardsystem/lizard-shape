@@ -89,10 +89,6 @@ class ShapeFieldInline(admin.TabularInline):
     model = ShapeField
 
 
-def category_ancestors(obj):
-    return ' -> '.join(['root'] + [a.name for a in obj.get_ancestors()])
-
-
 def category_descendants(obj):
     return ', '.join([a.name for a in obj.get_descendants()])
 
@@ -100,16 +96,14 @@ def category_descendants(obj):
 class CategoryAdmin(admin.ModelAdmin):
 # class CategoryAdmin(treebeard_admin.TreeAdmin):
     # pass
-    list_display = ('__unicode__', 'slug', category_ancestors,
-                    category_descendants)
+    list_display = ('__unicode__', 'slug', category_descendants)
     list_filter = ('name', 'parent', 'slug', 'shapes', )
     filter_horizontal = ('shapes', )
 
 
 def shape_related_categories(obj):
     """obj is a shape object"""
-    return ' / '.join([category_ancestors(c)
-                       for c in obj.category_set.all()])
+    return ' / '.join([str(c) for c in obj.category_set.all()])
 
 
 class ShapeAdmin(admin.ModelAdmin):
