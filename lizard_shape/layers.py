@@ -109,6 +109,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
         if self.shape is not None:
             self.prj = self.shape.prj_file.file.read()
 
+        # Fill self.layer_filename
         if layer_filename is not None:
             self.layer_filename = str(layer_filename)
             self.resource_module = None
@@ -126,6 +127,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
                 self.layer_filename = pkg_resources.resource_filename(
                     self.resource_module,
                     self.resource_name)
+
         self.search_property_name = \
             layer_arguments.get('search_property_name', "")
         self.search_property_id = \
