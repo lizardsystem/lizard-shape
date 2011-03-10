@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.10 (unreleased)
+1.10 (2011-03-10)
 -----------------
 
 - Added shape_slug option to adapter constructor.
