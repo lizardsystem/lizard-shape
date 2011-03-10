@@ -64,8 +64,9 @@ class AdapterShapefile(WorkspaceItemAdapter):
     * resource_module -- module that contains the shapefile resource
     * resource name -- name of the shapefile resource
 
-    * shape_id -- required by image function, or it will output an
-      empty graph.
+    * shape_id OR shape_slug -- required by image function, or it will
+      output an empty graph. If both shape_id and shape_slug, then it
+      will take shape_slug.
 
     """
     def __init__(self, *args, **kwargs):
@@ -78,7 +79,9 @@ class AdapterShapefile(WorkspaceItemAdapter):
 
         There are a few possibilities to define your shape:
 
-        - PREFERRED shape_id is defined
+        - PREFERRED shape_slug is defined
+
+        - shape_id is defined.
 
         - resource_module and resource_name are defined.
 
@@ -95,11 +98,15 @@ class AdapterShapefile(WorkspaceItemAdapter):
         self.layer_name = str(layer_arguments['layer_name'])
         layer_filename = layer_arguments.get('layer_filename', None)
         self.shape_id = layer_arguments.get('shape_id', None)
+        self.shape_slug = layer_arguments.get('shape_slug', None)
 
         self.shape = None
         self.prj = None  # Projection from .prj file
         if self.shape_id is not None:
             self.shape = Shape.objects.get(pk=self.shape_id)
+        if self.shape_slug is not None:
+            self.shape = Shape.objects.get(slug=self.shape_slug)
+        if self.shape is not None:
             self.prj = self.shape.prj_file.file.read()
 
         if layer_filename is not None:
@@ -108,7 +115,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
             self.resource_name = None
         else:
             # If layer_filename is not defined, resource_module and
-            # resource_name must be defined OR shape(_id) must be
+            # resource_name must be defined OR shape(_id/_slug) must be
             # defined.
             if self.shape is not None:
                 self.layer_filename = str(self.shape.shp_file.file.name)
