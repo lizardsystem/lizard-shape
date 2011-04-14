@@ -2,10 +2,10 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.12 (unreleased)
+1.12 (2011-04-14)
 -----------------
 
-- Nothing changed yet.
+- Removed header from popup (looks better).
 
 
 1.11 (2011-03-10)

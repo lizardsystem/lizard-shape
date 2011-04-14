@@ -1,7 +1,6 @@
 {% load workspaces %}
 {# header #}
 {% if img_url %}
-<h3>Grafiek</h3>
 <div style="width: 100%; height: 170px;"
      class="img-use-my-size">
   <a href="{{ img_url }}"
@@ -14,10 +13,9 @@
 Data beschikbaar: {{ his_file_dtstart|date:"Y-m-d" }}
 {% endif %}
 {% for display_object in display_group %}
-<h3>Attributen - {{ display_object.name }}</h3>
 <table>
   <tr>
-    <td><img src="{{ symbol_url }}"/>&nbsp;</td>
+    <td><img src="{{ symbol_url }}"/>&nbsp;{{ display_object.name }}</td>
     {% if add_snippet %}
     <td class="sidebarbox-action-icon">
       <a href=""
