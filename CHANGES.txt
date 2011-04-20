@@ -5,7 +5,9 @@ Changelog of lizard-shape
 1.13 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Added dependency on lizard-map >= 1.68 in setup.py (WorkspaceItemError)
+
+- Removed pin on lizard-map 1.36 in buildout.cfg
 
 
 1.12 (2011-04-14)
