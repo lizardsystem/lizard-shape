@@ -9,6 +9,8 @@ Changelog of lizard-shape
 
 - Removed pin on lizard-map 1.36 in buildout.cfg
 
+- Removed pin on lizard-ui 1.24 (version conflict with latest lizard-map)
+
 
 1.12 (2011-04-14)
 -----------------
