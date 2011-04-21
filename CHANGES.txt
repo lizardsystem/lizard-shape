@@ -2,10 +2,11 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.14 (unreleased)
+1.14 (2011-04-21)
 -----------------
 
-- Nothing changed yet.
+- Removed unnecessary workspace_manager and date_range_form stuff. It
+  is also incompatible with map >= 1.71.
 
 
 1.13 (2011-04-20)

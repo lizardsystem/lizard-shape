@@ -5,10 +5,6 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from lizard_map.daterange import DateRangeForm
-from lizard_map.daterange import current_start_end_dates
-from lizard_map.workspace import WorkspaceManager
-
 from lizard_shape.models import Category
 
 
@@ -71,7 +67,7 @@ def homepage(request,
             # Append sub categories.
             children = get_tree(parent=category)
             # Find shapes.
-            shapes = category.shapes.all()
+            # shapes = category.shapes.all()
             row = {'name': category.name,
                    'type': 'category',
                    'children': children}
@@ -86,11 +82,6 @@ def homepage(request,
         parent_category = get_object_or_404(Category, slug=root_slug)
     shapes_tree = get_tree(parent_category)
 
-    workspace_manager = WorkspaceManager(request)
-    workspaces = workspace_manager.load_or_create()
-    date_range_form = DateRangeForm(
-        current_start_end_dates(request, for_form=True))
-
     if crumbs_prepend is not None:
         crumbs = list(crumbs_prepend)
     else:
@@ -103,8 +94,6 @@ def homepage(request,
         template,
         {'javascript_hover_handler': javascript_hover_handler,
          'javascript_click_handler': javascript_click_handler,
-         'date_range_form': date_range_form,
-         'workspaces': workspaces,
          'shapes_tree': shapes_tree,
          'parent_category': parent_category,
          'crumbs': crumbs},
