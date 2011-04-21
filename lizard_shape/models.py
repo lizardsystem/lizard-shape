@@ -385,6 +385,7 @@ class ShapeLegendClass(models.Model):
                 'mask': ('empty_mask.png', ),
                 'color': color}
 
+
 class ShapeLegendSingleClass(models.Model):
     """
     Single entry for ShapeLegendClasses.

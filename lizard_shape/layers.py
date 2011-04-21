@@ -15,8 +15,6 @@ from django.utils import simplejson as json
 from lizard_map.adapter import Graph
 from lizard_map.coordinates import detect_prj
 from lizard_map.coordinates import google_projection
-from lizard_map import coordinates
-from lizard_map.models import WorkspaceItem
 from lizard_map.models import WorkspaceItemError
 from lizard_map.utility import float_to_string
 from lizard_map.workspace import WorkspaceItemAdapter
@@ -108,7 +106,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
             try:
                 self.shape = Shape.objects.get(pk=self.shape_id)
             except Shape.DoesNotExist:
-                raise WorkspaceItemError # Trac #2470
+                raise WorkspaceItemError  # Trac #2470
         if self.shape_slug is not None:
             self.shape = Shape.objects.get(slug=self.shape_slug)
         if self.shape is not None:
