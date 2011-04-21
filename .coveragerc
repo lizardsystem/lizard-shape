@@ -1,11 +1,15 @@
 [report]
 omit =
+    */migrations/*
+    */test*
+    /Library/*
+    /Users/*/.buildout/eggs/*
     /home/*/.buildout/eggs/*
-    /var/lib/hudson/.buildout/*
     /usr/*
+    /var/lib/hudson/.buildout/*
+    /var/lib/jenkins/.buildout/*
+    eggs/*
     local_checkouts/*
     parts/*
-    eggs/*
-    */test*
 
 ignore_errors = true
