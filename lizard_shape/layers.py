@@ -190,8 +190,14 @@ class AdapterShapefile(WorkspaceItemAdapter):
         if legend is not None:
             for single_class in legend.shapelegendsingleclass_set.all():
                 icon_style = icon_style_template.copy()
-                icon_style.update({
-                        'color': single_class.color.to_tuple()})
+                try:
+                    icon_style.update({
+                            'color': single_class.color.to_tuple()})
+                except TypeError:
+                    # Some users forget setting the color. Don't crash.
+                    # Take color alarming red.
+                    icon_style.update({
+                            'color': (1, 0.5, 0.5, 1)})
                 if single_class.icon:
                     icon_style.update({'icon': single_class.icon})
                 if single_class.mask:

@@ -2,10 +2,10 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.15 (unreleased)
------------------
+1.14.1 (2011-05-02)
+-------------------
 
-- Nothing changed yet.
+- Added error checking when legend class color is not filled in.
 
 
 1.14 (2011-04-21)
