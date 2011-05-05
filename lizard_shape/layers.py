@@ -182,7 +182,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
 
         # LEGEND_TYPE_SHAPELEGENDCLASS
         icon_style_template = {'icon': 'empty.png',
-                               'mask': ('empty_mask.png', ),
+                               'mask': ('empty_mask.png',),
                                'color': (1, 1, 1, 1)}
         legend_result = []
         legend = self._legend_object
@@ -201,7 +201,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
                 if single_class.icon:
                     icon_style.update({'icon': single_class.icon})
                 if single_class.mask:
-                    icon_style.update({'mask': (single_class.mask, )})
+                    icon_style.update({'mask': (single_class.mask,)})
                 img_url = self.symbol_url(icon_style=icon_style)
 
                 if single_class.label:
@@ -314,19 +314,34 @@ class AdapterShapefile(WorkspaceItemAdapter):
         if radius is not None:
             # Manually make radius smaller
             logger.debug("Adjusting radius...")
-            radius = radius * 0.2
+            radius = radius * 0.2  # ???
 
         transformed_x, transformed_y = transform(
             google_projection, Proj(detect_prj(self.prj)), x, y)
         query_point = Point(transformed_x, transformed_y)
+
         ds = osgeo.ogr.Open(self.layer_filename)
         lyr = ds.GetLayer()
+
         if radius is not None:
+
+            # The radius needs to be transformed as well, but how?
+            # A transformed square will no longer be a square!
+            # This needs further attention...
+
+            transformed_x_radius, transformed_y_radius = transform(
+                google_projection, Proj(detect_prj(self.prj)),
+                x + radius, y + radius)
+
+            radius = max(abs(transformed_x - transformed_x_radius),
+                         abs(transformed_y - transformed_y_radius))
+
             lyr.SetSpatialFilterRect(
                 transformed_x - radius,
                 transformed_y - radius,
                 transformed_x + radius,
                 transformed_y + radius)
+
         lyr.ResetReading()
         feat = lyr.GetNextFeature()
 
