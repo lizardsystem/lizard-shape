@@ -7,6 +7,8 @@ Changelog of lizard-shape
 
 - #2551 Removed header "Veld" and "Waarde" from popup.
 
+- #2663 Fixed untransformed radius.
+
 
 1.14.1 (2011-05-02)
 -------------------
