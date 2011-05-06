@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.14.2 (unreleased)
+1.14.2 (2011-05-06)
 -------------------
 
 - #2551 Removed header "Veld" and "Waarde" from popup.
