@@ -6,8 +6,12 @@ from django.db import models
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ("lizard_map", "0001_initial"),
+        )
+
     def forwards(self, orm):
-        
+
         # Adding model 'Shape'
         db.create_table('lizard_shape_shape', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -112,7 +116,7 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
-        
+
         # Deleting model 'Shape'
         db.delete_table('lizard_shape_shape')
 
