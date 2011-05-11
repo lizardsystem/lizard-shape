@@ -2,8 +2,8 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.14.3 (unreleased)
--------------------
+1.15 (2011-05-11)
+-----------------
 
 - Added dependency in migration on lizard-map so that lizard-map's legend
   exists before our migration requires it.
