@@ -96,5 +96,7 @@ def homepage(request,
          'javascript_click_handler': javascript_click_handler,
          'shapes_tree': shapes_tree,
          'parent_category': parent_category,
-         'crumbs': crumbs},
+         'crumbs': crumbs,
+         'transparency_slider': True,
+         },
         context_instance=RequestContext(request))
