@@ -10,8 +10,6 @@ from lizard_shape.models import Category
 
 def homepage(request,
              root_slug=None,
-             javascript_click_handler='popup_click_handler',
-             javascript_hover_handler='popup_hover_handler',
              template="lizard_shape/homepage.html",
              crumbs_prepend=None):
     """
@@ -92,9 +90,7 @@ def homepage(request,
 
     return render_to_response(
         template,
-        {'javascript_hover_handler': javascript_hover_handler,
-         'javascript_click_handler': javascript_click_handler,
-         'shapes_tree': shapes_tree,
+        {'shapes_tree': shapes_tree,
          'parent_category': parent_category,
          'crumbs': crumbs,
          'transparency_slider': True,
