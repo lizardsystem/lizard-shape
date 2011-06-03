@@ -5,7 +5,7 @@ Changelog of lizard-shape
 1.16 (unreleased)
 -----------------
 
-- Set transparency slide in lizard-shape.
+- Enabled transparency slide in lizard-shape.
 
 - Depending on lizard-map >= 1.80 now as that does away with the javascript
   map hover handler. More performance!
