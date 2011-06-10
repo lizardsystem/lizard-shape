@@ -111,6 +111,9 @@ class AdapterShapefile(WorkspaceItemAdapter):
             self.shape = Shape.objects.get(slug=self.shape_slug)
         if self.shape is not None:
             self.prj = self.shape.prj_file.file.read()
+            # ^^^ TODO: don't read it every time in the init!
+            # Also fails when the file is missing.
+            # Perhaps in the model's save() method?
 
         # Fill self.layer_filename
         if layer_filename is not None:
@@ -248,6 +251,8 @@ class AdapterShapefile(WorkspaceItemAdapter):
         return layers, styles
 
     def extent(self, identifiers=None):
+        # TODO: this one is called every time to determine whether workspace
+        # extends are available...
         layer = mapnik.Layer(self.layer_name, detect_prj(self.prj))
 
         layer.datasource = mapnik.Shapefile(
@@ -256,6 +261,9 @@ class AdapterShapefile(WorkspaceItemAdapter):
         ds = osgeo.ogr.Open(self.layer_filename)
         lyr = ds.GetLayer()
         lyr.ResetReading()
+        # TODO: w, s, e, n = lyr.GetExtent() makes sure the rest of this isn't needed.
+        # TODO: try it.
+
         feat = lyr.GetNextFeature()
 
         north = None
