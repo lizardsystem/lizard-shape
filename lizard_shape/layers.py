@@ -110,10 +110,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
         if self.shape_slug is not None:
             self.shape = Shape.objects.get(slug=self.shape_slug)
         if self.shape is not None:
-            self.prj = self.shape.prj_file.file.read()
-            # ^^^ TODO: don't read it every time in the init!
-            # Also fails when the file is missing.
-            # Perhaps in the model's save() method?
+            self.prj = self.shape.prj
 
         # Fill self.layer_filename
         if layer_filename is not None:
@@ -555,6 +552,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
         img_url = None
         his_file_dtstart = None
         if self.shape_id is not None:
+            # ^^^ is also done in __init__. TODO: refactor this out.
             shape = Shape.objects.get(pk=self.shape_id)
             if shape.his:
                 img_url = reverse(

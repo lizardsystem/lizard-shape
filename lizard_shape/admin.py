@@ -110,6 +110,7 @@ class ShapeAdmin(admin.ModelAdmin):
     form = ShapeForm
     list_display = ('name', shape_related_categories, 'template', 'his')
     list_filter = ('template', )
+    exclude = ('prj', )
 
 
 class ShapeTemplateAdmin(admin.ModelAdmin):

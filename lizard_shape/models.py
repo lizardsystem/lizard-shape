@@ -39,6 +39,9 @@ class Shape(models.Model):
     shx_file = models.FileField(upload_to=UPLOAD_TO)
     prj_file = models.FileField(upload_to=UPLOAD_TO)
 
+    prj = models.TextField(
+        help_text=u'Auto-filled when saving model.')
+
     his = models.ForeignKey('His', null=True, blank=True)
     his_parameter = models.CharField(
         max_length=80, null=True, blank=True,
@@ -53,11 +56,24 @@ class Shape(models.Model):
         return '%s (%s)' % (self.name, self.slug)
 
     def save(self, *args, **kwargs):
-        """Check if constraints are met before saving model."""
+        """Check if constraints are met before saving model.
+
+        Also read contents of prj_file and put it in field prj.
+        """
         shp_first = self.shp_file.name.rpartition('.')
         dbf_first = self.dbf_file.name.rpartition('.')
         shx_first = self.shx_file.name.rpartition('.')
         prj_first = self.prj_file.name.rpartition('.')
+
+        try:
+            self.prj = self.prj_file.file.read()  # fill prj field
+        except IOError:
+            self.prj = 'Could not read .prj file %s' % self.prj_file.name
+            logger.exception(
+                'Could not read .prj file %s' % self.prj_file.name)
+            # TODO: inform user? It does not raise an error now
+            # because I needed a development environment with Shape
+            # objects, without the actual files.
 
         if shp_first[-1] != 'shp':
             raise ShapeNameError(

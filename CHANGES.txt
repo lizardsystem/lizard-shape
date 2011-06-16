@@ -5,7 +5,11 @@ Changelog of lizard-shape
 1.17 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Added prj field to Shape model. The adapter (layers.py) now uses
+  Shape.prj instead of reading the file.
+
+Note: When upgrading, you need to re-save all Shape models in order to
+fill the prj fields.
 
 
 1.16 (2011-06-03)
