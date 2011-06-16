@@ -260,6 +260,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
         lyr.ResetReading()
         # TODO: w, s, e, n = lyr.GetExtent() makes sure the rest of this isn't needed.
         # TODO: try it.
+        # See #2877 first try: Doesn't work well.
 
         feat = lyr.GetNextFeature()
 

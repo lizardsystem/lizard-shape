@@ -8,7 +8,8 @@ Changelog of lizard-shape
 - Added prj field to Shape model. The adapter (layers.py) now uses
   Shape.prj instead of reading the file.
 
-Note: When upgrading, you need to re-save all Shape models in order to
+Note: After upgrading, run the management command
+lizard_shape_update_prj. This re-saves all Shape models in order to
 fill the prj fields.
 
 
