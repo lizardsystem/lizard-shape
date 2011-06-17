@@ -26,6 +26,7 @@ from lizard_shape.models import ShapeLegendPoint
 
 logger = logging.getLogger(__name__)
 
+MAX_SEARCH_RESULTS = 3
 LEGEND_TYPE_SHAPELEGEND = 'ShapeLegend'
 LEGEND_TYPE_SHAPELEGENDCLASS = 'ShapeLegendClass'
 LEGEND_TYPE_SHAPELEGENDPOINT = 'ShapeLegendPoint'
@@ -423,11 +424,10 @@ class AdapterShapefile(WorkspaceItemAdapter):
                     results.append(result)
             feat = lyr.GetNextFeature()
         results = sorted(results, key=lambda a: a['distance'])
-
-        if len(results) > 10:
-            logger.warning('A lot of results found (%d), just taking top 10.' %
-                           len(results))
-        return results[:10]
+        if len(results) > MAX_SEARCH_RESULTS:
+            logger.warning('A lot of results found (%d), just taking top %s.',
+                           len(results), MAX_SEARCH_RESULTS)
+        return results[:MAX_SEARCH_RESULTS]
 
     def symbol_url(self, identifier=None, start_date=None,
                    end_date=None, icon_style=None):
