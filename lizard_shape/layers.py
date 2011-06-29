@@ -249,8 +249,8 @@ class AdapterShapefile(WorkspaceItemAdapter):
         return layers, styles
 
     def extent(self, identifiers=None):
-        # TODO: this one is called every time to determine whether workspace
-        # extends are available...
+        """Calculate extent using ogr GetExtent function
+        """
         layer = mapnik.Layer(self.layer_name, detect_prj(self.prj))
 
         layer.datasource = mapnik.Shapefile(
@@ -259,43 +259,18 @@ class AdapterShapefile(WorkspaceItemAdapter):
         ds = osgeo.ogr.Open(self.layer_filename)
         lyr = ds.GetLayer()
         lyr.ResetReading()
-        # TODO: w, s, e, n = lyr.GetExtent() makes sure the rest of this isn't needed.
-        # TODO: try it.
-        # See #2877 first try: Doesn't work well.
+        w, e, s, n = lyr.GetExtent()
 
-        feat = lyr.GetNextFeature()
-
-        north = None
-        south = None
-        east = None
-        west = None
-        while feat is not None:
-            geom = feat.GetGeometryRef()
-            if geom:
-                item = loads(geom.ExportToWkt())
-                centroid = item.centroid  # For polygons
-                x = centroid.x
-                y = centroid.y
-                if x > east or east is None:
-                    east = x
-                if x < west or west is None:
-                    west = x
-                if y < south or south is None:
-                    south = y
-                if y > north or north is None:
-                    north = y
-            feat = lyr.GetNextFeature()
-
-        west_transformed, north_transformed = transform(
-            Proj(detect_prj(self.prj)), google_projection, west, north)
-        east_transformed, south_transformed = transform(
-            Proj(detect_prj(self.prj)), google_projection, east, south)
+        w, s = transform(
+            Proj(detect_prj(self.prj)), google_projection, w, s)
+        e, n = transform(
+            Proj(detect_prj(self.prj)), google_projection, e, n)
 
         return {
-            'north': north_transformed,
-            'west': west_transformed,
-            'south': south_transformed,
-            'east': east_transformed}
+            'north': n,
+            'west': w,
+            'south': s,
+            'east': e}
 
     def search(self, x, y, radius=None):
         """
