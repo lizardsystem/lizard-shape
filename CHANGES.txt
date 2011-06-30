@@ -5,7 +5,8 @@ Changelog of lizard-shape
 1.20 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Added index field to ShapeLegendSingleClass to control the order of
+  the legend rows. #2985
 
 
 1.19 (2011-06-29)

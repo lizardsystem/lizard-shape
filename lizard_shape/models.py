@@ -443,6 +443,12 @@ class ShapeLegendSingleClass(models.Model):
     icon = models.CharField(max_length=80, null=True, blank=True)
     mask = models.CharField(max_length=80, null=True, blank=True)
 
+    # Determines the order of rows.
+    index = models.IntegerField(default=100)
+
+    class Meta:
+        ordering = ('index', )
+
     def __unicode__(self):
         if self.is_exact:
             return '%s: %s - %s' % (
