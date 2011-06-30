@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.20 (unreleased)
+1.20 (2011-06-30)
 -----------------
 
 - Added index field to ShapeLegendSingleClass to control the order of
