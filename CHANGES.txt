@@ -5,7 +5,8 @@ Changelog of lizard-shape
 1.21 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Added errorcheck for #3033. When the shapefile does not exist, the
+  adapter.search function will now return with an empty list.
 
 
 1.20 (2011-06-30)

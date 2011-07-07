@@ -303,7 +303,14 @@ class AdapterShapefile(WorkspaceItemAdapter):
         query_point = Point(transformed_x, transformed_y)
 
         ds = osgeo.ogr.Open(self.layer_filename)
-        lyr = ds.GetLayer()
+        try:
+            lyr = ds.GetLayer()
+        except AttributeError:
+            # #3033
+            # This one occurs when the file does not exist.
+            logger.error("The search function crashed. Probably due "
+                         "to a missing shapefile.")
+            return []
 
         if radius is not None:
 
