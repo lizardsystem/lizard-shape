@@ -193,7 +193,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
                 icon_style = icon_style_template.copy()
                 try:
                     icon_style.update({
-                            'color': single_class.color.to_tuple()})
+                            'color': single_class.legend_color().to_tuple()})
                 except TypeError:
                     # Some users forget setting the color. Don't crash.
                     # Take color alarming red.

@@ -449,18 +449,25 @@ class ShapeLegendSingleClass(models.Model):
     class Meta:
         ordering = ('index', )
 
+    def legend_color(self):
+        """Returns a color_iside if not color."""
+        if self.color_inside:
+            return self.color_inside
+        else:
+            return self.color
+
     def __unicode__(self):
         if self.is_exact:
             return '%s: %s - %s' % (
                 self.shape_legend_class,
                 self.min_value,
-                self.color)
+                self.legend_color())
         else:
             return '%s: (%s, %s) - %s' % (
                 self.shape_legend_class,
                 self.min_value,
                 self.max_value,
-                self.color)
+                self.legend_color())
 
 
 class His(models.Model):

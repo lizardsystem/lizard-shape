@@ -5,6 +5,9 @@ Changelog of lizard-shape
 1.21 (unreleased)
 -----------------
 
+- Fixed icon color in legend, first prefered is color_inside if
+  none then color #2957.
+
 - Added errorcheck for #3033. When the shapefile does not exist, the
   adapter.search function will now return with an empty list.
 
