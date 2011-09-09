@@ -407,8 +407,8 @@ class AdapterShapefile(WorkspaceItemAdapter):
             feat = lyr.GetNextFeature()
         results = sorted(results, key=lambda a: a['distance'])
         if len(results) > MAX_SEARCH_RESULTS:
-            logger.warning('A lot of results found (%d), just taking top %s.',
-                           len(results), MAX_SEARCH_RESULTS)
+            logger.info('A lot of results found (%d), just taking top %s.',
+                        len(results), MAX_SEARCH_RESULTS)
         return results[:MAX_SEARCH_RESULTS]
 
     def symbol_url(self, identifier=None, start_date=None,
