@@ -1,6 +1,9 @@
-import logging
 import os
 
+from lizard_ui.settingshelper import setup_logging
+from lizard_ui.settingshelper import STATICFILES_FINDERS
+
+STATICFILES_FINDERS = STATICFILES_FINDERS # to silence pyflakes
 
 DEBUG = True
 TEMPLATE_DEBUG = True
@@ -71,12 +74,7 @@ STATIC_URL = '/static_media/'
 # admin's static media into STATIC_ROOT/admin.
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
-
-# Set up logging BEFORE importing the base settings.
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(name)s %(levelname)s %(message)s')
-
+LOGGING = setup_logging(BUILDOUT_DIR)
 
 try:
     # Import local settings that aren't stored in svn.
