@@ -5,6 +5,8 @@ Changelog of lizard-shape
 1.21 (unreleased)
 -----------------
 
+- Also raising WorkspaceItemError when looking up shapes via a slug.
+
 - Fixed icon color in legend, first prefered is color_inside if
   none then color #2957.
 
