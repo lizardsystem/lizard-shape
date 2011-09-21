@@ -103,13 +103,13 @@ class AdapterShapefile(WorkspaceItemAdapter):
 
         self.shape = None
         self.prj = None  # Projection from .prj file
-        if self.shape_id is not None:
-            try:
+        try:
+            if self.shape_id is not None:
                 self.shape = Shape.objects.get(pk=self.shape_id)
-            except Shape.DoesNotExist:
-                raise WorkspaceItemError  # Trac #2470
-        if self.shape_slug is not None:
-            self.shape = Shape.objects.get(slug=self.shape_slug)
+            if self.shape_slug is not None:
+                self.shape = Shape.objects.get(slug=self.shape_slug)
+        except Shape.DoesNotExist:
+            raise WorkspaceItemError
         if self.shape is not None:
             self.prj = self.shape.prj
 
@@ -132,10 +132,10 @@ class AdapterShapefile(WorkspaceItemAdapter):
                     self.resource_module,
                     self.resource_name)
 
-        self.search_property_name = \
-            layer_arguments.get('search_property_name', "")
-        self.search_property_id = \
-            layer_arguments.get('search_property_id', "")
+        self.search_property_name = layer_arguments.get(
+            'search_property_name', "")
+        self.search_property_id = layer_arguments.get(
+            'search_property_id', "")
         self.legend_id = layer_arguments.get('legend_id', None)
         self.legend_type = layer_arguments.get('legend_type', None)
         self.value_field = layer_arguments.get('value_field', None)
