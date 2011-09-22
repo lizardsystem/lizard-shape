@@ -5,7 +5,11 @@ Changelog of lizard-shape
 1.21 (unreleased)
 -----------------
 
-- Also raising WorkspaceItemError when looking up shapes via a slug.
+- Clearer error message when converting coordinates to google doesn't work. To
+  aid debugging that particular error.
+
+- Also raising WorkspaceItemError when looking up shapes via a slug, not just
+  when looking it up via a primary key.
 
 - Fixed icon color in legend, first prefered is color_inside if
   none then color #2957.
