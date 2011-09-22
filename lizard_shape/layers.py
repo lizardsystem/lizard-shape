@@ -390,8 +390,13 @@ class AdapterShapefile(WorkspaceItemAdapter):
                                            google_projection,
                                            *item.coords[0])})
                     except NotImplementedError:
-                        logger.warning("Got a NotImplementedError in search. "
-                                       "Ignoring coordinates.")
+                        # logger.warning("Got a NotImplementedError in search. "
+                        #                "Ignoring coordinates.")
+                        logger.warning(
+                            "Got a NotImplementedError while transforming "
+                            "coordinates from %s to google with pyproj. Not "
+                            "returning google coordinates.",
+                            self.prj)
 
                     if (self.search_property_id and
                         self.search_property_id in feat_items):
