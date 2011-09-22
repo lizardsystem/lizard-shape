@@ -394,9 +394,10 @@ class AdapterShapefile(WorkspaceItemAdapter):
                         #                "Ignoring coordinates.")
                         logger.warning(
                             "Got a NotImplementedError while transforming "
-                            "coordinates from %s to google with pyproj. Not "
-                            "returning google coordinates.",
-                            self.prj)
+                            "coordinates from %s to google with pyproj "
+                            "for shapefile %s. Not returning google ",
+                            "coordinates.",
+                            self.prj, self.shape)
 
                     if (self.search_property_id and
                         self.search_property_id in feat_items):
