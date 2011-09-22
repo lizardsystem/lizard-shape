@@ -2,8 +2,8 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.22 (unreleased)
------------------
+1.21.1 (2011-09-22)
+-------------------
 
 - Fixed typo in the "clearer error message" from 1.21 that crashed the
   logger.
