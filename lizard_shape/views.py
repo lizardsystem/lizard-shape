@@ -76,7 +76,6 @@ def homepage(request,
 
     parent_category = None
     if root_slug is not None:
-        print root_slug
         parent_category = get_object_or_404(Category, slug=root_slug)
     shapes_tree = get_tree(parent_category)
 
