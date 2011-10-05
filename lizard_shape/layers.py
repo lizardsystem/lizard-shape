@@ -227,7 +227,8 @@ class AdapterShapefile(WorkspaceItemAdapter):
         styles = {}
         layer = mapnik.Layer(self.layer_name, detect_prj(self.prj))
         # TODO: ^^^ translation!
-
+        logging.debug("Giving shapefile %s to a mapnik layer...",
+                      self.layer_filename)
         layer.datasource = mapnik.Shapefile(
             file=self.layer_filename)
 
@@ -246,6 +247,8 @@ class AdapterShapefile(WorkspaceItemAdapter):
         styles[style_name] = style
         layer.styles.append(style_name)
         layers = [layer]
+        logging.debug("Giving shapefile %s as layer to mapnik...",
+                      self.layer_filename)
         return layers, styles
 
     def extent(self, identifiers=None):
