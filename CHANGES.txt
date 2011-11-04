@@ -5,8 +5,11 @@ Changelog of lizard-shape
 1.22 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Made view class based for lizard-map 3.3
 
+- Changed template to use new workspace / collage tags
+
+- Changed buildout and setup to require lizard-map >= 3.3
 
 1.21.1 (2011-09-22)
 -------------------
