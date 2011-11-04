@@ -5,7 +5,7 @@ Changelog of lizard-shape
 1.23 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Fixed a bug that prevented the view class from working.
 
 
 1.22 (2011-11-04)
