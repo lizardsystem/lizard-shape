@@ -496,9 +496,15 @@ class AdapterShapefile(WorkspaceItemAdapter):
                 values = []
 
                 for field in self.display_fields:
-                    values.append({'name': field['name'],
-                                   'value': feat_items[str(field['field'])],
-                                   'value_type': field['field_type']})
+                    if str(field['field']) not in feat_items:
+                        # Trying to show a field that's not in feat_items
+                        values.append({'name': field['name'],
+                                       'value': 'Not present in data',
+                                       'value_type': 1})
+                    else:
+                        values.append({'name': field['name'],
+                                       'value': feat_items[str(field['field'])],
+                                       'value_type': field['field_type']})
 
                 name = feat_items[self.search_property_name]
                 result.append({
