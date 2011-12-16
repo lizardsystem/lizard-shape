@@ -3,7 +3,7 @@ import os
 from lizard_ui.settingshelper import setup_logging
 from lizard_ui.settingshelper import STATICFILES_FINDERS
 
-STATICFILES_FINDERS = STATICFILES_FINDERS # to silence pyflakes
+STATICFILES_FINDERS = STATICFILES_FINDERS  # to silence pyflakes
 
 DEBUG = True
 TEMPLATE_DEBUG = True

@@ -27,7 +27,8 @@ tests_require = [
 
 setup(name='lizard-shape',
       version=version,
-      description="Provides storage and visualization for shapefiles and his files",
+      description=("Provides storage and visualization for " +
+                   "shapefiles and his files"),
       long_description=long_description,
       # Get strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=['Programming Language :: Python',
@@ -43,7 +44,7 @@ setup(name='lizard-shape',
       zip_safe=False,
       install_requires=install_requires,
       tests_require=tests_require,
-      extras_require = {'test': tests_require},
+      extras_require={'test': tests_require},
       entry_points={
           'console_scripts': [
             ],

@@ -2,17 +2,15 @@
 
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
-from django.shortcuts import render_to_response
-from django.template import RequestContext
-
-from lizard_shape.models import Category
 from lizard_map.views import AppView
+from lizard_shape.models import Category
+
 
 def shape_treeitems(shapes):
     """
     Make treeitems for given shapes, return them in a list.
     """
-    
+
     children = []
 
     for shape in shapes:
@@ -53,6 +51,7 @@ def shape_treeitems(shapes):
 
     return children
 
+
 def get_tree(parent=None):
     """
     Make tree for homepage using Category and Shape.
@@ -75,6 +74,7 @@ def get_tree(parent=None):
         result += shape_treeitems(parent.shapes.all())
 
     return result
+
 
 class HomepageView(AppView):
     """
@@ -102,9 +102,9 @@ class HomepageView(AppView):
 
     def crumbs(self):
         # Do not add this as a class variable.
-        # It uses reverse(), which uses the urlconf, which uses this class. So at the time the class
+        # It uses reverse(), which uses the urlconf, which
+        # uses this class. So at the time the class
         # is created, there are no urls yet and reverse() fails.
-        return [ {'name': 'home', 'url': '/'},
-                 {'name': 'kaarten', 'title': 'kaarten', 'url': reverse('lizard_shape.homepage')} ]
-
-
+        return [{'name': 'home', 'url': '/'},
+                {'name': 'kaarten', 'title': 'kaarten',
+                 'url': reverse('lizard_shape.homepage')}]

@@ -503,7 +503,8 @@ class AdapterShapefile(WorkspaceItemAdapter):
                                        'value_type': 1})
                     else:
                         values.append({'name': field['name'],
-                                       'value': feat_items[str(field['field'])],
+                                       'value':
+                                           feat_items[str(field['field'])],
                                        'value_type': field['field_type']})
 
                 name = feat_items[self.search_property_name]
