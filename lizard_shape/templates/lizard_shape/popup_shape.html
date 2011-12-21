@@ -18,13 +18,14 @@ Data beschikbaar: {{ his_file_dtstart|date:"Y-m-d" }}
     <td><img src="{{ symbol_url }}"/>&nbsp;{{ display_object.name }}</td>
     {% if add_snippet %}
     <td class="sidebarbox-action-icon">
-      <a href=""
-         class="add-snippet ss_chart_line_add ss_sprite"
-         data-workspace-id="{{ display_object.workspace_item.workspace.id }}"
-         data-workspace-item-id="{{ display_object.workspace_item.id }}"
-         data-item-identifier='{{ display_object.identifier|json_escaped }}'
-         data-item-shortname="{{ display_object.shortname }}"
-         data-item-name="{{ display_object.name }}"></a>
+      <a href="{% url lizard_map_collage_add %}"
+         class="collage-add ss_star ss_sprite"
+	 data-target-id="#edit-collage"
+	 data-adapter-class="{{ adapter_class }}"
+         data-adapter-layer-json="{{ adapter_layer_json }}"
+         data-identifier="{{ display_object.identifier|json_escaped }}"
+         data-name="{{ display_object.name }}"
+         title="Toevoegen aan selectie"></a>
     </td>
     {% endif %}
   </tr>

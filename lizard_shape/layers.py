@@ -574,6 +574,8 @@ class AdapterShapefile(WorkspaceItemAdapter):
              'add_snippet': add_snippet,
              'symbol_url': self.symbol_url(),
              'img_url': img_url,
+             'adapter_class': self.adapter_class,
+             'adapter_layer_json': json.dumps(self.layer_arguments),
              'his_file_dtstart': his_file_dtstart})
 
     def image(self, identifiers, start_date, end_date,
