@@ -27,7 +27,7 @@ def check_extension_or_error(filename, extension, extension_name=None):
     first = filename.rpartition('.')
     if extension_name is None:
         extension_name = '%s file' % extension
-    if first[-1] != extension:
+    if first[-1].lower() != extension:
         raise forms.ValidationError(
             "%s doest not have extension .%s." % (extension_name, extension))
 
