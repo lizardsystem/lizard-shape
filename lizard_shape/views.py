@@ -79,8 +79,6 @@ def get_tree(parent=None):
 class HomepageView(AppView):
     """
     Class based main page for Shape.
-
-    TODO: make crumbs work.
     """
 
     template_name = 'lizard_shape/homepage.html'
@@ -99,12 +97,3 @@ class HomepageView(AppView):
 
     def shapes_tree(self):
         return get_tree(self.parent_category())
-
-    def crumbs(self):
-        # Do not add this as a class variable.
-        # It uses reverse(), which uses the urlconf, which
-        # uses this class. So at the time the class
-        # is created, there are no urls yet and reverse() fails.
-        return [{'name': 'home', 'url': '/'},
-                {'name': 'kaarten', 'title': 'kaarten',
-                 'url': reverse('lizard_shape.homepage')}]

@@ -5,6 +5,9 @@ Changelog of lizard-shape
 1.25 (unreleased)
 -----------------
 
+- Removed old breadcrumbs code because it didn't work with the
+  new version anymore. Now needs lizard-map 3.18.
+
 - Checking for case-insensitive extension, so .SHP is just fine for .shp.
 
 

@@ -14,7 +14,7 @@ install_requires = [
     'django-staticfiles',
     'django-extensions',
     'lizard-ui',
-    'lizard-map >= 3.9',  # Bug fix for shape in 3.9
+    'lizard-map >= 3.18',  # Bug fix for shape in 3.9
     'django-nose',
     'django-treebeard',
     'nens',
