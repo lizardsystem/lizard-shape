@@ -5,7 +5,8 @@ Changelog of lizard-shape
 1.26 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Don't show 'Grafiek' on the collage detail page since we don't
+  actually have one, and don't show the dialog to edit graph options.
 
 
 1.25 (2012-01-17)

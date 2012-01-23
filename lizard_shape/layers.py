@@ -653,3 +653,11 @@ class AdapterShapefile(WorkspaceItemAdapter):
 
         graph.add_today()
         return graph.http_png()
+
+    @property
+    def collage_detail_data_description(self):
+        return 'Gegevens'
+
+    @property
+    def collage_detail_edit_action(self):
+        return None
