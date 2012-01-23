@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.26 (unreleased)
+1.26 (2012-01-23)
 -----------------
 
 - Don't show 'Grafiek' on the collage detail page since we don't
