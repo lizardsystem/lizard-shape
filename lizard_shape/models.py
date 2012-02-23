@@ -1,17 +1,17 @@
 # (c) Nelen & Schuurmans.  GPL licensed, see LICENSE.txt.
 import logging
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import simplejson as json
 from django.utils.translation import ugettext as _
-from nens.sobek import HISFile
-from treebeard.al_tree import AL_Node
-import mapnik
-
 from lizard_map.mapnik_helper import point_rule
 from lizard_map.models import ColorField
 from lizard_map.models import Legend
 from lizard_map.models import LegendPoint
+from nens.sobek import HISFile
+from treebeard.al_tree import AL_Node
+import mapnik
 
 # The default location from MEDIA_ROOT to upload files to.
 UPLOAD_TO = "lizard_shape/shapes"
@@ -185,11 +185,16 @@ class Category(AL_Node):
     class Meta:
         ordering = ('name', )
 
+    def save(self, *args, **kwargs):
+        if self is self.parent:
+            raise ValidationError("Parent field points at itself.")
+        super(Category, self).save(*args, **kwargs)
+
     def __unicode__(self):
         if self.parent is None:
             return u'%s' % self.name
         else:
-            return ' -> '.join([str(self.parent), self.name])
+            return ' -> '.join([unicode(self.parent), self.name])
 
 
 class ShapeLegend(Legend):

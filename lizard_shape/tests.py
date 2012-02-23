@@ -95,6 +95,16 @@ class ModelsTest(TestCase):
             name='root', slug='root')
         self.assertRaises(IntegrityError, second_root_category.save)
 
+    def test_no_infinite_recursion_in_unicode(self):
+        """Pointing a category's parent field at itself would give an infinite
+        recursion error in __unicode__().
+        """
+        category = Category(
+            name='root', slug='root')
+        category.save()
+        category.parent = category
+        self.assertRaises(ValidationError, category.save)
+
 
 class ModelShapeTest(TestCase):
     fixtures = ['lizard_shape_test']

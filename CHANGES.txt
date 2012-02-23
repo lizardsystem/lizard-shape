@@ -5,7 +5,9 @@ Changelog of lizard-shape
 1.27 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Raising a validationerror when a category's parent field points at
+  itself. This leads to an infinite recursion error in the __unicode__,
+  rendering the admin inaccessible (to fix the error...).
 
 
 1.26 (2012-01-23)
