@@ -1,6 +1,5 @@
 # (c) Nelen & Schuurmans.  GPL licensed, see LICENSE.txt.
 
-from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from lizard_map.views import AppView
 from lizard_shape.models import Category
