@@ -60,6 +60,8 @@ class Shape(models.Model):
 
         Also read contents of prj_file and put it in field prj.
         """
+        # XXX: TODO: Make the naming dynamic based on
+        # the names of the filefields to make the save dynamic.
         shp_first = self.shp_file.name.rpartition('.')
         dbf_first = self.dbf_file.name.rpartition('.')
         shx_first = self.shx_file.name.rpartition('.')
