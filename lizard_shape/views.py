@@ -1,7 +1,7 @@
 # (c) Nelen & Schuurmans.  GPL licensed, see LICENSE.txt.
 
 from django.shortcuts import get_object_or_404
-from lizard_map.views import AppView
+from lizard_map.views import MapView
 from lizard_shape.models import Category
 
 
@@ -75,7 +75,7 @@ def get_tree(parent=None):
     return result
 
 
-class HomepageView(AppView):
+class HomepageView(MapView):
     """
     Class based main page for Shape.
     """
