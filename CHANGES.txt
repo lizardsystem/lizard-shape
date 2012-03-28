@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.27 (unreleased)
+1.27 (2012-03-28)
 -----------------
 
 - Raising a validationerror when a category's parent field points at
