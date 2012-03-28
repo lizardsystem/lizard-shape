@@ -9,6 +9,8 @@ Changelog of lizard-shape
   itself. This leads to an infinite recursion error in the __unicode__,
   rendering the admin inaccessible (to fix the error...).
 
+- Increased radius in the adapter's search(), Dave complained it was
+  impossibly small.
 
 1.26 (2012-01-23)
 -----------------

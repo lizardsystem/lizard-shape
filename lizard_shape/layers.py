@@ -298,8 +298,13 @@ class AdapterShapefile(WorkspaceItemAdapter):
 
         if radius is not None:
             # Manually make radius smaller
+
+            # RG, way later: it used to say 0.2 on the line below, but
+            # there were complaints saying that this was too
+            # small. From some manual testing, 1 (the default) is too
+            # large. I'll put 0.8. Obviously a very well argued value.
             logger.debug("Adjusting radius...")
-            radius = radius * 0.2  # ???
+            radius = radius * 0.8
 
         transformed_x, transformed_y = transform(
             google_projection, Proj(detect_prj(self.prj)), x, y)
