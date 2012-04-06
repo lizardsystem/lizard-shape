@@ -3,3 +3,6 @@ bin
 develop-eggs
 lizard_shape.egg-info
 parts
+*.pyc
+nosetests.xml
+var

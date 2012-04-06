@@ -11,6 +11,8 @@ Changelog of lizard-shape
 
 - Required lizard-map 3.26.
 
+- Added .gitignore
+
 1.27.1 (2012-03-28)
 -------------------
 
