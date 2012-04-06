@@ -5,8 +5,11 @@ Changelog of lizard-shape
 1.27.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Changed signature of two functions in AdapterShapefile
+  (collage_detail_data_description and collage_detail_edit_action) to
+  comply with lizard-map 3.26.
 
+- Required lizard-map 3.26.
 
 1.27.1 (2012-03-28)
 -------------------
