@@ -2,8 +2,8 @@ Changelog of lizard-shape
 ===================================================
 
 
-1.27.2 (unreleased)
--------------------
+1.28 (2012-04-06)
+-----------------
 
 - Changed signature of two functions in AdapterShapefile
   (collage_detail_data_description and collage_detail_edit_action) to
