@@ -159,6 +159,8 @@ class ShapeField(models.Model):
         ordering = ('index', )
 
     def __unicode__(self):
+        # Only add the dash if both self.shape_template and self.name exist,
+        # otherwise just show the one that does
         return u' - '.join(s for s in (self.shape_template, self.name)
                            if s)
 
