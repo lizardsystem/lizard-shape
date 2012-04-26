@@ -5,7 +5,7 @@ Changelog of lizard-shape
 1.29 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Changed description of shape templates.
 
 
 1.28 (2012-04-06)

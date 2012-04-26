@@ -159,7 +159,8 @@ class ShapeField(models.Model):
         ordering = ('index', )
 
     def __unicode__(self):
-        return u'%s - %s' % (self.shape_template, self.name)
+        return u' - '.join(s for s in (self.shape_template, self.name)
+                           if s)
 
 
 class Category(AL_Node):
