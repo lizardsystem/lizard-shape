@@ -189,7 +189,7 @@ class Category(AL_Node):
         ordering = ('name', )
 
     def save(self, *args, **kwargs):
-        if self is self.parent:
+        if self.parent_id and self.parent_id == self.pk:
             raise ValidationError("Parent field points at itself.")
         super(Category, self).save(*args, **kwargs)
 
