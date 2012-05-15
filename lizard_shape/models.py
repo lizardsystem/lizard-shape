@@ -6,7 +6,7 @@ from django.db import models
 from django.utils import simplejson as json
 from django.utils.translation import ugettext as _
 from lizard_map.mapnik_helper import point_rule
-from lizard_map.models import ColorField
+from lizard_map.fields import ColorField
 from lizard_map.models import Legend
 from lizard_map.models import LegendPoint
 from nens.sobek import HISFile

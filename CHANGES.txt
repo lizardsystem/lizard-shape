@@ -5,7 +5,7 @@ Changelog of lizard-shape
 1.30 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Fix colorfield import.
 
 
 1.29 (2012-04-26)
