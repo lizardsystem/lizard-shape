@@ -23,6 +23,8 @@ Features:
 
 - Make a tree structure with your shapefiles.
 
+- Added edit link
+
 
 Usage
 -----
