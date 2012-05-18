@@ -7,6 +7,12 @@ Changelog of lizard-shape
 
 - Fix colorfield import.
 
+- Added edit link
+
+- Updated layout for bootstrap.
+
+- Changed .txt extensions to .rst.
+
 
 1.29 (2012-04-26)
 -----------------

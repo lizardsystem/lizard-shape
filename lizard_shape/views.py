@@ -83,6 +83,7 @@ class HomepageView(AppView):
 
     template_name = 'lizard_shape/homepage.html'
     transparancy_slider = True
+    edit_link = '/admin/lizard_shape/'
 
     def get(self, request, *args, **kwargs):
         """Get parameters from kwargs and GET parameters. TODO: better way"""
