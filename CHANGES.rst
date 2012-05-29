@@ -7,6 +7,8 @@ Changelog of lizard-shape
 
 - Fix colorfield references in migrations.
 
+- UI fixes.
+
 
 2.0 (2012-05-18)
 ----------------
