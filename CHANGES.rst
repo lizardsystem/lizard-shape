@@ -5,7 +5,8 @@ Changelog of lizard-shape
 2.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fix bug in ShapeField's __unicode__ that made it throw an exception in
+  case the field has a ShapeTemplate (this is bad).
 
 
 2.1 (2012-05-29)
