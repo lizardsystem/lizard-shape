@@ -18,7 +18,7 @@ Data beschikbaar: {{ his_file_dtstart|date:"Y-m-d" }}
     <td><img src="{{ symbol_url }}"/>&nbsp;{{ display_object.name }}</td>
     {% if add_snippet %}
     <td class="sidebarbox-action-icon">
-      <span
+      <a
          href="{% url lizard_map_collage_add %}"
          class="collage-add ss_star ss_sprite"
          data-target-id="#edit-collage"
@@ -26,7 +26,7 @@ Data beschikbaar: {{ his_file_dtstart|date:"Y-m-d" }}
          data-adapter-layer-json="{{ adapter_layer_json }}"
          data-identifier="{{ display_object.identifier|json_escaped }}"
          data-name="{{ display_object.name }}"
-         title="Toevoegen aan selectie"></span>
+         title="Toevoegen aan selectie">&nbsp;</a>
     </td>
     {% endif %}
   </tr>
