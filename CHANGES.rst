@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-2.2 (unreleased)
+2.2 (2012-10-04)
 ----------------
 
 - Add GDAL dependency which is referenced in a management command.
