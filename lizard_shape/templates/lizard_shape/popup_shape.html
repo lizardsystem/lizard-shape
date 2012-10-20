@@ -1,12 +1,9 @@
 {% load workspaces %}
 {# header #}
-{% if img_url %}
-<div style="width: 100%; height: 170px;"
-     class="img-use-my-size">
-  <a href="{{ img_url }}"
-     class="replace-with-image">
-    afbeelding nog niet geladen
-  </a>
+{% if image_graph_url %}
+<div style="width: 100%; height: 240px;"
+     class="dynamic-graph"
+     data-image-graph-url="{{ image_graph_url }}">
 </div>
 {% endif %}
 {% if his_file_dtstart %}

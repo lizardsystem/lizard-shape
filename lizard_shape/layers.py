@@ -551,20 +551,20 @@ class AdapterShapefile(WorkspaceItemAdapter):
 
         # Images for timeseries
 
-        img_url = None
+        image_graph_url = None
         his_file_dtstart = None
         if self.shape_id is not None:
             # ^^^ is also done in __init__. TODO: refactor this out.
             shape = Shape.objects.get(pk=self.shape_id)
             if shape.his:
-                img_url = reverse(
+                image_graph_url = reverse(
                     "lizard_map.workspace_item_image",
                     kwargs={'workspace_item_id': self.workspace_item.id},
                     )
                 identifiers_escaped = [
                     json.dumps(identifier).replace('"', '%22')
                     for identifier in identifiers]
-                img_url = img_url + '?' + '&'.join(
+                image_graph_url = image_graph_url + '?' + '&'.join(
                     ['identifier=%s' % i for i in identifiers_escaped])
                 try:
                     his_file_dtstart = shape.his.hisfile().dtstart
@@ -578,7 +578,7 @@ class AdapterShapefile(WorkspaceItemAdapter):
             {'display_group': display_group,
              'add_snippet': add_snippet,
              'symbol_url': self.symbol_url(),
-             'img_url': img_url,
+             'image_graph_url': image_graph_url,
              'adapter_class': self.adapter_class,
              'adapter_layer_json': json.dumps(self.layer_arguments),
              'his_file_dtstart': his_file_dtstart})
