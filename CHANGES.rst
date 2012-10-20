@@ -5,7 +5,7 @@ Changelog of lizard-shape
 2.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Support mixed flot/matplotlib (IE8) graphs.
 
 
 2.2 (2012-10-04)
