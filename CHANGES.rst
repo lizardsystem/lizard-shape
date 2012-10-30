@@ -7,6 +7,8 @@ Changelog of lizard-shape
 
 - Support mixed flot/matplotlib (IE8) graphs.
 
+- Add Bootstrap table styling.
+
 
 2.2 (2012-10-04)
 ----------------
