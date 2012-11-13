@@ -1,27 +1,34 @@
 {# the variables tree_template and tree_items must be defined before entering #}
 {# tree_items is a list of dicts with properties name, url, children #}
 {% for child in tree_items %}
-<li>
   {% ifequal child.type 'category' %}
+  <li class="node">
+    <div class="hitarea">
     {% if child.url %}<a href="{{ child.url }}">{% endif %}
     <span class="folder">{{ child.name }}</span>
     {% if child.url %}</a>{% endif %}
+    </div>
     <ul>
       {% with child.children as tree_items %}
         {% include tree_template %}
       {% endwith %}
     </ul>
+  </li>
   {% else %}{# child.type == 'shape' #}
+  <li class="leaf">
     <div class="workspace-acceptable"
          data-adapter-layer-json="{{ child.adapter_layer_json }}"
          data-adapter-class="adapter_shapefile"
          data-name="{{ child.name }}">
     {{ child.name }}
-      {% if child.description %}{# show info button if description available #}
-      <span class="ss_sprite ss_information sidebarbox-action-icon legend-tooltip">&nbsp;</span>
-      <div class="tooltip">{% autoescape off %}{{ child.description }}{% endautoescape %}</div>
-      {% endif %}
     </div>
+    {% if child.description %}{# show info button if description available #}
+      <span class="sidebarbox-action-icon legend-tooltip has_popover"
+         data-content="{{ child.description }}"
+         data-trigger="click"
+         rel="popover"
+         title="{{ child.name }}"><i class="icon-info-sign"></i></span>
+    {% endif %}
+  </li>
   {% endifequal %}
-</li>
 {% endfor %}
