@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-2.3 (unreleased)
+2.3 (2012-11-22)
 ----------------
 
 - Fixed bug in __unicode__ of ShapeTemplate. It crashes on some
