@@ -128,7 +128,10 @@ class ShapeTemplate(models.Model):
         ordering = ('name', )
 
     def __unicode__(self):
-        return '%s' % self.name
+        try:
+            return '%s' % self.name
+        except:
+            return '(not displayable)'
 
 
 class ShapeField(models.Model):

@@ -5,6 +5,9 @@ Changelog of lizard-shape
 2.3 (unreleased)
 ----------------
 
+- Fixed bug in __unicode__ of ShapeTemplate. It crashes on some
+  characters.
+
 - Support mixed flot/matplotlib (IE8) graphs.
 
 - Add Bootstrap table styling.
