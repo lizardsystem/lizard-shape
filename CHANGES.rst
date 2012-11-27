@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-2.4 (unreleased)
+2.4 (2012-11-27)
 ----------------
 
 - Properly set dependency versions.
