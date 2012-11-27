@@ -5,7 +5,7 @@ Changelog of lizard-shape
 2.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Properly set dependency versions.
 
 
 2.3 (2012-11-22)
