@@ -5,7 +5,7 @@ Changelog of lizard-shape
 2.5 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Slightly changed popup styling.
 
 
 2.4 (2012-11-27)

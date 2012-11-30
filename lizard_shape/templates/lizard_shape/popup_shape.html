@@ -10,27 +10,14 @@
 Data beschikbaar: {{ his_file_dtstart|date:"Y-m-d" }}
 {% endif %}
 {% for display_object in display_group %}
-<table>
-  <tr>
-    <td><img src="{{ symbol_url }}"/>&nbsp;{{ display_object.name }}</td>
-    {% if add_snippet %}
-    <td class="sidebarbox-action-icon">
-      <a
-         href="{% url lizard_map_collage_add %}"
-         class="collage-add ss_star ss_sprite"
-         data-target-id="#edit-collage"
-         data-adapter-class="{{ adapter_class }}"
-         data-adapter-layer-json="{{ adapter_layer_json }}"
-         data-identifier="{{ display_object.identifier|json_escaped }}"
-         data-name="{{ display_object.name }}"
-         title="Toevoegen aan selectie">&nbsp;</a>
-    </td>
-    {% endif %}
-  </tr>
-</table>
+<div><img src="{{ symbol_url }}"/><strong>{{ display_object.name }}</strong></div>
 {# body #}
 <div>
   <table class="noprint table table-bordered">
+    <thead>
+      <th>Attribuut</th>
+      <th>Waarde</th>
+    </thead>
     <tbody>
       {% for row in display_object.values %}
       <tr>
@@ -57,4 +44,15 @@ Data beschikbaar: {{ his_file_dtstart|date:"Y-m-d" }}
     </tbody>
   </table>
 </div>
+{% if add_snippet %}
+<a
+   href="{% url lizard_map_collage_add %}"
+   class="collage-add ss_star ss_sprite"
+   data-target-id="#edit-collage"
+   data-adapter-class="{{ adapter_class }}"
+   data-adapter-layer-json="{{ adapter_layer_json }}"
+   data-identifier="{{ display_object.identifier|json_escaped }}"
+   data-name="{{ display_object.name }}"
+   title="Toevoegen aan selectie">&nbsp;{{ display_object.name }}</a>
+{% endif %}
 {% endfor %}
