@@ -10,7 +10,7 @@
 Data beschikbaar: {{ his_file_dtstart|date:"Y-m-d" }}
 {% endif %}
 {% for display_object in display_group %}
-<div><img src="{{ symbol_url }}"/><strong>{{ display_object.name }}</strong></div>
+<div><img src="{{ symbol_url }}"/>  <strong>{{ display_object.name }}</strong></div>
 {# body #}
 <div>
   <table class="noprint table table-bordered">
@@ -54,5 +54,8 @@ Data beschikbaar: {{ his_file_dtstart|date:"Y-m-d" }}
    data-identifier="{{ display_object.identifier|json_escaped }}"
    data-name="{{ display_object.name }}"
    title="Toevoegen aan selectie">&nbsp;{{ display_object.name }}</a>
+{% endif %}
+{% if not forloop.last %}
+<hr/>
 {% endif %}
 {% endfor %}
