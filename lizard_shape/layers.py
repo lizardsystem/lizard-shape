@@ -664,3 +664,9 @@ class AdapterShapefile(WorkspaceItemAdapter):
 
     def collage_detail_edit_action(self, identifier, *args, **kwargs):
         return None
+
+    def collage_detail_show_edit_block(self, identifier, *args, **kwargs):
+        return False
+
+    def collage_detail_show_statistics_block(self, identifier, *args, **kwargs):
+        return False

@@ -5,7 +5,7 @@ Changelog of lizard-shape
 2.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Don't show edit / statistics block in collage.
 
 
 2.5 (2012-12-04)
