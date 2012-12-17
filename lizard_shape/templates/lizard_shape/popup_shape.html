@@ -36,7 +36,7 @@ Data beschikbaar: {{ his_file_dtstart|date:"Y-m-d" }}
         {% endifequal %}
         {% ifequal row.value_type 3 %}{# Weblink#}
         <td>
-          <a href="{{ row.value|safe }}">link</a>
+          <a href="{{ row.value|safe }}" style="text-decoration:underline; color:blue;">link</a>
         </td>
         {% endifequal %}
       </tr>

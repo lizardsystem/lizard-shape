@@ -7,6 +7,8 @@ Changelog of lizard-shape
 
 - Don't show edit / statistics block in collage.
 
+- Set some link styling in popup.
+
 
 2.5 (2012-12-04)
 ----------------
