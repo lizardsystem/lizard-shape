@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-2.6 (unreleased)
+2.6 (2012-12-17)
 ----------------
 
 - Don't show edit / statistics block in collage.
