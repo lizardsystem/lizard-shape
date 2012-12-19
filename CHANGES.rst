@@ -2,7 +2,7 @@ Changelog of lizard-shape
 ===================================================
 
 
-2.7 (unreleased)
+2.7 (2012-12-19)
 ----------------
 
 - Fixed urls.py, so it won't recusively include other lizard-* URLs when
