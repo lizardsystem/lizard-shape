@@ -83,6 +83,8 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 LOGGING = setup_logging(BUILDOUT_DIR)
 
+LIZARD_SHAPE_STANDALONE = True
+
 try:
     # Import local settings that aren't stored in svn.
     from lizard_shape.local_testsettings import *

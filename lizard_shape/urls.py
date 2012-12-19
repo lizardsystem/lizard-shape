@@ -6,8 +6,6 @@ from django.contrib import admin
 from lizard_ui.urls import debugmode_urlpatterns
 from lizard_shape.views import HomepageView
 
-admin.autodiscover()
-
 urlpatterns = patterns(
     '',
     url(r'^$',
@@ -16,14 +14,13 @@ urlpatterns = patterns(
     url(r'^category/(?P<root_slug>.*)/$',
      HomepageView.as_view(),
      name='lizard_shape.homepage'),
-    (r'^map/', include('lizard_map.urls')),
     )
 
-urlpatterns += debugmode_urlpatterns()
-
-if settings.DEBUG:
-    # Add this also to the projects that use this application
+if getattr(settings, 'LIZARD_SHAPE_STANDALONE', False):
+    admin.autodiscover()
     urlpatterns += patterns(
         '',
+        (r'^map/', include('lizard_map.urls')),
         (r'^admin/', include(admin.site.urls)),
     )
+    urlpatterns += debugmode_urlpatterns()
