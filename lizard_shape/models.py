@@ -182,14 +182,15 @@ class Category(AL_Node):
         max_length=20, unique=True)
     parent = models.ForeignKey(
         'Category', null=True, blank=True)
+    index = models.IntegerField(default=1000)
 
     # For treebeard.
-    node_order_by = ['name']
+    node_order_by = ['index', 'name']
 
     shapes = models.ManyToManyField('Shape', null=True, blank=True)
 
     class Meta:
-        ordering = ('name', )
+        ordering = ('index', 'name')
 
     def save(self, *args, **kwargs):
         if self.parent_id and self.parent_id == self.pk:

@@ -5,7 +5,7 @@ Changelog of lizard-shape
 2.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Added a sorting index to the Shape Category model.
 
 
 2.7 (2012-12-19)

@@ -97,7 +97,6 @@ class CategoryAdmin(admin.ModelAdmin):
 # class CategoryAdmin(treebeard_admin.TreeAdmin):
     # pass
     list_display = ('__unicode__', 'slug', category_descendants)
-    list_filter = ('name', 'parent', 'slug', 'shapes', )
     filter_horizontal = ('shapes', )
 
 
