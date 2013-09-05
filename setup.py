@@ -20,7 +20,7 @@ install_requires = [
     'nens',
     'shapely',
     'south',
-    'GDAL',
+    'GDALfixed',
     ],
 
 tests_require = [
