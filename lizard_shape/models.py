@@ -9,7 +9,7 @@ from lizard_map.mapnik_helper import point_rule
 from lizard_map.fields import ColorField
 from lizard_map.models import Legend
 from lizard_map.models import LegendPoint
-from nens.sobek import HISFile
+#from nens.sobek import HISFile
 from treebeard.al_tree import AL_Node
 import mapnik
 
@@ -99,7 +99,7 @@ class Shape(models.Model):
         Returns timeseries from hisfile in a dict associating
         timestamp to value. Returns [] if no hisfile defined.
         """
-        if self.his and self.his_parameter:
+        if False and self.his and self.his_parameter:
             hf = self.his.hisfile()
             return hf.get_timeseries(
                 location_name, self.his_parameter, start=start, end=end)
