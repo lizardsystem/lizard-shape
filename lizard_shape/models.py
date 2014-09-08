@@ -1,9 +1,9 @@
 # (c) Nelen & Schuurmans.  GPL licensed, see LICENSE.txt.
+import json
 import logging
 
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils import simplejson as json
 from django.utils.translation import ugettext as _
 from lizard_map.mapnik_helper import point_rule
 from lizard_map.fields import ColorField
