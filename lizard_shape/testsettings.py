@@ -21,7 +21,9 @@ INSTALLED_APPS = [
     'lizard_ui',
     'lizard_map',
     'lizard_security',
-    'staticfiles',
+    'lizard_maptree',
+    'lizard_wms',
+    'django.contrib.staticfiles',
     'compressor',
     'django_nose',
     'south',
@@ -48,7 +50,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     # Needs to be added for django-staticfiles to allow you to use
     # {{ STATIC_URL }}myapp/my.css in your templates.
-    'staticfiles.context_processors.static_url',
+    'django.core.context_processors.static',
     )
 
 
@@ -84,6 +86,8 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 LOGGING = setup_logging(BUILDOUT_DIR)
 
 LIZARD_SHAPE_STANDALONE = True
+
+SECRET_KEY = "Does not need to be secret"
 
 try:
     # Import local settings that aren't stored in svn.

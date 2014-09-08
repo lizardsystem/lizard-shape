@@ -46,7 +46,7 @@ Data beschikbaar: {{ his_file_dtstart|date:"Y-m-d" }}
 </div>
 {% if add_snippet %}
 <a
-   href="{% url lizard_map_collage_add %}"
+   href="{% url "lizard_map_collage_add" %}"
    class="collage-add ss_star ss_sprite"
    data-target-id="#edit-collage"
    data-adapter-class="{{ adapter_class }}"
