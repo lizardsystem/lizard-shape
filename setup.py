@@ -11,10 +11,10 @@ long_description = '\n\n'.join([
 
 install_requires = [
     'Django',
-    'django-staticfiles',
     'django-extensions',
-    'lizard-ui >= 4.0, < 5.0',
-    'lizard-map >= 4.0, < 5.0',
+    'lizard-ui >= 4.0',
+    'lizard-map >= 4.0',
+    'lizard-wms',
     'django-nose',
     'django-treebeard',
     'nens',

@@ -6,3 +6,7 @@ parts
 *.pyc
 nosetests.xml
 var
+htmlcov/
+.coverage
+src/
+.mr.developer.cfg

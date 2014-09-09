@@ -1,9 +1,9 @@
 # (c) Nelen & Schuurmans.  GPL licensed, see LICENSE.txt.
+import json
 import logging
 
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils import simplejson as json
 from django.utils.translation import ugettext as _
 from lizard_map.mapnik_helper import point_rule
 from lizard_map.fields import ColorField
@@ -60,6 +60,15 @@ class Shape(models.Model):
 
         Also read contents of prj_file and put it in field prj.
         """
+
+        # XXX
+        # Since Django 1.6.6, uploaded files get random names,
+        # so shapefiles don't work anymore. As this Lizard 5 branch
+        # of lizard-shape is obsolete anyway, I'm disabling this
+        # save function.
+        raise ValueError(
+            "Lizard-shape does not support saving shapes anymore")
+
         shp_first = self.shp_file.name.rpartition('.')
         dbf_first = self.dbf_file.name.rpartition('.')
         shx_first = self.shx_file.name.rpartition('.')

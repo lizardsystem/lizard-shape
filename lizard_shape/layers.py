@@ -1,3 +1,5 @@
+import json
+
 from pyproj import Proj
 from pyproj import transform
 from shapely.geometry import Point
@@ -10,7 +12,6 @@ import pkg_resources
 
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
-from django.utils import simplejson as json
 
 from lizard_map.adapter import Graph
 from lizard_map.coordinates import detect_prj
