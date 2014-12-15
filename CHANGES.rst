@@ -8,6 +8,8 @@ Changelog of lizard-shape
 - DISABLED UPLOADING OF SHAPES FOR LIZARD5, because Django 1.6.6
   messes up uploaded filenames and the functionality isn't used.
 
+- Updated to django 1.6.
+
 
 2.8 (2013-02-22)
 ----------------
